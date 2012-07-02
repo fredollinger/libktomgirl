@@ -1,0 +1,13 @@
+libktomgirl
+
+This is just a library and gives no actual end user interface to Tomboy style notes. 
+
+However, this can be used to build Tomboy like (note taking) capabilities into
+another app as it will fully support the Tomboy file format xml file as well as
+normal operations such as making a new note, deleting a note, searching, and
+much, much more.
+
+This has been created by taking the gnote code and ripping out all the glib and
+gtk dependencies. Thus, this is the smallest, most portable implementation of
+the Tomboy File Format reader and writer.
+
