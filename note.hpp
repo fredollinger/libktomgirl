@@ -3,6 +3,8 @@
  *
  * Copyright (C) 2009 Hubert Figuiere
  *
+ * 2012 Modified by Fred Ollinger <follinge@gmail.com> for KTomGirl
+ *
  * Modified heavily 2012 by Fred Ollinger <follinge@gmail.com>
  * for KTomGirl
  *
