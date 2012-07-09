@@ -1,9 +1,34 @@
-Ported By: Fred Ollinger <follinge@gmail.com>
+Fred Ollinger <follinge@gmail.com> is the maintainer of KTomGirl.
 
-Please send all bugs, feature requests and flames to Fred.
+This is mainly a merge of several projects including gnote (based on Tomboy) and knotes.
 
-Original C++ code mostly by Hubert Figuiere. 
+The purpose was to bring Tomboy goodness to a pure KDE4 environment. Also for
+me to learn about how to code in KDE4/Qt4 as well as being an excercise in
+reading differing coding styles.
 
-Contributions by the gnote team.
+The other authors are the Gnotes teams, the Knotes team, and the Tomboy team
+(inadventantly when they were forked to make gnote).
 
-Original concept and C# code used by the Tomboy Team.
+Thanks to everyone who gave their time in making this project work.
+
+Icons From the DarkGlass Theme
+
+*Credits must go to:
+*Mentalrey for many glass icons.
+
+*AleXander Kirichev for Slackware kmenu icon.
+*Amira Julia for the original art work that provided some printer and desktop icons.
+*Dirceu for the user avatars.
+*EKrava for the kmenu_Kubuntu icon.
+*Everaldo Coelho (realistiK & Crystal) - Ultra high quality open source icons.
+*Everaldo for the emotions.
+*Futurosoft for a couple of their GPL icons.
+*Guppetto (OS-L) - for (among other things) the best folder icons ever.
+*hammergom for kde_fedora icon, K3B, XGame and many icons from his Crystal Glossy set.
+*Keyser Soze for the Debian kmenu.
+*Marco Martin (Glaze) - for many actions.
+*Marco Martin for the kwifi icons.
+*Marc Mironescu for some email icon.
+*Matias Costa for creating some folder open and folder locked icons.
+*Rowancompsciguy for the laptop battery icons
+*Yaco for the Skype icon.
