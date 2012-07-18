@@ -23,7 +23,7 @@
 #include <tr1/array>
 
 
-#include "../libtomgirl/debug.hpp"
+#include "debug.hpp"
 #include "notebuffer.hpp"
 #include "note.hpp"
 #include "preferences.hpp"

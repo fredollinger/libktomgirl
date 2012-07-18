@@ -29,16 +29,16 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-#include "../libtomgirl/datetime.hpp"
-#include "../libtomgirl/debug.hpp"
-#include "../libtomgirl/files.hpp"
+#include "datetime.hpp"
+#include "debug.hpp"
+#include "files.hpp"
 #include "ktglib.hpp"
 #include "gnote.hpp"
 #include "note.hpp"
 #include "notemanager.hpp"
 #include "preferences.hpp"
-#include "../libtomgirl/sharp.hpp"
-#include "../libtomgirl/string.hpp"
+#include "sharp.hpp"
+#include "string.hpp"
 
 namespace gnote {
 NoteManager::NoteManager(const std::string & directory, const std::string & backup) 
@@ -71,50 +71,7 @@ void NoteManager::_common_init(const std::string & directory, const std::string 
     // FIXME: We need to re-implement first run jazz...eventually...first:
     load_notes ();
 
-#if 0
-    bool is_first_run = first_run ();
-
-    const std::string old_note_dir = Gnote::old_note_dir();
-    const bool migration_needed
-                 = is_first_run
-                   && sharp::directory_exists(old_note_dir);
-
-    if (migration_needed) {
-      migrate_notes(old_note_dir);
-      is_first_run = false;
-    }
-
-    m_addin_mgr = create_addin_manager ();
-
-    if (is_first_run) {
-      std::list<ImportAddin*> l;
-      m_addin_mgr->get_import_addins(l);
-      bool has_imported = false;
-
-      if(l.empty()) {
-        DBG_OUT("no import plugins");
-      }
-
-      for(std::list<ImportAddin*>::iterator iter = l.begin();
-          iter != l.end(); ++iter) {
-
-        DBG_OUT("importing");
-        (*iter)->initialize();
-        if((*iter)->want_to_run(*this)) {
-          has_imported |= (*iter)->first_run(*this);
-        }
-      }
-      // we MUST call this after import
-      post_load();
-
-      // First run. Create "Start Here" notes.
-      create_start_notes ();
-    } 
-    else {
-      load_notes ();
-    }
-#endif
-  }
+}
 
   NoteManager::~NoteManager()
   {
@@ -177,21 +134,6 @@ void NoteManager::load_notes()
       }
       //std::cout << "adding note: " << file_path;
     }
-    // post_load();
-    // Make sure that a Start Note Uri is set in the preferences, and
-    // make sure that the Uri is valid to prevent bug #508982. This
-    // has to be done here for long-time Tomboy users who won't go
-    // through the create_start_notes () process.
-    #if 0
-    if (start_note_uri().empty() ||
-        !find_by_uri(start_note_uri())) {
-      // Attempt to find an existing Start Here note
-      Note::Ptr start_note = find (_("Start Here"));
-      if (start_note) {
-        Preferences::obj().set<std::string>(Preferences::START_NOTE_URI, start_note->uri());
-      }
-    }
-    #endif
 }
 // END LOAD_NOTES
 

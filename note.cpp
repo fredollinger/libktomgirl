@@ -43,14 +43,14 @@
 #include "notedata.hpp"
 #include "notebuffer.hpp"
 #include "notemanager.hpp"
-#include "../libtomgirl/debug.hpp"
-#include "../libtomgirl/files.hpp"
-#include "../libtomgirl/tag.hpp"
-#include "../libtomgirl/string.hpp"
-#include "../libtomgirl/datetime.hpp"
-#include "../libtomgirl/xmlconvert.hpp"
-#include "../libtomgirl/xmlreader.hpp"
-#include "../libtomgirl/xmlwriter.hpp"
+#include "debug.hpp"
+#include "files.hpp"
+#include "tag.hpp"
+#include "string.hpp"
+#include "datetime.hpp"
+#include "xmlconvert.hpp"
+#include "xmlreader.hpp"
+#include "xmlwriter.hpp"
 
 namespace utils{
     std::string encode(const std::string & source)
