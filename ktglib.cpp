@@ -51,4 +51,18 @@ std::string build_filename(const std::string & p, const std::string & fn)
 	return p + "/" + fn;
 }
 
+/* erase():
+ * Given a string incomging, erase the target char
+ */
+std::string erase(std::string &incoming, std::string &target){
+        size_t sz;
+        std::string str = incoming;
+        sz = str.find(target);
+        while(std::string::npos != sz){
+                str.erase(sz, 1);
+                sz = str.find(target);
+        }
+        return str;
+}
+
 } // namespace KTGlib

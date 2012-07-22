@@ -26,12 +26,12 @@
 
 #include "boost/date_time/gregorian/gregorian_types.hpp"
 #include "boost/date_time/posix_time/posix_time.hpp" //include all types plus i/o
-// #include "boost/date_time/posix_time/posix_time_types.hpp" //no i/o just types
 
 #include <time.h>
 #include <sys/time.h>
 
 #include "datetime.hpp"
+#include "ktglib.hpp"
 
 using namespace boost::posix_time;
 
@@ -127,8 +127,8 @@ namespace sharp {
 std::string DateTime::to_iso8601() const
 {
 	ptime pt(not_a_date_time);
-	std::time_t t;
-	t = 1118158776;
+	//std::time_t t;
+	//t = 1118158776;
 	pt = from_time_t(m_date.tv_sec);
 	return to_iso_extended_string(pt);
 }
@@ -147,15 +147,35 @@ DateTime DateTime::now()
 	return DateTime(n);
 }
 
-std::string DateTime::strip_delimiters_from_iso8601(const std::string &iso8601){
+/* strip_delimiters_from_iso8601():
+ * Get rid of the hyphens and the colons from this the file 
+ */
+
+std::string DateTime::strip_delimiters_from_iso8601(std::string iso8601){
+	std::string str = iso8601.c_str();
+	std::string s_char = "-";
+	str = KTGlib::erase(str, s_char);
+	s_char = ":";
+	str = KTGlib::erase(str, s_char);
+	std::cout << "strip_delim(): " << str;
+	return str;
+}
+
+#if 0
 	std::string fixed;
 	std::string ret = iso8601;
-	
-	const char *T = "T";
 
-	if (15 != iso8601.length()){
-		std::cout << "DateTime::strip_delimiters_from_iso8601 string busted, erturning a proper (but wrong) string... " << iso8601.length() << "\n";
+//	const char *T = "T";
+
+	std::cout << "DateTime::strip_delimiters_from_iso8601 for string: " << iso8601;
+
+	// FIXME: This test is stupid. Let's just get the T.
+	if (19 != iso8601.length()){
+		std::cout << "DateTime::strip_delimiters_from_iso8601 string busted, returning a proper (but wrong) string... " << iso8601.length() << "\n";
+		// FIXME: When done, delete the next line and uncomment
+		// the one after that.
 		ret = "20120131T235959";
+		//ret = iso8601;
 		goto end;
 	}
 	
@@ -174,6 +194,7 @@ std::string DateTime::strip_delimiters_from_iso8601(const std::string &iso8601){
 	
 	return ret;
 }
+#endif
 
 // FIXME: Busted need to implement this protocol
 DateTime DateTime::from_iso8601(const std::string &raw_str)

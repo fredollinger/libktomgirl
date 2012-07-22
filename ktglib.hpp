@@ -38,6 +38,8 @@ std::string build_filename(const std::string & p, const std::string & fn);
 
 std::string get_user_data_dir();
 
+std::string erase(std::string&, std::string&);
+
 // BEGIN class ustring 
 class ustring{
 public:
