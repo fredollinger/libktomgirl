@@ -150,51 +150,14 @@ DateTime DateTime::now()
 /* strip_delimiters_from_iso8601():
  * Get rid of the hyphens and the colons from this the file 
  */
-
 std::string DateTime::strip_delimiters_from_iso8601(std::string iso8601){
 	std::string str = iso8601.c_str();
 	std::string s_char = "-";
 	str = KTGlib::erase(str, s_char);
 	s_char = ":";
 	str = KTGlib::erase(str, s_char);
-	std::cout << "strip_delim(): " << str;
 	return str;
 }
-
-#if 0
-	std::string fixed;
-	std::string ret = iso8601;
-
-//	const char *T = "T";
-
-	std::cout << "DateTime::strip_delimiters_from_iso8601 for string: " << iso8601;
-
-	// FIXME: This test is stupid. Let's just get the T.
-	if (19 != iso8601.length()){
-		std::cout << "DateTime::strip_delimiters_from_iso8601 string busted, returning a proper (but wrong) string... " << iso8601.length() << "\n";
-		// FIXME: When done, delete the next line and uncomment
-		// the one after that.
-		ret = "20120131T235959";
-		//ret = iso8601;
-		goto end;
-	}
-	
-	end:
-
-	// One last sanity test...
-	/*
-	if  ( strcmp(T, (const char*) iso8601.at(8)) ){
-		std::cout << "we are a T\n";
-	}
-	else{
-		std::cout << "no T, going to default";
-		ret = "20120131T235959";
-	}
-	*/
-	
-	return ret;
-}
-#endif
 
 // FIXME: Busted need to implement this protocol
 DateTime DateTime::from_iso8601(const std::string &raw_str)
