@@ -120,6 +120,8 @@ public:
 
   static void parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags);
 
+  void reload(void);
+
   typedef enum {
     NO_CHANGE,
     CONTENT_CHANGED,

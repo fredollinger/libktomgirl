@@ -106,6 +106,11 @@ Note::~Note()
 	std::cout << "~Note()" <<  m_filepath;
 }
 
+/* Reload the note. */
+void Note::reload(){
+    NoteData *data = NoteArchiver::read(m_filepath, url_from_path(m_filepath));
+}
+
 void Note::changed(){
     m_save_needed = true;
 }
