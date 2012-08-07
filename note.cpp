@@ -137,17 +137,17 @@ std::string Note::uid() const {
 	return m_filepath.substr(begin+1, len - 6 - begin);
 }
 
-  Note::Ptr Note::create_existing_note(NoteData *data,
+Note::Ptr Note::create_existing_note(NoteData *data,
                                  std::string filepath,
                                  NoteManager & manager)
-  {
+{
     if (!data->change_date().is_valid()) {
-      std::cout << "Note::Ptr Note::create_existing_note() change_date valid";
+//      std::cout << "Note::Ptr Note::create_existing_note() change_date valid";
       sharp::DateTime d(boost::filesystem::last_write_time(filepath));
       data->set_change_date(d);
     }
-    else
-      std::cout << "Note::Ptr Note::create_existing_note() change_date NOT valid";
+ //   else
+  //    std::cout << "Note::Ptr Note::create_existing_note() change_date NOT valid";
     if (!data->create_date().is_valid()) {
       if(data->change_date().is_valid()) {
         data->create_date() = data->change_date();
@@ -158,7 +158,7 @@ std::string Note::uid() const {
       }
     }
     return Note::Ptr(new Note(data, filepath, manager));
-  }
+}
 
   /// <summary>
   /// Returns a Tomboy URL from the given path.
@@ -213,12 +213,13 @@ void Note::parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags)
 // so we can have things like lists and bolded text and so on
 // this is down the road. When we get there, get rid of this...
 std::string Note::text_content_plain(){
+	std::cout << "std::string Note::text_content_plain()" << m_text_content;
 	return m_text_content;
 }
 
 std::string Note::text_content()
 {
-
+	std::cout << "std::string Note::text_content()" << m_text_content;
 	m_text_content=utils::decode(xml_content());
 	return m_text_content;
     /*
