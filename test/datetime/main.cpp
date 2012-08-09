@@ -10,17 +10,33 @@
 
 using namespace sharp;
 
+void nowTest(){
+	DateTime dt = DateTime::now();
+	qDebug() << "day: " << dt.day();
+	qDebug() << "month: " << dt.month();
+	qDebug() << "sec: " << dt.sec();
+	//qDebug() << "hour: " << dt.hour();
+}
+
+void iso8601Test(std::string &st){
+	DateTime dt = DateTime::from_iso8601(st);
+//	qDebug() << "to short time string: " << QString::fromStdString(dt.to_short_time_string() );
+	qDebug() << "day: " << dt.day();
+	qDebug() << "month: " << dt.month();
+}
+
 void dateTest(std::string &st, std::string success){
-	qDebug() << __PRETTY_FUNCTION__ << QString::fromStdString(success);
+
+//	qDebug() << __PRETTY_FUNCTION__ << QString::fromStdString(success);
 	// test the strip delim separately
 	std::string res = DateTime::strip_delimiters_from_iso8601(success);
-	qDebug() << __PRETTY_FUNCTION__ << "strip delim test: "<< QString::fromStdString(res);
+//	qDebug() << __PRETTY_FUNCTION__ << "strip delim test: "<< QString::fromStdString(res);
 
-	#if 0
 	// now test the converter
 	DateTime dt = DateTime::from_iso8601(st);
 	res = dt.to_iso8601();
-	qDebug() << QString::fromStdString(res);
+	// qDebug() << "to iso8601: " << QString::fromStdString(res);
+	qDebug() << "to short time string: " << QString::fromStdString(dt.to_short_time_string() );
 
 	if (success.compare(st)) 
 		qDebug() << "success";
@@ -28,7 +44,6 @@ void dateTest(std::string &st, std::string success){
 	  qDebug() << "date test failed: " <<  QString::fromStdString(res) << " != " << QString::fromStdString(success);
 	  exit(0); 
 	}
-	#endif
 }
 
 int main( int argc, char *argv[] )
@@ -38,11 +53,15 @@ int main( int argc, char *argv[] )
 	std::string st;
 	std::string success;
 
-	st = "2002-02-01T07:59:59";
+//	st = "2002-02-01T07:59:59";
+	st = "2012-08-09T09:01:20";
 
 	success = "20020131T235959";
 
-	dateTest(success, st);
+//	dateTest(success, st);
+//	iso8601Test(success);
+	//iso8601Test(st);
+	nowTest();
 
 	return app.exec();
 }

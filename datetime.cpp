@@ -28,6 +28,7 @@
 #include "boost/date_time/posix_time/posix_time.hpp" //include all types plus i/o
 
 #include <time.h>
+#include <ctime>
 #include <sys/time.h>
 
 #include "datetime.hpp"
@@ -127,8 +128,6 @@ namespace sharp {
 std::string DateTime::to_iso8601() const
 {
 	ptime pt(not_a_date_time);
-	//std::time_t t;
-	//t = 1118158776;
 	pt = from_time_t(m_date.tv_sec);
 	return to_iso_extended_string(pt);
 }
@@ -136,13 +135,16 @@ std::string DateTime::to_iso8601() const
 DateTime DateTime::now()
   {
 	GTimeVal n;
-	//g_get_current_time(&n); 
-	//struct timeval t;
-	//gettimeofday(&t, NULL);
-	n.tv_sec = time(NULL);
+
+	ptime pt = second_clock::local_time();
+
+	tm t = to_tm(pt);
+	time_t tt = mktime( &t );
+
+	n.tv_sec = tt;
 	n.tv_usec = 0;
 
-    	//std::cout <<  t << n.tv_sec;
+	std::cout << "seconds: " << t.tm_sec;
 
 	return DateTime(n);
 }
@@ -163,7 +165,6 @@ std::string DateTime::strip_delimiters_from_iso8601(std::string iso8601){
 DateTime DateTime::from_iso8601(const std::string &raw_str)
 {
 	GTimeVal retval;
-	std::cout << "BEGIN DateTime::from_iso8601: \n";
 	ptime pt = second_clock::local_time();
 	std::string iso8601 = strip_delimiters_from_iso8601(raw_str);
 
@@ -178,10 +179,7 @@ DateTime DateTime::from_iso8601(const std::string &raw_str)
     		std::cout << "An exception occurred. Exception Nr. " << e << std::endl;
 		goto bail;
   	}
-	std::cout << "DateTime::from_iso8601: ptime success \n";
 
-	//std::cout << "FIXME: Pronto: DateTime::from_iso8601(): " << pt.to_simple_string
-	//retval.tv_sec = qdt.toTime_t();
 	tm td_tm;
 	try {
 		td_tm = to_tm(pt);
@@ -192,8 +190,6 @@ DateTime DateTime::from_iso8601(const std::string &raw_str)
     		std::cout << "An exception occurred. Exception Nr. " << e << std::endl;
 		goto bail;
   	}
-
-	std::cout << "END: DateTime::from_iso8601: " << iso8601 << "\n";
 
 	bail:
 		return DateTime(retval);

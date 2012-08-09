@@ -3,8 +3,7 @@ UI_HEADERS= ui_searchwindow.h
 
 .PHONY: ktgconfig.h
 
-all: 
-	mkdir -p build
+all: build
 	cd build && make 2>err
 
 ui_searchwindow.h:
@@ -14,7 +13,7 @@ ui_notesdialog.h:
 	$(UIC) notesdialog.ui > ui_notesdialog.h
 ui_notebooksdialog.h:
 	$(UIC) notebooksdialog.ui > ui_notebooksdialog.h
-setup:
+build:
 	mkdir build
 	cd build && cmake ..
 err:
