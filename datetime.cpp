@@ -141,6 +141,8 @@ const char* dt_months[] = {"Zero", "January", "February", "March", "April", "May
 
 	std::string st = dt_months[month()];
 	st = st + c_d + c_y + c_t;
+	if (hour() > 11) st = st + " PM";
+	else st = st + " AM";
 	return st;
   }
 
