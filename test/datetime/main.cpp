@@ -11,10 +11,13 @@
 using namespace sharp;
 
 void nowTest(){
-	DateTime dt = DateTime::now();
+//	DateTime dt = DateTime::now();
+	std::string st = "2011-08-09T09:01:20";
+	DateTime dt = DateTime::from_iso8601(st);
 	qDebug() << "day: " << dt.day();
 	qDebug() << "month: " << dt.month();
 	qDebug() << "sec: " << dt.sec();
+	qDebug() << "string: " << QString::fromStdString(dt.to_string());
 	//qDebug() << "hour: " << dt.hour();
 }
 

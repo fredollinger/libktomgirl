@@ -29,6 +29,7 @@
 
 #include <time.h>
 #include <ctime>
+#include <cstdio>
 #include <sys/time.h>
 
 #include "datetime.hpp"
@@ -37,6 +38,8 @@
 using namespace boost::posix_time;
 
 namespace sharp {
+
+const char* dt_months[] = {"Zero", "January", "February", "March", "April", "May", "June", "July", "August", "September", "November", "December"};
 
 #define SEC_PER_MINUTE 60
 #define SEC_PER_HOUR (SEC_PER_MINUTE * 60)
@@ -79,6 +82,20 @@ namespace sharp {
     return result.tm_mday;
   }
 
+  int DateTime::hour() const
+  {
+    struct tm result;
+    localtime_r(&m_date.tv_sec, &result);
+    return result.tm_hour;
+  }
+
+  int DateTime::minute() const
+  {
+    struct tm result;
+    localtime_r(&m_date.tv_sec, &result);
+    return result.tm_min;
+  }
+
   int DateTime::month() const
   {
     struct tm result;
@@ -103,6 +120,28 @@ namespace sharp {
   bool DateTime::is_valid() const
   {
     return ((m_date.tv_sec != -1) && (m_date.tv_usec != -1));
+  }
+
+  /* If you just want a decent string, this is the choice to make... */
+  std::string DateTime::to_string() const{
+	DateTime dt_now = now();
+	ptime pt = from_time_t(m_date.tv_sec);
+	char c_d[4];
+	char c_y[10] = ", "; 
+	char c_t[10] = ""; 
+	sprintf(c_d, " %i", day());
+
+	if (dt_now.year() != year())
+		sprintf(c_y, ", %i", year());
+
+	if (minute() > 9)	
+		sprintf(c_t, " %i:%i", hour(), minute());
+	else
+		sprintf(c_t, " %i:0%i", hour(), minute());
+
+	std::string st = dt_months[month()];
+	st = st + c_d + c_y + c_t;
+	return st;
   }
 
   std::string DateTime::_to_string(const char * format, struct tm * t) const
@@ -165,7 +204,8 @@ std::string DateTime::strip_delimiters_from_iso8601(std::string iso8601){
 DateTime DateTime::from_iso8601(const std::string &raw_str)
 {
 	GTimeVal retval;
-	ptime pt = second_clock::local_time();
+	ptime pt(not_a_date_time);
+	// ptime pt = second_clock::local_time();
 	std::string iso8601 = strip_delimiters_from_iso8601(raw_str);
 
 	retval.tv_sec = 0;
