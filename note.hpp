@@ -44,12 +44,13 @@ namespace sharp {
 }
 
 namespace gnote {
-
-class NoteManager;
-
+// BEGIN EXTERN CLASSES
+class NoteBuffer;
 class NoteData;
-class NoteWindow;
+class NoteManager;
 class NoteTagTable;
+class NoteWindow;
+// END EXTERN CLASSES
 
 class NoteDataBufferSynchronizer  
 {
@@ -200,9 +201,11 @@ private:
 
   struct ChildWidgetData{};
 
+  std::tr1::shared_ptr<NoteBuffer> m_buffer;
   NoteDataBufferSynchronizer m_data;
   std::string                m_filepath;
-  /* FO: I added this. I can't wrap my mind around the whole convulted mess
+  /* FO: I added this. I can't wrap my mind 
+   * around the whole convulted mess
    * that is NoteData and so on...
    */
   std::string                m_title;

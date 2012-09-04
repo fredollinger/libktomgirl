@@ -46,9 +46,7 @@ public:
 
   ~NoteBuffer();
 
-  void toggle_active_tag(const std::string &);
-  void set_active_tag(const std::string &);
-  void remove_active_tag(const std::string &);
+  // BEGIN private bool functions
   bool is_active_tag(const std::string & );
   bool is_bulleted_list_active();
   bool can_make_bulleted_list();
@@ -57,10 +55,19 @@ public:
   bool add_new_line(bool soft_break);
   bool delete_key_handler();
   bool backspace_key_handler();
-  void check_selection();
-  bool run_widget_queue();
   std::string get_selection() const;
+  bool run_widget_queue();
+  // END private bool functions
+
+  // BEGIN private void functions
+  void toggle_active_tag(const std::string &);
+  void set_active_tag(const std::string &);
+  void remove_active_tag(const std::string &);
+  void set_text(const std::string & t);
+  void check_selection();
   void toggle_selection_bullets();
+  // END private void functions
+
   void increase_cursor_depth()
     {
       change_cursor_depth(true);
