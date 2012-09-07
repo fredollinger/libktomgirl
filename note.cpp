@@ -213,8 +213,9 @@ void Note::parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags)
 // so we can have things like lists and bolded text and so on
 // this is down the road. When we get there, get rid of this...
 std::string Note::text_content_plain(){
-	std::cout << "std::string Note::text_content_plain()" << m_text_content;
-	return m_text_content;
+	std::cout << "std::string Note::text_content_plain()" << xml_content();
+	return utils::decode(xml_content());
+	//return m_text_content;
 }
 
 std::string Note::text_content()
@@ -520,6 +521,7 @@ NoteData *NoteArchiver::_read(const std::string & read_file, const std::string &
 
   void NoteDataBufferSynchronizer::set_text(const std::string & t)
   {
+	std::cout << "NoteDataBufferSynchronizer::set_text(): " << t;
     m_data->text() = t;
     synchronize_buffer();
   }

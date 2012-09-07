@@ -207,7 +207,7 @@ void NoteManager::delete_note(const Note::Ptr & note)
     }
 
     //m_notes.removeAll(note);
-    m_notes.clear();
+    // m_notes.clear();
     note->delete_note();
 }
 // END NoteManager::delete_note()

@@ -30,6 +30,8 @@
 
 #include "xmlreader.hpp"
 
+#include <iostream>
+
 namespace sharp {
 
   std::string xmlchar_to_string(const xmlChar * s)
@@ -79,6 +81,7 @@ namespace sharp {
    */
   void XmlReader::load_buffer(const std::string &s)
   {
+	std::cout << "XmlReader::load_buffer: " << s;
     close();
     /** we copy the string. It shouldn't be a big deal as the strings
      * are copy on write.
