@@ -39,6 +39,8 @@
 #include "preferences.hpp"
 #include "sharp.hpp"
 #include "string.hpp"
+#include "trie.hpp"
+#include "triecontroller.hpp"
 
 namespace gnote {
 NoteManager::NoteManager(const std::string & directory, const std::string & backup) 
