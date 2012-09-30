@@ -92,18 +92,6 @@ public:
     void m_signal_start_note_created(void);
 // END PUBLIC
 
-/*
-signals:
-
-	void signal_note_deleted(void);
-	void signal_note_added(void);
-	void signal_note_renamed(void);
-	void signal_note_saved(void);
-    	void m_signal_start_note_created(void);
-
-*/
-
-
 private:
     bool create_directory(const std::string & directory) const;
     void on_note_rename(const Note::Ptr & note, const std::string & old_title);
@@ -124,18 +112,7 @@ private:
     AddinManager   *m_addin_mgr;
     std::string m_note_template_title;
     std::string m_start_note_uri;
-
-#if 0
-    //Note::Ptr create_new_note (std::string title, const std::string & guid);
-    //Note::Ptr create_new_note (const std::string & title, const std::string & xml_content, 
-    //                         const std::string & guid);
-    bool first_run() const;
-    void create_notes_dir() const;
-#endif   
-  };
-
-
-}
-
-#endif
-
+  }; // class NoteManager 
+} // namespace gnote 
+#endif // _NOTEMANAGER_HPP__
+//Sun Sep 30 11:09:55 PDT 2012
