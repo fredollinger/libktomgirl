@@ -26,6 +26,7 @@
 #include "gnote.hpp"
 #include "notemanager.hpp"
 #include "notebook.hpp"
+#include "tag.hpp"
 #include "tagmanager.hpp"
 
 namespace gnote {
@@ -83,8 +84,10 @@ namespace notebooks {
       // "Meetings", the templateNoteTitle should be "Meetings
       // Notebook Template".  Translators should place the
       // name of the notebook accordingly using "%1%".
-      std::string format = _("%1% Notebook Template");
-      m_template_note_title = str(boost::format(format) % m_name);
+
+      // FIXME: TRANSLATE
+      //std::string format = _("%1% Notebook Template");
+      //m_template_note_title = str(boost::format(format) % m_name);
     }
   }
 
@@ -111,9 +114,10 @@ namespace notebooks {
                             NoteManager::get_note_template_content (
                               m_template_note_title));
           
+#if 0
       // Select the initial text
-      NoteBuffer::Ptr buffer = note->get_buffer();
-      Gtk::TextIter iter = buffer->get_iter_at_line_offset (2, 0);
+      //NoteBuffer::Ptr buffer = note->get_buffer();
+      //Gtk::TextIter iter = buffer->get_iter_at_line_offset (2, 0);
       buffer->move_mark (buffer->get_selection_bound(), iter);
       buffer->move_mark (buffer->get_insert(), buffer->end());
 
@@ -128,6 +132,8 @@ namespace notebooks {
       tag = TagManager::obj()
         .get_or_create_system_tag (NOTEBOOK_TAG_PREFIX + get_name());
       note->add_tag (tag);
+
+#endif
         
       note->queue_save (Note::CONTENT_CHANGED);
     }
@@ -146,7 +152,9 @@ namespace notebooks {
   /// </returns>
   bool Notebook::contains_note(const Note::Ptr & note)
   {
-    return note->contains_tag (m_tag);
+	// FIXME: IMPLEMENT
+	return true;
+    // return note->contains_tag (m_tag);
   }
 
   std::string Notebook::normalize(const std::string & s)
@@ -166,7 +174,9 @@ namespace notebooks {
 
 
   AllNotesNotebook::AllNotesNotebook()
-    : SpecialNotebook(_("All Notes"))
+	// FIXME: i18n
+    //: SpecialNotebook(_("All Notes"))
+    : SpecialNotebook("All Notes")
   {
   }
 
@@ -178,7 +188,9 @@ namespace notebooks {
 
 
   UnfiledNotesNotebook::UnfiledNotesNotebook()
-    : SpecialNotebook(_("Unfiled Notes"))
+    //: SpecialNotebook(_("Unfiled Notes"))
+    : SpecialNotebook("Unfiled Notes")
+
   {
   }
 
