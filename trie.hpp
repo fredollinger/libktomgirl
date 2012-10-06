@@ -1,4 +1,3 @@
-
 /*
  * gnote
  *
@@ -34,7 +33,6 @@
 #include "triehit.hpp"
 
 namespace gnote {
-
 
   template<class value_t>
   class TrieTree 

@@ -13,6 +13,7 @@ set (CMAKE_CXX_FLAGS "-fexceptions -lboost_filesystem-mt -lboost_date_time-mt -l
 
 set(ktomgirl_SRCS
 actionmanager.cpp
+notebook.cpp
 datetime.cpp
 debug.cpp
 files.cpp
