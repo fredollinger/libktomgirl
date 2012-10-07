@@ -273,7 +273,6 @@ void Note::write(const std::string & _write_file, const NoteData & note)
     obj().write_file(write_file, data);
   }
 
-// STARTHERE
 // BEGIN NoteArchiver::write_file()
 void NoteArchiver::write_file(const std::string & _write_file, const NoteData & note)
 {
@@ -308,7 +307,7 @@ void NoteArchiver::write_file(const std::string & _write_file, const NoteData & 
     {
 		std::cout << "save fail";
     }
-  }
+  } // END NoteArchiver::write_file()
 
 // BEGIN NOTEARCHIVER::WRITE
 void NoteArchiver::write(sharp::XmlWriter & xml, const NoteData & note)

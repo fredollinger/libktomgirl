@@ -24,12 +24,16 @@
 #include <string>
 
 #include "datetime.hpp"
+#include "tag.hpp"
+
+#include "sharp/map.hpp"
 
 namespace gnote {
 class NoteData
 {
 /* This holds the actual data, text, and on on of the note */
   public:
+    typedef std::map<std::string, Tag::Ptr> TagMap;
     NoteData(const std::string & _uri);
     std::string       m_text;
 
