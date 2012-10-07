@@ -636,6 +636,56 @@ void Note::delete_note()
   {
     return m_data.synchronized_data();
   }
-  
+
+   void Note::get_tags(std::list<Tag::Ptr> & l) const
+  { 
+    sharp::map_get_values(m_data.data().tags(), l);
+  } 
+
+  void Note::remove_tag(Tag & tag)
+  {
+    std::string tag_name = tag.normalized_name();
+    NoteData::TagMap & thetags(m_data.data().tags());
+    NoteData::TagMap::iterator iter;
+
+    // if we are deleting the note, no need to check for the tag, we 
+    // know it is there.
+    if(!m_is_deleting) {
+      iter = thetags.find(tag_name);
+      if (iter == thetags.end())  {
+        return;
+      }
+    }
+
+    // m_signal_tag_removing(*this, tag);
+
+    // don't erase the tag if we are deleting the note. 
+    // This will invalidate the iterator.
+    // see bug 579839.
+    if(!m_is_deleting) {
+      thetags.erase(iter);
+    }
+    tag.remove_note(*this);
+
+    // m_signal_tag_removed(shared_from_this(), tag_name);
+
+    DBG_OUT("Tag removed, queueing save");
+    queue_save(OTHER_DATA_CHANGED);
+  }
+
+  void Note::remove_tag(const Tag::Ptr & tag)
+  {
+    if (!tag)
+      //throw sharp::Exception ("Note.RemoveTag () called with a null tag.");
+    remove_tag(*tag);
+  }
+
+  bool Note::contains_tag(const Tag::Ptr & tag) const
+  {
+    const NoteData::TagMap & thetags(m_data.data().tags());
+    return (thetags.find(tag->normalized_name()) != thetags.end());
+  }
+
+
 } // namespace gnote
 // Wed Jun 13 10:03:47 PDT 2012

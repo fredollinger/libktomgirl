@@ -60,6 +60,7 @@ namespace gnote {
     return (m_width != 0) && (m_height != 0);
 
   }
+
 } // namespace gnote 
 // END NOTEDATA
 // Sat Jun  2 07:59:33 PDT 2012

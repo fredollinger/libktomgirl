@@ -113,6 +113,12 @@ class Note
 {
 // BEGIN NOTE public:
 public:
+  void add_tag(const Tag::Ptr &);
+  bool contains_tag(const Tag::Ptr &) const;
+  void get_tags(std::list<Tag::Ptr> &) const;
+  void remove_tag(Tag &);
+  void remove_tag(const Tag::Ptr &);
+
   void set_text_content(const std::string & text);
   std::string m_text_content;
   typedef std::tr1::shared_ptr<Note> Ptr;

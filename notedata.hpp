@@ -29,6 +29,8 @@
 #include "sharp/map.hpp"
 
 namespace gnote {
+
+
 class NoteData
 {
 /* This holds the actual data, text, and on on of the note */
@@ -135,6 +137,15 @@ class NoteData
       {
         return m_y;
       }
+
+    const TagMap & tags() const
+      { 
+        return m_tags;
+      }
+    TagMap & tags()
+      { 
+        return m_tags;
+      }
     
     bool is_open_on_startup() const
       {
@@ -149,6 +160,7 @@ class NoteData
     bool has_extent();
 
   private:
+
     const std::string m_uri;
     std::string       m_title;
     std::string       m_full_path; // full path to the note
@@ -159,6 +171,9 @@ class NoteData
     int               m_width, m_height;
     int               m_x, m_y;
     bool              m_open_on_startup;
+
+    TagMap m_tags;
+
     static const int  s_noPosition;
 }; // class NoteData
 } //  namespace gnote 
