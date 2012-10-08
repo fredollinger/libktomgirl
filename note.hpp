@@ -150,7 +150,7 @@ public:
   void delete_note();
   static Note::Ptr load(const std::string &, NoteManager &);
   void save();
-  void queue_save(ChangeType c);
+  //void queue_save(ChangeType c);
 
   bool is_open() {return m_is_open;};
   void set_is_open(bool b){ m_is_open = b; };

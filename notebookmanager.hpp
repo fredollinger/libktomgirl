@@ -2,6 +2,8 @@
  * gnote
  *
  * Copyright (C) 2009 Hubert Figuiere
+ * 
+ * 2012 Modified by Fred Ollinger <follinge@gmail.com> for libktomgirl
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,19 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
-
 #ifndef _NOTEBOOK_MANAGER_HPP__
 #define _NOTEBOOK_MANAGER_HPP__
 
-#include <sigc++/signal.h>
-/*
-#include <gtkmm/liststore.h>
-#include <gtkmm/treemodel.h>
-#include <gtkmm/treemodelsort.h>
-#include <gtkmm/treemodelfilter.h>
-*/
+//#include <sigc++/signal.h>
 
 #include "notebook.hpp"
 #include "note.hpp"
@@ -51,7 +44,7 @@ public:
       return *s_instance;
     }
 
-  typedef sigc::signal<void, const Note &, const Notebook::Ptr &> NotebookEventHandler;
+  //typedef sigc::signal<void, const Note &, const Notebook::Ptr &> NotebookEventHandler;
   bool is_adding_notebook() const
     {
       return m_adding_notebook;
@@ -86,11 +79,9 @@ public:
   //static void prompt_delete_notebook(Gtk::Window *, const Notebook::Ptr &);
   bool move_note_to_notebook (const Note::Ptr &, const Notebook::Ptr &);
 
-  NotebookEventHandler & signal_note_added_to_notebook()
-    { return m_note_added_to_notebook; }
+  //NotebookEventHandler & signal_note_added_to_notebook() { return m_note_added_to_notebook; }
 
-  NotebookEventHandler & signal_note_removed_from_notebook()
-    { return m_note_removed_from_notebook; }
+  //NotebookEventHandler & signal_note_removed_from_notebook() { return m_note_removed_from_notebook; }
 
 private:
   NotebookManager();
@@ -126,8 +117,8 @@ private:
   std::map<std::string, Notebook> m_notebookMap;
   //object locker = new object ();    
   bool                                 m_adding_notebook;
-  NotebookEventHandler                 m_note_added_to_notebook;
-  NotebookEventHandler                 m_note_removed_from_notebook;
+  //NotebookEventHandler                 m_note_added_to_notebook;
+  //NotebookEventHandler                 m_note_removed_from_notebook;
 };
 
   }

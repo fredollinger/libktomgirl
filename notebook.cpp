@@ -50,8 +50,7 @@ namespace notebooks {
     }
     else {
       set_name(name);
-      m_tag = TagManager::obj().get_or_create_system_tag (
-        std::string(NOTEBOOK_TAG_PREFIX) + name);
+      // m_tag = TagManager::obj().get_or_create_system_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
     }
   }
 
@@ -108,13 +107,11 @@ namespace notebooks {
   {
     NoteManager & noteManager = Gnote::obj().default_note_manager();
     Note::Ptr note = noteManager.find (m_template_note_title);
-    if (!note) {
-      note =
-        noteManager.create (m_template_note_title,
-                            NoteManager::get_note_template_content (
-                              m_template_note_title));
-          
 #if 0
+    //if (!note) {
+      //note =
+        // noteManager.create (m_template_note_title, NoteManager::get_note_template_content ( m_template_note_title));
+          
       // Select the initial text
       //NoteBuffer::Ptr buffer = note->get_buffer();
       //Gtk::TextIter iter = buffer->get_iter_at_line_offset (2, 0);
@@ -123,7 +120,6 @@ namespace notebooks {
 
       // Flag this as a template note
       Tag::Ptr tag = TagManager::obj()
-        .get_or_create_system_tag (TagManager::TEMPLATE_NOTE_SYSTEM_TAG);
       note->add_tag (tag);
 
       // Add on the notebook system tag so Tomboy
@@ -133,10 +129,10 @@ namespace notebooks {
         .get_or_create_system_tag (NOTEBOOK_TAG_PREFIX + get_name());
       note->add_tag (tag);
 
-#endif
         
-      note->queue_save (Note::CONTENT_CHANGED);
-    }
+      //note->queue_save (Note::CONTENT_CHANGED);
+    } 
+#endif
 
     return note;
   }

@@ -22,7 +22,7 @@
 #include <iostream>
 
 #include <string.h>
-#include <exception>
+// #include <exception>
 
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
@@ -39,8 +39,10 @@
 #include "preferences.hpp"
 #include "sharp.hpp"
 #include "string.hpp"
+#include "tagmanager.hpp"
 #include "trie.hpp"
 #include "triecontroller.hpp"
+#include "utils.hpp"
 
 namespace gnote {
 NoteManager::NoteManager(const std::string & directory, const std::string & backup) 
@@ -79,6 +81,14 @@ void NoteManager::_common_init(const std::string & directory, const std::string 
   {
     // delete m_addin_mgr;
   }
+
+/* FIXME: This is to shut up a build error, but this should probably 
+ * come up with a fake name and a proper uuid. */
+/*
+Note::Ptr NoteManager::create(){
+	return create_new_note("Untitled Note", "");
+}
+*/
 
 // BEGIN NoteManager::create_new_note()
 // Create a new note with the specified title, and a simple
@@ -212,6 +222,44 @@ void NoteManager::delete_note(const Note::Ptr & note)
     // m_notes.clear();
     note->delete_note();
 }
+
 // END NoteManager::delete_note()
+
+// BEGIN Note::Ptr NoteManager::get_or_create_template_note()
+Note::Ptr NoteManager::get_or_create_template_note(){
+    Note::Ptr template_note = find(m_note_template_title);
+    // BEGIN if (!template_note) 
+	#if 0
+    //if (!template_note) {
+      //template_note = create (m_note_template_title, get_note_template_content(m_note_template_title));
+
+      // Select the initial text
+/*
+      Glib::RefPtr<NoteBuffer> buffer = template_note->get_buffer();
+      Gtk::TextIter iter = buffer->get_iter_at_line_offset(2, 0);
+      buffer->move_mark(buffer->get_selection_bound(), iter);
+      buffer->move_mark(buffer->get_insert(), buffer->end());
+*/
+
+      // Flag this as a template note
+      //Tag::Ptr tag = TagManager::obj().get_or_create_system_tag(TagManager::TEMPLATE_NOTE_SYSTEM_TAG);
+      // template_note->add_tag(tag);
+
+ //     template_note->queue_save(Note::CONTENT_CHANGED);
+   } // END if (!template_note) 
+#endif
+
+    return template_note;
+} // END Note::Ptr NoteManager::get_or_create_template_note()
+
+std::string NoteManager::get_note_template_content(const std::string & title) { 
+    return str(boost::format("<note-content>"
+                             "<note-title>%1%</note-title>\n\n"
+                             "%2%"
+                             "</note-content>")
+                //% utils::XmlEncoder::encode (title)
+               % "Describe your new note here.");
+}
+
 } // namespace gnote
 // Sun May 27 14:07:53 PDT 2012

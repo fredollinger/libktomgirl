@@ -3,6 +3,8 @@
  *
  * Copyright (C) 2010 Debarshi Ray
  * Copyright (C) 2009 Hubert Figuiere
+ * 
+ * 2012 Modified by Fred Ollinger <follinge@gmail.com> for KTomGirl
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -178,7 +180,7 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
           Note * note = *note_iter;
 		// FIXME:
           //note->remove_tag (notebook->get_tag());
-          m_note_removed_from_notebook (*note, notebook);
+          //m_note_removed_from_notebook (*note, notebook);
         }
 //      }
     }
@@ -401,14 +403,14 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
       
       if (currentNotebook) {
         note->remove_tag (currentNotebook->get_tag());
-        m_note_removed_from_notebook(*note, currentNotebook);
+        //m_note_removed_from_notebook(*note, currentNotebook);
       }
       
       // Only attempt to add the notebook tag when this
       // menu item is not the "No notebook" menu item.
       if (notebook && !std::tr1::dynamic_pointer_cast<SpecialNotebook>(notebook)) {
         note->add_tag (notebook->get_tag());
-        m_note_added_to_notebook(*note, notebook);
+        //m_note_added_to_notebook(*note, notebook);
       }
       
       return true;

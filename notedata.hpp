@@ -26,7 +26,7 @@
 #include "datetime.hpp"
 #include "tag.hpp"
 
-#include "sharp/map.hpp"
+#include "map.hpp"
 
 namespace gnote {
 

@@ -669,8 +669,8 @@ void Note::delete_note()
 
     // m_signal_tag_removed(shared_from_this(), tag_name);
 
-    DBG_OUT("Tag removed, queueing save");
-    queue_save(OTHER_DATA_CHANGED);
+    // DBG_OUT("Tag removed, queueing save");
+    // queue_save(OTHER_DATA_CHANGED);
   }
 
   void Note::remove_tag(const Tag::Ptr & tag)
@@ -686,6 +686,24 @@ void Note::delete_note()
     return (thetags.find(tag->normalized_name()) != thetags.end());
   }
 
+void Note::add_tag(const Tag::Ptr & tag)
+  {
+    if(!tag) {
+  //    throw sharp::Exception ("note::add_tag() called with a NULL tag.");
+	return;
+    }
+    tag->add_note (*this);
+
+    NoteData::TagMap & thetags(m_data.data().tags());
+    if (thetags.find(tag->normalized_name()) == thetags.end()) {
+      thetags[tag->normalized_name()] = tag;
+
+ //     m_signal_tag_added(*this, tag);
+
+//      DBG_OUT ("Tag added, queueing save");
+ //     queue_save(OTHER_DATA_CHANGED);
+    }
+}
 
 } // namespace gnote
 // Wed Jun 13 10:03:47 PDT 2012

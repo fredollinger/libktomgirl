@@ -24,7 +24,7 @@
 
 // #include <map>
 
-#include "sharp/map.hpp"
+#include "map.hpp"
 #include "string.hpp"
 
 #include "note.hpp"
