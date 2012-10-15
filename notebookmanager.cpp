@@ -456,6 +456,7 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
     /// </summary>
 void NotebookManager::load_notebooks()
 { // FIXME: Implement this
+	std::cout << "load_notebooks called" << std::endl;
 //	return;
 #if 0
       Gtk::TreeIter iter;
