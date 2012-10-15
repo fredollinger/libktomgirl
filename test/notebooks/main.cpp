@@ -7,16 +7,16 @@
 #include <libktomgirl/datetime.hpp>
 #include <libktomgirl/ktglib.hpp>
 #include <libktomgirl/notebook.hpp>
-#include <libktomgirl/notemanager.hpp>
+//#include <libktomgirl/notemanager.hpp>
 #include <libktomgirl/notebookmanager.hpp>
 
 using namespace sharp;
+using namespace gnote::notebooks;
 
 int main( int argc, char *argv[] )
 {
-	//gnote::Notebook::Ptr nb;
-	gnote::notebooks::Notebook::Ptr notebook;
-	//Notebook::Ptr get_notebook(const std::string & notebookName) const;
+	std::string notebookName = "joe";
+    Notebook::Ptr notebook = NotebookManager::instance().get_or_create_notebook (notebookName);
 
 	return 0;
 }
