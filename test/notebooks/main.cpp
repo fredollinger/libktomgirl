@@ -6,6 +6,7 @@
 
 #include <libktomgirl/datetime.hpp>
 #include <libktomgirl/ktglib.hpp>
+#include <libktomgirl/notebook.hpp>
 #include <libktomgirl/notemanager.hpp>
 #include <libktomgirl/notebookmanager.hpp>
 
@@ -13,13 +14,9 @@ using namespace sharp;
 
 int main( int argc, char *argv[] )
 {
-	//gnote::NotebookManager *m_nb_manager;
-	//m_nb_manager = new gnote::NotebookManager();
-/*
-	gnote::Note::Ptr gnote = m_gnmanager->find("Cycle Bullying: With Malice Towards None II");
-
-	std::cout << "Title: " << gnote->get_title() << std::endl;
-*/
+	//gnote::Notebook::Ptr nb;
+	gnote::notebooks::Notebook::Ptr notebook;
+	//Notebook::Ptr get_notebook(const std::string & notebookName) const;
 
 	return 0;
 }
