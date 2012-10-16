@@ -24,6 +24,7 @@
 #include <string.h>
 #include <iostream>
 
+#include "ktgtreeiter.hpp"
 #include "string.hpp"
 //#include "exception.hpp"
 //#include "createnotebookdialog.hpp"
@@ -58,11 +59,8 @@ namespace gnote {
      Notebook::Ptr unfiledNotesNotebook(new UnfiledNotesNotebook ());
      iter = m_notebooks->append ();
      iter->set_value(0, Notebook::Ptr(unfiledNotesNotebook));
-
-      
-
-     load_notebooks ();
 	#endif
+     load_notebooks ();
     }
 
 

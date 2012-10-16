@@ -1,9 +1,9 @@
 /*
  * KTomGirl
  *
- * TreeIter:
+ * Tree:
  * 
- * Iterator class to simulate GTK::TreeIter.
+ * Class to simulate GTK::TreeView and more as data containers.
  *
  * Copyright (C) 2012 Fred Ollinger
  *
@@ -21,8 +21,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ktgtreeiter.hpp"
+#ifndef _KTG_TREE_HPP_
+#define _KTG_TREE_HPP_
 
 namespace KTGlib {
-}
-// Mon Oct 15 12:36:54 PDT 2012
+class Tree{
+}; // END class TreeIter
+}  // namespace KTGlib
+#endif // _KTG_TREE_HPP_
+// Mon Oct 15 12:36:44 PDT 2012

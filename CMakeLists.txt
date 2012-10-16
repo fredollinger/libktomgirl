@@ -18,6 +18,7 @@ debug.cpp
 files.cpp
 gnote.cpp
 ktglib.cpp
+ktgtree.cpp
 ktgtreeiter.cpp
 note.cpp
 notebook.cpp

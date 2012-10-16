@@ -1,9 +1,9 @@
 /*
  * KTomGirl
  *
- * KTGlib:
+ * TreeIter:
  * 
- * A wrapper for Glib, providing the equivalents without glib for KTomGirl Project.
+ * Iterator class to simulate GTK::TreeIter.
  *
  * Copyright (C) 2012 Fred Ollinger
  *
