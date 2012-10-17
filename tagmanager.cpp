@@ -33,7 +33,7 @@ namespace gnote {
   const char * TagManager::TEMPLATE_NOTE_SYSTEM_TAG = "template";
 
 
-  namespace {
+ // namespace {
 #if 0
     int compare_tags_sort_func (const Gtk::TreeIter & a, 
                                 const Gtk::TreeIter & b)
@@ -66,6 +66,7 @@ namespace gnote {
   // Return an existing tag for the specified tag name.  If no Tag exists
   // null will be returned.
   // </summary>
+  #if 0
   Tag::Ptr TagManager::get_tag (const std::string & tag_name) const
   {
     if (tag_name.empty())
@@ -90,6 +91,7 @@ namespace gnote {
       Gtk::TreeIter tree_iter = iter->second;
       return (*tree_iter)[m_columns.m_tag];
     }
+#endif 
 
     return Tag::Ptr();
   }

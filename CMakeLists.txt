@@ -15,6 +15,7 @@ set(ktomgirl_SRCS
 actionmanager.cpp
 datetime.cpp
 debug.cpp
+exception.cpp
 files.cpp
 gnote.cpp
 ktglib.cpp
@@ -30,6 +31,7 @@ preferences.cpp
 sharp.cpp
 string.cpp
 tag.cpp
+tagmanager.cpp
 xml.cpp
 xmlconvert.cpp
 xmlreader.cpp

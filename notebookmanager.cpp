@@ -32,14 +32,15 @@
 #include "debug.hpp"
 #include "gnote.hpp"
 #include "notemanager.hpp"
-//#include "tagmanager.hpp"
+#include "tagmanager.hpp"
 
 namespace gnote {
   namespace notebooks {
 
-    NotebookManager::NotebookManager()
-      : m_adding_notebook(false)
-   { 
+NotebookManager::NotebookManager()
+	: m_adding_notebook(false)
+{ 
+	std::cout << "NotebookManager::NotebookManager(): called\n";
 	#if 0
      m_notebooks = Gtk::ListStore::create(m_column_types);
 
@@ -456,13 +457,22 @@ void NotebookManager::load_notebooks()
 { // FIXME: Implement this
 	std::cout << "load_notebooks called" << std::endl;
 //	return;
-#if 0
-      Gtk::TreeIter iter;
-      std::list<Tag::Ptr> tags;
-      TagManager::obj().all_tags(tags);
+
+	/* The code is being translated. We'll put the old line above
+	 * as a comment and the new line below it. */
+
+	// Gtk::TreeIter iter;
+	KTGlib::TreeIter iter;
+	
+	// FIXME: FRED
+       std::list<Tag::Ptr> tags;
+       TagManager::obj().all_tags(tags);
       for(std::list<Tag::Ptr>::const_iterator tag_iter = tags.begin();
           tag_iter != tags.end(); ++tag_iter) {
+	// FIXME: REMOVE NEXT LINE
+	}
         
+#if 0
         const Tag::Ptr & tag(*tag_iter);
         // Skip over tags that aren't notebooks
 	// FIXME: implement

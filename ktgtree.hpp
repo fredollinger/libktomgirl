@@ -24,6 +24,8 @@
 #ifndef _KTG_TREE_HPP_
 #define _KTG_TREE_HPP_
 
+#include "tree.hh"
+
 namespace KTGlib {
 class Tree{
 }; // END class TreeIter

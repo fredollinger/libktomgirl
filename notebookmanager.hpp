@@ -40,6 +40,7 @@ public:
 
   static NotebookManager & instance()
     {
+      std::cout << "static NotebookManager & instance()\n";
       static NotebookManager *s_instance = new NotebookManager();
       return *s_instance;
     }

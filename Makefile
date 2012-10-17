@@ -14,8 +14,10 @@ clean:
 install: build/$(TARGET).so
 	cp build/$(TARGET).so /usr/lib
 	mkdir -p /usr/include/$(TARGET)
-	cp -r *.hpp base /usr/include/$(TARGET)
+	cp -r *.hpp base sharp /usr/include/$(TARGET)
 	ldconfig
 
 deps:
 	sudo apt-get install g++ cmake
+nbtest:
+	cd test/notebooks && make && make test

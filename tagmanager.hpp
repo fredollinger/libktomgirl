@@ -23,6 +23,7 @@
 #ifndef __TAG_MANAGER_HPP_
 #define __TAG_MANAGER_HPP_
 
+#include <map>
 #include <memory>
 #include <tr1/memory>
 #include "base/singleton.hpp"

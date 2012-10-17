@@ -25,6 +25,7 @@
 #ifndef __TAG_HPP_
 #define __TAG_HPP_
 
+#include <list>
 #include <string>
 #include <tr1/memory>
 

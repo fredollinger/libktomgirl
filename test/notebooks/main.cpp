@@ -15,7 +15,7 @@ using namespace gnote::notebooks;
 
 int main( int argc, char *argv[] )
 {
-	std::string notebookName = "joe";
+    std::string notebookName = "joe";
     Notebook::Ptr notebook = NotebookManager::instance().get_or_create_notebook (notebookName);
 
 	return 0;
