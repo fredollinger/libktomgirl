@@ -52,7 +52,7 @@ namespace gnote {
   }
 #endif
 
-  TagManager::TagManager()
+TagManager::TagManager()
     //:  m_tags(Gtk::ListStore::create(m_columns))
     //,  m_sorted_tags(Gtk::TreeModelSort::create(m_tags))
   {
@@ -62,13 +62,15 @@ namespace gnote {
   }
 
 
+// BEGIN TagManager::get_tag ()
   // <summary>
   // Return an existing tag for the specified tag name.  If no Tag exists
   // null will be returned.
   // </summary>
-  #if 0
-  Tag::Ptr TagManager::get_tag (const std::string & tag_name) const
+Tag::Ptr TagManager::get_tag (const std::string & tag_name) const
   {
+
+  #if 0
     if (tag_name.empty())
       throw sharp::Exception("TagManager.GetTag () called with a null tag name.");
 
@@ -91,18 +93,20 @@ namespace gnote {
       Gtk::TreeIter tree_iter = iter->second;
       return (*tree_iter)[m_columns.m_tag];
     }
-#endif 
 
+#endif 
     return Tag::Ptr();
-  }
+} // END TagManager::get_tag ()
   
-  // <summary>
-  // Same as GetTag () but will create a new tag if one doesn't already exist.
-  // </summary>
-  Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
-  {
+// BEGIN TagManager::get_or_create_tag()
+// <summary>
+// Same as GetTag () but will create a new tag if one doesn't already exist.
+// </summary>
+Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
+{
         Tag::Ptr t(new Tag(tag_name));
 		return t;
+}
 #if 0
     if (tag_name.empty())
       throw sharp::Exception ("TagManager.GetOrCreateTag () called with a null tag name.");
@@ -149,8 +153,9 @@ namespace gnote {
     }
 
     return tag;
-#endif
   }
+#endif
+// END TagManager::get_or_create_tag()
     
   /// <summary>
   /// Same as GetTag(), but for a system tag.
@@ -245,8 +250,9 @@ namespace gnote {
     for(TagMap::const_iterator iter = m_tag_map.begin();
         iter != m_tag_map.end(); ++iter) {
       Tag::Ptr tag;
-      iter->second->get_value(0, tag);      
-      tags.push_back(tag);
+      // FIXME: NEED TO IMPLEMENT
+      // iter->second->get_value(0, tag);      
+      //tags.push_back(tag);
     }
   }
 
