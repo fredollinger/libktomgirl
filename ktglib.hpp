@@ -33,6 +33,7 @@ namespace KTGlib {
 typedef std::list<std::string> StringList;
 typedef boost::uint64_t gunichar; 
 bool str_has_prefix(std::string, const char *);
+bool str_has_prefix(std::string, std::string);
 
 std::string build_filename(const std::string & p, const std::string & fn);
 

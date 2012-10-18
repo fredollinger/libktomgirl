@@ -32,6 +32,10 @@ const char* ustring::c_str(){
   return m_qs.c_str();
 }
 
+bool str_has_prefix(std::string one, std::string two){
+	return str_has_prefix(one, two.c_str());
+} 
+
 bool str_has_prefix(std::string st, const char *ch){
 	size_t found;
 

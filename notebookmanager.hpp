@@ -24,6 +24,7 @@
 
 //#include <sigc++/signal.h>
 
+#include "ktgtree.hpp"
 #include "notebook.hpp"
 #include "note.hpp"
 #include "tag.hpp"
@@ -91,6 +92,8 @@ private:
   void load_notebooks();
   //static bool filter_notebooks(const Gtk::TreeIter &);
 
+
+ std::auto_ptr<KTGlib::Tree>         m_notebooks;
   #if 0
   class ColumnRecord
   //  : public Gtk::TreeModelColumnRecord
@@ -104,9 +107,9 @@ private:
   };
   
 
+//  Glib::RefPtr<Gtk::ListStore>         m_notebooks;
   ColumnRecord                         m_column_types;
 #endif
-//  Glib::RefPtr<Gtk::ListStore>         m_notebooks;
  // Glib::RefPtr<Gtk::TreeModelSort>     m_sortedNotebooks;
   //Glib::RefPtr<Gtk::TreeModelFilter>   m_filteredNotebooks;
   // <summary>

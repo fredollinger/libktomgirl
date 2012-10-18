@@ -24,9 +24,10 @@
 #include <string.h>
 #include <iostream>
 
+#include "ktglib.hpp"
 #include "ktgtreeiter.hpp"
 #include "string.hpp"
-//#include "exception.hpp"
+#include "exception.hpp"
 //#include "createnotebookdialog.hpp"
 #include "notebookmanager.hpp"
 #include "debug.hpp"
@@ -102,11 +103,12 @@ NotebookManager::NotebookManager()
     Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebookName)
     {
 	Notebook::Ptr notebook; // FIXME: delete this line
-	#if 0
       if (notebookName.empty())
         throw sharp::Exception ("NotebookManager.GetNotebook () called with a null name.");
       
+     #if 0
       Notebook::Ptr notebook = get_notebook (notebookName);
+
       if (notebook) {
         return notebook;
       }
@@ -453,44 +455,36 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
     /// <summary>
     /// Loop through the system tags looking for notebooks
     /// </summary>
-void NotebookManager::load_notebooks()
-{ // FIXME: Implement this
+void NotebookManager::load_notebooks(){ // FIXME: Implement this
 	std::cout << "load_notebooks called" << std::endl;
-//	return;
 
-	/* The code is being translated. We'll put the old line above
-	 * as a comment and the new line below it. */
+      /* The code is being translated. We'll put the old line above
+       * as a comment and the new line below it. */
 
-	// Gtk::TreeIter iter;
-	KTGlib::TreeIter iter;
+      KTGlib::TreeIter iter;
 	
-	// FIXME: FRED
-       std::list<Tag::Ptr> tags;
-       TagManager::obj().all_tags(tags);
+      std::list<Tag::Ptr> tags;
+      TagManager::obj().all_tags(tags);
       for(std::list<Tag::Ptr>::const_iterator tag_iter = tags.begin();
           tag_iter != tags.end(); ++tag_iter) {
 	// FIXME: REMOVE NEXT LINE
-	}
-        
-#if 0
         const Tag::Ptr & tag(*tag_iter);
         // Skip over tags that aren't notebooks
 	// FIXME: implement
-	/*
         if (!tag->is_system()
-            || !Glib::str_has_prefix(tag->name(),
-                                     std::string(Tag::SYSTEM_TAG_PREFIX)
-                                     + Notebook::NOTEBOOK_TAG_PREFIX)) {
-          continue;
+            || !KTGlib::str_has_prefix(tag->name(),
+            std::string(Tag::SYSTEM_TAG_PREFIX)
+            + Notebook::NOTEBOOK_TAG_PREFIX)){
+            continue;
         }
-	*/
+
         Notebook::Ptr notebook(new Notebook (tag));
+	// FRED: START HERE
 	// FIXME: Not sure if we even need this
-        iter = m_notebooks->append ();
-        iter->set_value(0, notebook);
-        m_notebookMap [notebook->get_normalized_name()] = iter;
- }
-	#endif
+        //iter = m_notebooks->append ();
+        //iter->set_value(0, notebook);
+        //m_notebookMap [notebook->get_normalized_name()] = iter;
+     }
 }
 
     /// <summary>
