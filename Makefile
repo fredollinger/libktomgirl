@@ -14,7 +14,7 @@ clean:
 install: build/$(TARGET).so
 	cp build/$(TARGET).so /usr/lib
 	mkdir -p /usr/include/$(TARGET)
-	cp -r *.hpp base sharp /usr/include/$(TARGET)
+	cp -r *.hpp base /usr/include/$(TARGET)
 	ldconfig
 
 deps:
