@@ -24,8 +24,17 @@
 #ifndef _KTG_TREE_ITER_HPP_
 #define _KTG_TREE_ITER_HPP_
 
+
+
 namespace KTGlib {
+class Tree;
 class TreeIter{
+public:
+	TreeIter(void);
+	TreeIter(Tree*);
+private:
+	Tree *model;
+	bool is_end;
 }; // END class TreeIter
 }  // namespace KTGlib
 #endif // _KTG_TREE_ITER_HPP_

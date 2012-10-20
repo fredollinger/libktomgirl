@@ -23,6 +23,20 @@
 
 #include "ktgtreeiter.hpp"
 
-namespace KTGlib {
+namespace KTGlib{ 
+TreeIter::TreeIter() :
+	  model(0)
+	, is_end(false)
+{ 
+	return;
 }
-// Mon Oct 15 12:36:54 PDT 2012
+
+TreeIter::TreeIter(Tree *m) : 
+	  model(m)
+	, is_end(false)
+{
+	return;
+}
+
+} // namespace KTGlib
+// Sat Oct 20 16:19:46 PDT 2012
