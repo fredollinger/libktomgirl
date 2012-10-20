@@ -25,9 +25,13 @@
 #define _KTG_TREE_HPP_
 
 #include "tree.hh"
+#include "ktgtreeiter.hpp"
 
 namespace KTGlib {
 class Tree{
+public:
+	Tree(void);
+	TreeIter append(void);
 }; // END class TreeIter
 }  // namespace KTGlib
 #endif // _KTG_TREE_HPP_

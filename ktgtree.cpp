@@ -22,7 +22,15 @@
  */
 
 #include "ktgtree.hpp"
+#include "ktgtreeiter.hpp"
 
 namespace KTGlib {
+Tree::Tree(){
 }
+
+TreeIter Tree::append(){
+	TreeIter itr;
+	return itr;
+}
+} // namespace KTGlib 
 // Mon Oct 15 12:36:54 PDT 2012

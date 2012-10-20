@@ -481,7 +481,7 @@ void NotebookManager::load_notebooks(){ // FIXME: Implement this
         Notebook::Ptr notebook(new Notebook (tag));
 	// FRED: START HERE
 	// FIXME: Not sure if we even need this
-        //iter = m_notebooks->append ();
+        iter = m_notebooks->append ();
         //iter->set_value(0, notebook);
         //m_notebookMap [notebook->get_normalized_name()] = iter;
      }
