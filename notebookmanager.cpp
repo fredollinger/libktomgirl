@@ -463,7 +463,7 @@ void NotebookManager::load_notebooks(){ // FIXME: Implement this
       /* The code is being translated. We'll put the old line above
        * as a comment and the new line below it. */
 
-      KTGlib::TreeIter iter;
+      // KTGlib::TreeIter iter;
 	
       std::list<Tag::Ptr> tags;
       TagManager::obj().all_tags(tags);
@@ -482,6 +482,7 @@ void NotebookManager::load_notebooks(){ // FIXME: Implement this
 
         Notebook::Ptr notebook(new Notebook (tag));
         m_notebookMap [notebook->get_normalized_name()] = notebook;
+        std::cout << "loading: " << notebook->get_normalized_name();
      }
 }
 

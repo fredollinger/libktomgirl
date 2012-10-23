@@ -30,27 +30,7 @@
 
 namespace gnote {
 
-  const char * TagManager::TEMPLATE_NOTE_SYSTEM_TAG = "template";
-
-
- // namespace {
-#if 0
-    int compare_tags_sort_func (const Gtk::TreeIter & a, 
-                                const Gtk::TreeIter & b)
-    {
-      Tag::Ptr tag_a;
-      a->get_value(0, tag_a);
-      Tag::Ptr tag_b;
-      b->get_value(0, tag_b);
-
-      if (!tag_a || !tag_b)
-        return 0;
-
-      return strcmp(tag_a->normalized_name().c_str(), 
-                    tag_b->normalized_name().c_str());
-    }
-  }
-#endif
+const char * TagManager::TEMPLATE_NOTE_SYSTEM_TAG = "template";
 
 TagManager::TagManager()
     //:  m_tags(Gtk::ListStore::create(m_columns))
@@ -250,9 +230,10 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     for(TagMap::const_iterator iter = m_tag_map.begin();
         iter != m_tag_map.end(); ++iter) {
       Tag::Ptr tag;
-      // FIXME: NEED TO IMPLEMENT
-      // iter->second->get_value(0, tag);      
-      //tags.push_back(tag);
+      // FIXME: NEED TO TEST
+      //iter->second->get_value(0, tag);      
+      tag = iter->second;
+      tags.push_back(tag);
     }
   }
 
