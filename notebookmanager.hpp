@@ -118,7 +118,7 @@ private:
   //std::map<std::string, Gtk::TreeIter> m_notebookMap;
 
   // Need to make sure this works right...
-  std::map<std::string, Notebook> m_notebookMap;
+  std::map<std::string, KTGlib::TreeIter> m_notebookMap;
   //object locker = new object ();    
   bool                                 m_adding_notebook;
   //NotebookEventHandler                 m_note_added_to_notebook;

@@ -33,4 +33,4 @@ TreeIter Tree::append(){
 	return itr;
 }
 } // namespace KTGlib 
-// Mon Oct 15 12:36:54 PDT 2012
+// Mon Oct 16 12:36:54 PDT 2012
