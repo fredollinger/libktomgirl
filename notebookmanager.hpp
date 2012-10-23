@@ -93,7 +93,7 @@ private:
   //static bool filter_notebooks(const Gtk::TreeIter &);
 
 
- std::auto_ptr<KTGlib::Tree>         m_notebooks;
+ //std::auto_ptr<KTGlib::Tree>         m_notebooks;
   #if 0
   class ColumnRecord
   //  : public Gtk::TreeModelColumnRecord
@@ -118,7 +118,7 @@ private:
   //std::map<std::string, Gtk::TreeIter> m_notebookMap;
 
   // Need to make sure this works right...
-  std::map<std::string, KTGlib::TreeIter> m_notebookMap;
+  std::map<std::string, Notebook::Ptr> m_notebookMap;
   //object locker = new object ();    
   bool                                 m_adding_notebook;
   //NotebookEventHandler                 m_note_added_to_notebook;

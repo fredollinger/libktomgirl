@@ -156,7 +156,8 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
 	std::cout << "NotebookManager::delete_notebook () called with a null argument."<< std::endl;
         //throw sharp::Exception ("NotebookManager::delete_notebook () called with a null argument.");
       std::string normalized_name = notebook->get_normalized_name();
-       std::map<std::string, Notebook>::iterator map_iter = m_notebookMap.find (normalized_name);
+       // std::map<std::string, Notebook>::iterator map_iter = m_notebookMap.find (normalized_name);
+	/*
       if (map_iter == m_notebookMap.end())
         return;
       
@@ -165,6 +166,7 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
         if (map_iter == m_notebookMap.end()) {
           return;
         }
+	*/
         
 	#if 0
         Gtk::TreeIter iter = map_iter->second;;
@@ -479,11 +481,7 @@ void NotebookManager::load_notebooks(){ // FIXME: Implement this
         }
 
         Notebook::Ptr notebook(new Notebook (tag));
-	// FRED: START HERE
-	// FIXME: Not sure if we even need this
-        iter = m_notebooks->append ();
-        //iter->set_value(0, notebook);
-        //m_notebookMap [notebook->get_normalized_name()] = iter;
+        m_notebookMap [notebook->get_normalized_name()] = notebook;
      }
 }
 
