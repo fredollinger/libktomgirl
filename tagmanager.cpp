@@ -238,4 +238,3 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
   }
 
 }
-
