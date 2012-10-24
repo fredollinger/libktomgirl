@@ -22,11 +22,13 @@ int main( int argc, char *argv[] )
 
      	gnote::TagManager *man = new gnote::TagManager(); 
 	gnote::Tag::Ptr tag; 
-        Notebook::Ptr notebook;
+        //Notebook::Ptr notebook;
 
 	std::string name = "bob";
 
-        notebook = Notebook::Ptr(new Notebook (name));
+	Notebook::Ptr notebook = NotebookManager::instance().get_or_create_notebook (name);
+
+        // notebook = Notebook::Ptr(new Notebook (name));
 
 //	tag = gnote::TagManager::obj().get_or_create_system_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
 
