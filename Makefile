@@ -21,3 +21,5 @@ deps:
 	sudo apt-get install g++ cmake
 nbtest:
 	cd test/notebooks && make && make test
+tagtest:
+	sudo make install && cd test/notebooks && make && make test

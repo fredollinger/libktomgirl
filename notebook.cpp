@@ -50,7 +50,7 @@ namespace notebooks {
     }
     else {
       set_name(name);
-      // m_tag = TagManager::obj().get_or_create_system_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
+      m_tag = TagManager::obj().get_or_create_system_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
     }
   }
 
@@ -87,6 +87,9 @@ namespace notebooks {
       // FIXME: TRANSLATE
       //std::string format = _("%1% Notebook Template");
       //m_template_note_title = str(boost::format(format) % m_name);
+
+      std::string format = "%1% Notebook Template";
+      m_template_note_title = str(boost::format(format) % m_name);
     }
   }
 

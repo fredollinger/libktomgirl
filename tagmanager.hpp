@@ -17,9 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
-
 #ifndef __TAG_MANAGER_HPP_
 #define __TAG_MANAGER_HPP_
 
@@ -28,7 +25,7 @@
 #include <tr1/memory>
 #include "base/singleton.hpp"
 #include "tag.hpp"
-
+#include "ktgtree.hpp"
 
 namespace gnote {
 
@@ -74,6 +71,8 @@ private:
 	
   };
   ColumnRecord                     m_columns;
+  std::auto_ptr<KTGlib::Tree>     m_tags;
+  std::auto_ptr<KTGlib::Tree>     m_sorted_tags;
   // Glib::RefPtr<Gtk::ListStore>     m_tags;
   // Glib::RefPtr<Gtk::TreeModelSort> m_sorted_tags;
   // The key for this dictionary is Tag.Name.ToLower ().
