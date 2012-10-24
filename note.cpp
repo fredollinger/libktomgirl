@@ -686,9 +686,10 @@ void Note::delete_note()
     return (thetags.find(tag->normalized_name()) != thetags.end());
   }
 
-void Note::add_tag(const Tag::Ptr & tag)
-  {
+void Note::add_tag(const Tag::Ptr & tag) {
+    std::cout << "Note::add_tag()";
     if(!tag) {
+	std::cout << "note::add_tag() called with a NULL tag.";
   //    throw sharp::Exception ("note::add_tag() called with a NULL tag.");
 	return;
     }

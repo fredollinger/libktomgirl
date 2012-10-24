@@ -19,7 +19,8 @@
  */
 
 
-#include <string.h>
+//#include <string.h>
+#include <iostream>
 
 #include "tagmanager.hpp"
 #include "debug.hpp"
@@ -223,6 +224,7 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
   
   void TagManager::all_tags(std::list<Tag::Ptr> & tags) const
   {
+    std::cout << "TagManager::all_tags" << std::endl;
     // Add in the system tags first
     sharp::map_get_values(m_internal_tags, tags);
     

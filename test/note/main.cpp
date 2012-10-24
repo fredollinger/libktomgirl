@@ -15,7 +15,6 @@ int main( int argc, char *argv[] )
 	gnote::NoteManager *m_gnmanager;
 	m_gnmanager = new gnote::NoteManager();
 	gnote::Note::Ptr gnote = m_gnmanager->find("Cycle Bullying: With Malice Towards None II");
-
 	std::cout << "Title: " << gnote->get_title() << std::endl;
 
 	return 0;
