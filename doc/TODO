@@ -1,3 +1,9 @@
+1. create a new notebook in KTomGirl
+2. set note to a given notebook (first in test then for real).
+3. when we save, save the notebook to xml
+
+============================
+
 Implement load_notebooks() in notebookmanager.cpp.
 
 
