@@ -269,9 +269,10 @@ void Note::write(const std::string & _write_file, const NoteData & note)
 }
 
   void NoteArchiver::write(const std::string & write_file, const NoteData & data)
-  {
+{
+    std::cout << "NoteArchiver::write()\n";
     obj().write_file(write_file, data);
-  }
+}
 
 // BEGIN NoteArchiver::write_file()
 void NoteArchiver::write_file(const std::string & _write_file, const NoteData & note)
@@ -309,9 +310,11 @@ void NoteArchiver::write_file(const std::string & _write_file, const NoteData & 
     }
   } // END NoteArchiver::write_file()
 
+// FIXME: FRED: add tag support
 // BEGIN NOTEARCHIVER::WRITE
 void NoteArchiver::write(sharp::XmlWriter & xml, const NoteData & note)
 {
+    std::cout << "NoteArchiver::write()\n";
 
     xml.write_start_document();
     xml.write_start_element("", "note", "http://beatniksoftware.com/tomboy");
@@ -380,18 +383,23 @@ void NoteArchiver::write(sharp::XmlWriter & xml, const NoteData & note)
     xml.write_string (boost::lexical_cast<std::string>(note.y()));
     xml.write_end_element();
 
-    /*
+    // BEGIN DEPRECATED
+    if (note.tags().size() > 0) 
+	std::cout << "NoteArchiver::write(): have tags!\n";
+    else
+	std::cout << "NoteArchiver::write(): have NO tags!\n";
+    // END DEPRECATED
+	
     if (note.tags().size() > 0) {
       xml.write_start_element ("", "tags", "");
       for(NoteData::TagMap::const_iterator iter = note.tags().begin();
-          iter != note.tags().end(); ++iter) {
+        iter != note.tags().end(); ++iter) {
         xml.write_start_element("", "tag", "");
         xml.write_string(iter->second->name());
         xml.write_end_element();
       }
       xml.write_end_element();
     }
-    */
 
     xml.write_start_element("", "open-on-startup", "");
     xml.write_string(note.is_open_on_startup() ? "True" : "False");
