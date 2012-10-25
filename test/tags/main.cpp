@@ -28,13 +28,13 @@ int main( int argc, char *argv[] )
 	std::string name = "bob";
 	tag = gnote::TagManager::obj().get_or_create_system_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
 	std::cout << "calling add_tag(): \n" << tag->name() << std::endl;
-	note->add_tag(tag);
+//	note->add_tag(tag);
 	if (note->contains_tag(tag) )
 		std::cout << "tag\n";
 	else
 		std::cout << "no tag\n";
 
-	note->save();
+//	note->save();
 	return 0;
 }
 // Mon Sep  3 16:23:15 PDT 2012
