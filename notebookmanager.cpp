@@ -102,37 +102,34 @@ NotebookManager::NotebookManager()
 
     Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebookName)
     {
-	Notebook::Ptr notebook; // FIXME: delete this line
-      if (notebookName.empty())
+	std::cout << "NotebookManager::get_or_create_notebook()" << std::endl;
+	//Notebook::Ptr notebook; // FIXME: delete this line
+    if (notebookName.empty())
         throw sharp::Exception ("NotebookManager.GetNotebook () called with a null name.");
       
-     #if 0
-      Notebook::Ptr notebook = get_notebook (notebookName);
+    Notebook::Ptr notebook = get_notebook (notebookName);
 
-      if (notebook) {
+    if (notebook) {
         return notebook;
-      }
-      
-      Gtk::TreeIter iter;
-//      lock (locker) {
-        notebook = get_notebook (notebookName);
-        if (notebook)
-          return notebook;
-        
-        try {
+    }
+
+	try {
           m_adding_notebook = true;
           notebook = Notebook::Ptr(new Notebook (notebookName));
-        } 
-        catch(...)
-        {
+    }
+
+	catch(...)
+    {
           // set flag to fast and rethrow
           m_adding_notebook = false;
           throw;
-        }
+    }
+
         m_adding_notebook = false;
-        iter = m_notebooks->append ();
-        iter->set_value(0, notebook);
-        m_notebookMap [notebook->get_normalized_name()] = iter;
+//        iter = m_notebooks->append ();
+ //       iter->set_value(0, notebook);
+        //m_notebookMap [notebook->get_normalized_name()] = iter;
+        m_notebookMap [notebook->get_normalized_name()] = notebook;
         
         // Create the template note so the system tag
         // that represents the notebook actually gets
@@ -144,11 +141,11 @@ NotebookManager::NotebookManager()
         // Since it's possible for the template note to already
         // exist, we need to make sure it gets tagged.
         templateNote->add_tag (notebook->get_tag());
-        m_note_added_to_notebook (*templateNote, notebook);
-//      }
-#endif
+		// FIXME: Figure this out!
+        // m_note_added_to_notebook (*templateNote, notebook);
+
       return notebook;
-    }
+}
 
 void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
 {
