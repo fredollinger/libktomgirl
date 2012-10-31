@@ -34,8 +34,8 @@ namespace gnote {
 const char * TagManager::TEMPLATE_NOTE_SYSTEM_TAG = "template";
 
 TagManager::TagManager()
-    //:  m_tags(Gtk::ListStore::create(m_columns))
-    //,  m_sorted_tags(Gtk::TreeModelSort::create(m_tags))
+    :  m_tags(new KTGlib::Tree())
+    ,  m_sorted_tags(new KTGlib::Tree())
   {
    // m_sorted_tags->set_sort_func (0, sigc::ptr_fun(&compare_tags_sort_func));
     //m_sorted_tags->set_sort_column_id (0, Gtk::SORT_ASCENDING);
@@ -227,15 +227,24 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     std::cout << "TagManager::all_tags" << std::endl;
     // Add in the system tags first
     sharp::map_get_values(m_internal_tags, tags);
-    
+
+	// FIXME: Delete next line:
+    TagMap::const_iterator iter = m_tag_map.begin();
+
+    std::cout << "TagManager::all_tags2" << std::endl;
+
+	std::cout << "mymap.size() is " << (int) m_tag_map.size() << std::endl;
+	if (m_tag_map.empty()) return;
+    std::cout << "TagManager::all_tags3" << std::endl;
     // Now all the other tags
     for(TagMap::const_iterator iter = m_tag_map.begin();
         iter != m_tag_map.end(); ++iter) {
-      Tag::Ptr tag;
-      // FIXME: NEED TO TEST
-      //iter->second->get_value(0, tag);      
-      tag = iter->second;
-      tags.push_back(tag);
+		std::cout << "TagManager::all_tags4" << std::endl;
+      	Tag::Ptr tag;
+      	// FIXME: NEED TO TEST
+      	//iter->second->get_value(0, tag);      
+      	tag = iter->second;
+     	tags.push_back(tag);
     }
   }
 
