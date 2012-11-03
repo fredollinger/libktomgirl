@@ -39,15 +39,16 @@
 #include <iostream>
 // BEGIN STD INCLUDES
 
+#include "datetime.hpp"
+#include "debug.hpp"
+#include "files.hpp"
 #include "note.hpp"
 #include "notedata.hpp"
 #include "notebuffer.hpp"
 #include "notemanager.hpp"
-#include "debug.hpp"
-#include "files.hpp"
 #include "tag.hpp"
+#include "tagmanager.hpp"
 #include "string.hpp"
-#include "datetime.hpp"
 #include "xmlconvert.hpp"
 #include "xmlreader.hpp"
 #include "xmlwriter.hpp"
@@ -181,8 +182,7 @@ Note::Ptr Note::create_existing_note(NoteData *data,
   }
 
 // BEGIN PARSE_TAGS
-void Note::parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags)
-{
+void Note::parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags) {
   sharp::XmlNodeSet nodes = sharp::xml_node_xpath_find(tagnodes, "//*");
     
   if(nodes.empty()) {
@@ -204,7 +204,7 @@ void Note::parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags)
           xmlFree(content);
         }
     }
-  } // BEGIN PARSE_TAGS FOR LOOP
+  } // END PARSE_TAGS FOR LOOP
 }
 // END PARSE_TAGS
 
@@ -481,8 +481,9 @@ NoteData *NoteArchiver::_read(const std::string & read_file, const std::string &
             Note::parse_tags(doc2->children, tag_strings);
             for(std::list<std::string>::const_iterator iter = tag_strings.begin();
                 iter != tag_strings.end(); ++iter) {
-              // Tag::Ptr tag = TagManager::obj().get_or_create_tag(*iter);
-              // note->tags()[tag->normalized_name()] = tag;
+	      // FRED: FIXME:
+               Tag::Ptr tag = TagManager::obj().get_or_create_tag(*iter);
+               note->tags()[tag->normalized_name()] = tag;
             }
             xmlFreeDoc(doc2);
           }

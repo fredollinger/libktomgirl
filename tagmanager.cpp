@@ -35,22 +35,17 @@ const char * TagManager::TEMPLATE_NOTE_SYSTEM_TAG = "template";
 
 TagManager::TagManager()
     :  m_tags(new KTGlib::Tree())
-    ,  m_sorted_tags(new KTGlib::Tree())
-  {
+    ,  m_sorted_tags(new KTGlib::Tree()) {
    // m_sorted_tags->set_sort_func (0, sigc::ptr_fun(&compare_tags_sort_func));
-    //m_sorted_tags->set_sort_column_id (0, Gtk::SORT_ASCENDING);
-    
-  }
-
+   // m_sorted_tags->set_sort_column_id (0, Gtk::SORT_ASCENDING);
+} 
 
 // BEGIN TagManager::get_tag ()
-  // <summary>
-  // Return an existing tag for the specified tag name.  If no Tag exists
-  // null will be returned.
-  // </summary>
-Tag::Ptr TagManager::get_tag (const std::string & tag_name) const
-  {
-
+// <summary>
+// Return an existing tag for the specified tag name.  If no Tag exists
+// null will be returned.
+// </summary>
+Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
   #if 0
     if (tag_name.empty())
       throw sharp::Exception("TagManager.GetTag () called with a null tag name.");
@@ -85,8 +80,10 @@ Tag::Ptr TagManager::get_tag (const std::string & tag_name) const
 // </summary>
 Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
 {
+	std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
+	std::cout << "TagManager::get_or_create_tag()" << normalized_tag_name  <<std::endl;
         Tag::Ptr t(new Tag(tag_name));
-		return t;
+	return t;
 }
 #if 0
     if (tag_name.empty())
@@ -222,8 +219,7 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
 #endif
   }
   
-  void TagManager::all_tags(std::list<Tag::Ptr> & tags) const
-  {
+void TagManager::all_tags(std::list<Tag::Ptr> & tags) const {
     std::cout << "TagManager::all_tags" << std::endl;
     // Add in the system tags first
     sharp::map_get_values(m_internal_tags, tags);
@@ -246,6 +242,60 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
       	tag = iter->second;
      	tags.push_back(tag);
     }
-  }
+} // END TagManager::all_tags()
 
-}
+#if 0 
+  // <summary>
+  // Same as GetTag () but will create a new tag if one doesn't already exist.
+  // </summary>
+  Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
+  {
+    if (tag_name.empty())
+      throw sharp::Exception ("TagManager.GetOrCreateTag () called with a null tag name.");
+
+    std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
+    if (normalized_tag_name.empty())
+      throw sharp::Exception ("TagManager.GetOrCreateTag () called with an empty tag name.");
+
+    std::vector<std::string> splits;
+    sharp::string_split(splits, normalized_tag_name, ":");
+    if ((splits.size() > 2) || Glib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
+      Glib::Mutex::Lock lock(m_locker);
+      std::map<std::string, Tag::Ptr>::iterator iter;
+      iter = m_internal_tags.find(normalized_tag_name);
+      if(iter != m_internal_tags.end()) {
+        return iter->second;
+      }
+      else {
+        Tag::Ptr t(new Tag(tag_name));
+        m_internal_tags [ t->normalized_name() ] = t;
+        return t;
+      }
+    }
+    Gtk::TreeIter iter;
+    bool tag_added = false;
+    Tag::Ptr tag = get_tag (normalized_tag_name);
+    if (!tag) {
+
+      Glib::Mutex::Lock lock(m_locker);
+
+      tag = get_tag (normalized_tag_name);
+      if (!tag) {
+        tag.reset(new Tag (sharp::string_trim(tag_name)));
+        iter = m_tags->append ();
+        (*iter)[m_columns.m_tag] = tag;
+        m_tag_map [tag->normalized_name()] = iter;
+
+        tag_added = true;
+      }
+    }
+
+    if (tag_added) {
+      m_signal_tag_added(tag, iter);
+    }
+
+    return tag;
+  }
+#endif
+   
+} // namespace gnote 
