@@ -47,7 +47,6 @@ TagManager::TagManager()
 // </summary>
 Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
   std::cout << "TagManager::get_tag():FIXME: STUB" << std::endl;
-  #if 0
     if (tag_name.empty())
       throw sharp::Exception("TagManager.GetTag () called with a null tag name.");
 
@@ -58,20 +57,23 @@ Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
     std::vector<std::string> splits;
     sharp::string_split(splits, normalized_tag_name, ":");
     if ((splits.size() > 2) || Glib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)) {
-      Glib::Mutex::Lock lock(m_locker);
+//      Glib::Mutex::Lock lock(m_locker);
+/*
       std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
       if(iter != m_internal_tags.end()) {
         return iter->second;
       }
       return Tag::Ptr();
     }
+
     std::map<std::string, Gtk::TreeIter>::const_iterator iter = m_tag_map.find(normalized_tag_name);
     if (iter != m_tag_map.end()) {
       Gtk::TreeIter tree_iter = iter->second;
       return (*tree_iter)[m_columns.m_tag];
+*/
+	return tag;
     }
 
-#endif 
     return Tag::Ptr();
 } // END TagManager::get_tag ()
   
