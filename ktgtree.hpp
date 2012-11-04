@@ -32,6 +32,7 @@ class Tree{
 public:
 	Tree(void);
 	TreeIter append(void);
+	TreeIter find(std::string);
 }; // END class TreeIter
 }  // namespace KTGlib
 #endif // _KTG_TREE_HPP_

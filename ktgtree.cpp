@@ -29,8 +29,16 @@ Tree::Tree(){
 }
 
 TreeIter Tree::append(){
+	// FIXME STUB
 	TreeIter itr;
 	return itr;
 }
+
+TreeIter Tree::find(std::string st){
+	// FIXME STUB
+	TreeIter itr;
+	return itr;
+}
+
 } // namespace KTGlib 
 // Mon Oct 16 12:36:54 PDT 2012

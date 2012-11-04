@@ -78,8 +78,10 @@ private:
   // The key for this dictionary is Tag.Name.ToLower ().
   typedef std::map<std::string, Tag::Ptr> TagMap;
   TagMap                           m_tag_map;
-  typedef std::map<std::string, Tag::Ptr> InternalMap;
-  InternalMap                      m_internal_tags;
+  //typedef std::map<std::string, Tag::Ptr> InternalMap;
+//  typedef std::auto_ptr<KTGlib::Tree>     InternalMap;
+ // InternalMap m_internal_tags;
+  std::auto_ptr<KTGlib::Tree> m_internal_tags;
   // mutable Glib::Mutex              m_locker;
   
   // sigc::signal<void, Tag::Ptr, const Gtk::TreeIter &> m_signal_tag_added;
