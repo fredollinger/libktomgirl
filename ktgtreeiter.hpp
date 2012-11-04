@@ -32,6 +32,7 @@ class TreeIter{
 public:
 	TreeIter(void);
 	TreeIter(Tree*);
+	void operator++(void);
 	void setCount(int);
 
 protected:

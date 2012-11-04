@@ -45,5 +45,9 @@ void TreeIter::setCount(int c){
 	return;
 }
 
+void TreeIter::operator++(){
+	m_count++;
+}
+
 } // namespace KTGlib
 // Sun Nov  4 14:24:14 PST 2012
