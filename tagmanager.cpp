@@ -113,9 +113,26 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     bool tag_added = false;
     Tag::Ptr tag = get_tag (normalized_tag_name);
 
+    // BEGIN if (!tag)
+    if (!tag) {
+
+    //  Glib::Mutex::Lock lock(m_locker);
+
+      tag = get_tag (normalized_tag_name);
+      if (!tag) {
+        tag.reset(new Tag (sharp::string_trim(tag_name)));
+    //    iter = m_tags->append ();
+     //   (*iter)[m_columns.m_tag] = tag;
+      //  m_tag_map [tag->normalized_name()] = iter;
+        m_tag_map [tag->normalized_name()] = tag;
+
+        tag_added = true;
+      }
+    } // END if (!tag)
+
 // FIXME: BEGIN JUNK
-        Tag::Ptr t(new Tag(tag_name));
-	return t;
+        // Tag::Ptr t(new Tag(tag_name));
+	return tag;
 }
 #if 0
     if (tag_name.empty())
