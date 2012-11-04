@@ -34,6 +34,7 @@ TreeIter Tree::append(){
 	m_count++;
 	TreeIter itr;
 	itr.setCount(m_count);	
+	m_tree[""]=itr;
 	// TODO: append to list...
 	return itr;
 }

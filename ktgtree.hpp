@@ -24,6 +24,7 @@
 #ifndef _KTG_TREE_HPP_
 #define _KTG_TREE_HPP_
 
+#include <map>
 #include "tree.hh"
 #include "ktgtreeiter.hpp"
 
@@ -35,6 +36,8 @@ public:
 	TreeIter find(std::string);
 protected:
 	int m_count; // row count
+  	typedef std::map<std::string, KTGlib::TreeIter> TreeMap;
+	TreeMap m_tree;
 }; // END class TreeIter
 }  // namespace KTGlib
 #endif // _KTG_TREE_HPP_
