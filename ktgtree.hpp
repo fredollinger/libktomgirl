@@ -33,6 +33,8 @@ public:
 	Tree(void);
 	TreeIter append(void);
 	TreeIter find(std::string);
+protected:
+	int m_count; // row count
 }; // END class TreeIter
 }  // namespace KTGlib
 #endif // _KTG_TREE_HPP_

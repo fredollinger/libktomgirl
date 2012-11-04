@@ -32,10 +32,15 @@ class TreeIter{
 public:
 	TreeIter(void);
 	TreeIter(Tree*);
-private:
+	void setCount(int);
+
+protected:
 	Tree *model;
+	int m_count;
 	bool is_end;
+
+
 }; // END class TreeIter
 }  // namespace KTGlib
 #endif // _KTG_TREE_ITER_HPP_
-// Mon Oct 15 12:36:44 PDT 2012
+// Sun Nov  4 14:24:23 PST 2012

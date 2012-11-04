@@ -24,8 +24,9 @@
 #include "ktgtreeiter.hpp"
 
 namespace KTGlib{ 
-TreeIter::TreeIter() :
-	  model(0)
+TreeIter::TreeIter() 
+	: model(0)
+	, m_count(0)
 	, is_end(false)
 { 
 	return;
@@ -33,10 +34,16 @@ TreeIter::TreeIter() :
 
 TreeIter::TreeIter(Tree *m) : 
 	  model(m)
+	, m_count(0)
 	, is_end(false)
 {
 	return;
 }
 
+void TreeIter::setCount(int c){
+	m_count = c;
+	return;
+}
+
 } // namespace KTGlib
-// Sat Oct 20 16:19:46 PDT 2012
+// Sun Nov  4 14:24:14 PST 2012

@@ -25,12 +25,16 @@
 #include "ktgtreeiter.hpp"
 
 namespace KTGlib {
-Tree::Tree(){
-}
+Tree::Tree()
+	: m_count(0) 
+{}
 
 TreeIter Tree::append(){
 	// FIXME STUB
+	m_count++;
 	TreeIter itr;
+	itr.setCount(m_count);	
+	// TODO: append to list...
 	return itr;
 }
 
