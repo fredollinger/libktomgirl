@@ -6,4 +6,19 @@
 
 Implement load_notebooks() in notebookmanager.cpp.
 
+Tree to implement
 
+    std::map<std::string, Gtk::TreeIter>::const_iterator iter = m_tag_map.find(normalized_tag_name);
+    if (iter != m_tag_map.end()) {
+      return (*tree_iter)[m_columns.m_tag];
+        iter = m_tags->append ();
+        (*iter)[m_columns.m_tag] = tag;
+        m_tag_map [tag->normalized_name()] = iter;
+    map_iter = m_tag_map.find(tag->normalized_name());
+    if (map_iter != m_tag_map.end()) {
+      map_iter = m_tag_map.find(tag->normalized_name());
+      if (map_iter != m_tag_map.end()) {
+        if (!m_tags->erase(iter)) {
+        m_tag_map.erase(map_iter);
+    for(TagMap::const_iterator iter = m_tag_map.begin();
+        iter != m_tag_map.end(); ++iter) {
