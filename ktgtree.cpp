@@ -62,5 +62,22 @@ TreeIter Tree::find(std::string st){
 	return itr;
 }
 
+TreeIter Tree::begin(){
+	// FIXME STUB
+	TreeIter itr;
+	return itr;
+}
+
+TreeIter Tree::end(){
+	// FIXME STUB
+	TreeIter itr;
+	return itr;
+}
+
+bool Tree::operator=(TreeIter){
+	// FIXME STUB
+	return true;
+}
+
 } // namespace KTGlib 
 // Mon Oct 16 12:36:54 PDT 2012

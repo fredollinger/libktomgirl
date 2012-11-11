@@ -101,6 +101,7 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
       //Glib::Mutex::Lock lock(m_locker);
       std::map<std::string, Tag::Ptr>::iterator iter;
+#if 0
       iter = m_internal_tags.find(normalized_tag_name);
       if(iter != m_internal_tags.end()) {
         return iter->second;
@@ -110,6 +111,7 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
         m_internal_tags [ t->normalized_name() ] = t;
         return t;
       }
+#endif
     }
 
     return Tag::Ptr();

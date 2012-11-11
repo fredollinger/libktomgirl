@@ -36,6 +36,9 @@ public:
 	Tree(const KTGlib::Tree*);
 	TreeIter append(void);
 	TreeIter find(std::string);
+	bool operator=(TreeIter);
+	TreeIter begin();
+	TreeIter end();
 protected:
 	int m_count; // row count
   	typedef std::map<std::string, KTGlib::TreeIter> TreeMap;
