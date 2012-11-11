@@ -64,14 +64,14 @@ TreeIter Tree::find(std::string st){
 
 TreeIter Tree::begin(){
 	// FIXME STUB
-	TreeIter itr;
-	return itr;
+	std::map<std::string, KTGlib::TreeIter>::const_iterator begin = m_tree.begin();
+	return (*begin).second;
 }
 
 TreeIter Tree::end(){
 	// FIXME STUB
-	TreeIter itr;
-	return itr;
+	std::map<std::string, KTGlib::TreeIter>::const_iterator end = m_tree.end();
+	return (*end).second;
 }
 
 bool Tree::operator=(TreeIter){
