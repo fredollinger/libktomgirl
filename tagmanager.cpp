@@ -95,87 +95,25 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
       throw sharp::Exception ("TagManager.GetOrCreateTag () called with an empty tag name.");
 
     std::vector<std::string> splits;
+
     sharp::string_split(splits, normalized_tag_name, ":");
+
+    if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
+      //Glib::Mutex::Lock lock(m_locker);
+      std::map<std::string, Tag::Ptr>::iterator iter;
+      iter = m_internal_tags.find(normalized_tag_name);
+      if(iter != m_internal_tags.end()) {
+        return iter->second;
+      }
+      else {
+        Tag::Ptr t(new Tag(tag_name));
+        m_internal_tags [ t->normalized_name() ] = t;
+        return t;
+      }
+    }
+
     return Tag::Ptr();
 }
-
-#if 0
-    // BEGIN IF VALID TAG
-    if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
-      // TODO: MUTEX HERE?
-      std::map<std::string, Tag::Ptr>::iterator iter;
-      iter = m_internal_tags.find(normalized_tag_name);
-      if(iter != m_internal_tags.end()) {
-        return iter->second;
-      }
-      else {
-        Tag::Ptr t(new Tag(tag_name));
-        m_internal_tags [ t->normalized_name() ] = t;
-        return t;
-
-      }
-    } // END IF VALID TAG
-
-    // Gtk::TreeIter iter;
-    bool tag_added = false;
-    Tag::Ptr tag = get_tag (normalized_tag_name);
-
-    // BEGIN if (!tag)
-    if (!tag) {
-
-    //  Glib::Mutex::Lock lock(m_locker);
-
-      tag =  = get_tag (normalized_tag_name);
-}
-    if (tag_name.empty())
-      throw sharp::Exception ("TagManager.GetOrCreateTag () called with a null tag name.");
-
-    std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
-    if (normalized_tag_name.empty())
-      throw sharp::Exception ("TagManager.GetOrCreateTag () called with an empty tag name.");
-
-    std::vector<std::string> splits;
-    sharp::string_split(splits, normalized_tag_name, ":");
-    if ((splits.size() > 2) || Glib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
-      Glib::Mutex::Lock lock(m_locker);
-      std::map<std::string, Tag::Ptr>::iterator iter;
-      iter = m_internal_tags.find(normalized_tag_name);
-      if(iter != m_internal_tags.end()) {
-        return iter->second;
-      }
-      else {
-        Tag::Ptr t(new Tag(tag_name));
-        m_internal_tags [ t->normalized_name() ] = t;
-        return t;
-      }
-    }
-    Gtk::TreeIter iter;
-    bool tag_added = false;
-    Tag::Ptr tag = get_tag (normalized_tag_name);
-    if (!tag) {
-
-      Glib::Mutex::Lock lock(m_locker);
-
-      tag = get_tag (normalized_tag_name);
-      if (!tag) {
-        tag.reset(new Tag (sharp::string_trim(tag_name)));
-        iter = m_tags->append ();
-        (*iter)[m_columns.m_tag] = tag;
-        m_tag_map [tag->normalized_name()] = iter;
-
-        tag_added = true;
-      }
-    }
-
-    if (tag_added) {
-      m_signal_tag_added(tag, iter);
-    }
-
-    return tag;
-  }
-#endif
-// END TagManager::get_or_create_tag()
-    
   /// <summary>
   /// Same as GetTag(), but for a system tag.
   /// </summary>

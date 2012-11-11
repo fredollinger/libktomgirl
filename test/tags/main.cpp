@@ -27,7 +27,9 @@ int main( int argc, char *argv[] )
 	gnote::Tag::Ptr t;
 
 	std::string name = "bob";
+	std::cout << "get_or_create_system_tag()";
 	tag = gnote::TagManager::obj().get_or_create_system_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
+	std::cout << "SUCCESS: get_or_create_system_tag()";
 	t = gnote::TagManager::obj().get_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
 	std::cout << "calling add_tag(): \n" << t->name() << std::endl;
 //	note->add_tag(tag);

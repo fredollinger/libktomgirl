@@ -32,6 +32,8 @@ namespace KTGlib {
 class Tree{
 public:
 	Tree(void);
+	Tree(const KTGlib::Tree&);
+	Tree(const KTGlib::Tree*);
 	TreeIter append(void);
 	TreeIter find(std::string);
 protected:

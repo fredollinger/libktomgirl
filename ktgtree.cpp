@@ -27,11 +27,28 @@
 namespace KTGlib {
 Tree::Tree()
 	: m_count(0) 
-{}
+{
+}
+
+// COPY
+KTGlib::Tree::Tree(const KTGlib::Tree &t){
+	std::map<std::string, KTGlib::TreeIter>::const_iterator begin = t.m_tree.begin();
+	std::map<std::string, KTGlib::TreeIter>::const_iterator end = t.m_tree.end();
+	m_tree = std::map<std::string, KTGlib::TreeIter>(begin, end);
+}
+
+// COPY
+KTGlib::Tree::Tree(const KTGlib::Tree *t){
+	std::map<std::string, KTGlib::TreeIter>::const_iterator begin = t->m_tree.begin();
+	std::map<std::string, KTGlib::TreeIter>::const_iterator end = t->m_tree.end();
+	m_tree = std::map<std::string, KTGlib::TreeIter>(begin, end);
+}
+
 
 TreeIter Tree::append(){
 	// FIXME STUB
 	m_count++;
+	//TreeIter *itr = new TreeIter();
 	TreeIter itr;
 	itr.setCount(m_count);	
 	m_tree[""]=itr;
