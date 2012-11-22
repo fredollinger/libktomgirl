@@ -57,9 +57,7 @@ TreeIter Tree::append(){
 }
 
 TreeIter Tree::find(std::string st){
-	// FIXME STUB
-	TreeIter itr;
-	return itr;
+	return m_tree[st];	
 }
 
 TreeIter Tree::begin(){

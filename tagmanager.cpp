@@ -59,8 +59,10 @@ Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
     sharp::string_split(splits, normalized_tag_name, ":");
     if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)) {
 //      Glib::Mutex::Lock lock(m_locker);
-/*
-      std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
+      //std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
+  	KTGlib::Tree m_internal_tags;
+      	KTGlib::TreeIter iter = m_internal_tags.find(normalized_tag_name);
+	/*
       if(iter != m_internal_tags.end()) {
         return iter->second;
       }
@@ -71,8 +73,8 @@ Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
     if (iter != m_tag_map.end()) {
       Gtk::TreeIter tree_iter = iter->second;
       return (*tree_iter)[m_columns.m_tag];
-*/
       //FIXME: REMOVE
+	*/
       return Tag::Ptr();
     }
 
@@ -99,8 +101,11 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     sharp::string_split(splits, normalized_tag_name, ":");
 
     if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
+	//FRED
       //Glib::Mutex::Lock lock(m_locker);
-      std::map<std::string, Tag::Ptr>::iterator iter;
+//      std::map<std::string, Tag::Ptr>::iterator iter;
+      KTGlib::TreeIter iter;
+      iter = m_internal_tags.find(normalized_tag_name);
 #if 0
       iter = m_internal_tags.find(normalized_tag_name);
       if(iter != m_internal_tags.end()) {
