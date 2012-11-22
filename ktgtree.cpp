@@ -44,16 +44,16 @@ KTGlib::Tree::Tree(const KTGlib::Tree *t){
 	m_tree = std::map<std::string, KTGlib::TreeIter>(begin, end);
 }
 
-
-TreeIter Tree::append(){
-	// FIXME STUB
+TreeIter Tree::append(const std::string &st){
 	m_count++;
-	//TreeIter *itr = new TreeIter();
 	TreeIter itr;
 	itr.setCount(m_count);	
-	m_tree[""]=itr;
-	// TODO: append to list...
+	m_tree[st]=itr;
 	return itr;
+}
+
+TreeIter Tree::append(){
+	return append("");
 }
 
 TreeIter Tree::find(std::string st){

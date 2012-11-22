@@ -35,6 +35,7 @@ public:
 	Tree(const KTGlib::Tree&);
 	Tree(const KTGlib::Tree*);
 	TreeIter append(void);
+	TreeIter append(const std::string&);
 	TreeIter find(std::string);
 	bool operator=(TreeIter);
 	TreeIter begin();

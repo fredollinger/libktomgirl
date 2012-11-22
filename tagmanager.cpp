@@ -106,6 +106,9 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
 //      std::map<std::string, Tag::Ptr>::iterator iter;
       KTGlib::TreeIter iter;
       iter = m_internal_tags.find(normalized_tag_name);
+      if(iter != m_internal_tags.end()) {
+        return (*iter);
+      }
 #if 0
       iter = m_internal_tags.find(normalized_tag_name);
       if(iter != m_internal_tags.end()) {
