@@ -49,5 +49,8 @@ void TreeIter::operator++(){
 	m_count++;
 }
 
+bool TreeIter::operator!=(){
+}
+
 } // namespace KTGlib
 // Sun Nov  4 14:24:14 PST 2012

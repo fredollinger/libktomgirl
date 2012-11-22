@@ -33,6 +33,7 @@ public:
 	TreeIter(void);
 	TreeIter(Tree*);
 	void operator++(void);
+	bool operator!=();
 	void setCount(int);
 
 protected:
