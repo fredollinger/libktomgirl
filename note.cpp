@@ -475,7 +475,8 @@ NoteData *NoteArchiver::_read(const std::string & read_file, const std::string &
         }
         else if(name == "tags") {
           xmlDocPtr doc2 = xmlParseDoc((const xmlChar*)xml.read_outer_xml().c_str());
-
+// FRED FIX AND UNCOMMENT
+#if 0
           if(doc2) {
             std::list<std::string> tag_strings;
             Note::parse_tags(doc2->children, tag_strings);
@@ -490,7 +491,9 @@ NoteData *NoteArchiver::_read(const std::string & read_file, const std::string &
           else {
             DBG_OUT("loading tag subtree failed");
           }
+#endif
         }
+
         else if(name == "open-on-startup") {
           note->set_is_open_on_startup(xml.read_string() == "True");
         }
