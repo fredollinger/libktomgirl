@@ -35,8 +35,8 @@ const char * TagManager::TEMPLATE_NOTE_SYSTEM_TAG = "template";
 
 TagManager::TagManager()
     :  m_tags(new KTGlib::Tree())
-    ,  m_sorted_tags(new KTGlib::Tree()) 
-    ,  m_internal_tags(new KTGlib::Tree()) {
+    ,  m_sorted_tags(new KTGlib::Tree()) {
+    //,  m_internal_tags(new KTGlib::Tree()) {
    // m_sorted_tags->set_sort_func (0, sigc::ptr_fun(&compare_tags_sort_func));
    // m_sorted_tags->set_sort_column_id (0, Gtk::SORT_ASCENDING);
 } 
@@ -98,32 +98,35 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
 
     //FRED
     // FIXME: Get rid of next line and debug below...
-    return Tag::Ptr();
+    //return Tag::Ptr();
 
     std::vector<std::string> splits;
     sharp::string_split(splits, normalized_tag_name, ":");
+    // BEGIN if ((splits.size() > 2) 
     if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
-      //Glib::Mutex::Lock lock(m_locker);
-//      std::map<std::string, Tag::Ptr>::iterator iter;
-      KTGlib::TreeIter iter;
-      iter = m_internal_tags.find(normalized_tag_name);
+	std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
+
       if(iter != m_internal_tags.end()) {
-        return (*iter);
-      }
-#if 0
-      iter = m_internal_tags.find(normalized_tag_name);
-      if(iter != m_internal_tags.end()) {
+	std::cout << "TagManager::get_or_create_tag(): found tag" << std::endl;
         return iter->second;
       }
       else {
+	std::cout << "TagManager::get_or_create_tag(): empty tag" << std::endl;
+
         Tag::Ptr t(new Tag(tag_name));
         m_internal_tags [ t->normalized_name() ] = t;
         return t;
       }
-#endif
-    }
+    } // END if ((splits.size() > 2) 
 
-    return Tag::Ptr();
+   Tag::Ptr tag = get_tag (normalized_tag_name);
+
+   // FIXME: NEED A RAFT OF ERROR HANDLING FROM GNOTE
+   if(!tag){
+	std::cout << "TagManager::get_or_create_tag(): FIXME: CAN'T MAKE TAG" << normalized_tag_name << std::endl;
+   }
+
+   return tag;
 }
   /// <summary>
   /// Same as GetTag(), but for a system tag.
