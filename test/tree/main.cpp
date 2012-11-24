@@ -19,6 +19,7 @@ int main( int argc, char *argv[] )
 	KTGlib::TreeIter iter;
 	m_internal_tags.append();
 	m_internal_tags.find(st);
+	m_internal_tags.find("joe");
 	return 0;
 }
 // Sun Nov  4 09:34:37 PST 2012

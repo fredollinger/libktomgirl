@@ -21,25 +21,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "tag.hpp"
+
 #ifndef _KTG_TREE_ITER_HPP_
 #define _KTG_TREE_ITER_HPP_
 
-
-
 namespace KTGlib {
+
 class Tree;
+
+enum KTGLIB_TREE_ITER_TYPE{
+	KTGLIB_TREE_ITER_TYPE_BEGIN,
+	KTGLIB_TREE_ITER_TYPE_END,
+	KTGLIB_TREE_ITER_TYPE_ELEMENT,
+};
+
 class TreeIter{
 public:
 	TreeIter(void);
 	TreeIter(Tree*);
+	// This is for creating BEGIN and END inters
+	TreeIter(int type);
+	int count(void);
 	void operator++(void);
-	bool operator!=();
+	bool operator!=(TreeIter);
+	gnote::Tag::Ptr operator*(void);
+	int type(void);
 	void setCount(int);
 
 protected:
 	Tree *model;
 	int m_count;
-	bool is_end;
+	int m_type;
+    	//typedef std::tr1::shared_ptr<Tag> Ptr;
+	gnote::Tag::Ptr m_tag;
 
 
 }; // END class TreeIter

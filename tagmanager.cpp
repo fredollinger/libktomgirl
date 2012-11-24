@@ -96,12 +96,13 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     if (normalized_tag_name.empty())
       throw sharp::Exception ("TagManager.GetOrCreateTag () called with an empty tag name.");
 
+    //FRED
+    // FIXME: Get rid of next line and debug below...
+    return Tag::Ptr();
+
     std::vector<std::string> splits;
-
     sharp::string_split(splits, normalized_tag_name, ":");
-
     if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
-	//FRED
       //Glib::Mutex::Lock lock(m_locker);
 //      std::map<std::string, Tag::Ptr>::iterator iter;
       KTGlib::TreeIter iter;

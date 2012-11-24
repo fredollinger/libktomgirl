@@ -27,7 +27,7 @@ namespace KTGlib{
 TreeIter::TreeIter() 
 	: model(0)
 	, m_count(0)
-	, is_end(false)
+	, m_type(KTGLIB_TREE_ITER_TYPE_ELEMENT)
 { 
 	return;
 }
@@ -35,10 +35,20 @@ TreeIter::TreeIter()
 TreeIter::TreeIter(Tree *m) : 
 	  model(m)
 	, m_count(0)
-	, is_end(false)
+	, m_type(KTGLIB_TREE_ITER_TYPE_ELEMENT)
 {
 	return;
 }
+
+TreeIter::TreeIter(int type) 
+	: model(0)
+	, m_count(0)
+	, m_type(type)
+{ 
+	return;
+}
+
+
 
 void TreeIter::setCount(int c){
 	m_count = c;
@@ -49,7 +59,22 @@ void TreeIter::operator++(){
 	m_count++;
 }
 
-bool TreeIter::operator!=(){
+int TreeIter::type(){
+	return m_type;
+}
+
+int TreeIter::count(){
+	return m_count;
+}
+
+bool TreeIter::operator!=(TreeIter iter){
+	if (type() == iter.type() && count() == iter.count()) return true;
+	return false;
+}
+
+gnote::Tag::Ptr TreeIter::operator*(void){
+	return m_tag;
+
 }
 
 } // namespace KTGlib
