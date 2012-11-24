@@ -58,27 +58,13 @@ Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
     std::vector<std::string> splits;
     sharp::string_split(splits, normalized_tag_name, ":");
     if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)) {
-//      Glib::Mutex::Lock lock(m_locker);
-      //std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
+  	std::cout << "TagManager::get_tag():FIXME: STUB" << std::endl;
   	KTGlib::Tree m_internal_tags;
       	KTGlib::TreeIter iter = m_internal_tags.find(normalized_tag_name);
-	/*
-      if(iter != m_internal_tags.end()) {
-        return iter->second;
-      }
       return Tag::Ptr();
     }
-
-    std::map<std::string, Gtk::TreeIter>::const_iterator iter = m_tag_map.find(normalized_tag_name);
-    if (iter != m_tag_map.end()) {
-      Gtk::TreeIter tree_iter = iter->second;
-      return (*tree_iter)[m_columns.m_tag];
-      //FIXME: REMOVE
-	*/
-      return Tag::Ptr();
-    }
-
-    return Tag::Ptr();
+  std::cout << "TagManager::get_tag():FIXME: STUB" << std::endl;
+  return Tag::Ptr();
 } // END TagManager::get_tag ()
   
 // BEGIN TagManager::get_or_create_tag()
@@ -111,11 +97,12 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
         return iter->second;
       }
       else {
-	std::cout << "TagManager::get_or_create_tag(): empty tag" << std::endl;
+	std::cout << "TagManager::get_or_create_tag(): empty tag" << tag_name <<std::endl;
 
-        Tag::Ptr t(new Tag(tag_name));
-        m_internal_tags [ t->normalized_name() ] = t;
-        return t;
+        //Tag::Ptr t(new Tag(tag_name));
+	std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
+        //m_internal_tags [ t->normalized_name() ] = t;
+        return Tag::Ptr();
       }
     } // END if ((splits.size() > 2) 
 
@@ -297,5 +284,40 @@ void TagManager::all_tags(std::list<Tag::Ptr> & tags) const {
     return tag;
   }
 #endif
+
+#if 0
+  // <summary>
+  // Return an existing tag for the specified tag name.  If no Tag exists
+  // null will be returned.
+  // </summary>
+  Tag::Ptr TagManager::get_tag (const std::string & tag_name) const
+  {
+    if (tag_name.empty())
+      throw sharp::Exception("TagManager.GetTag () called with a null tag name.");
+
+    std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
+    if (normalized_tag_name.empty())
+      throw sharp::Exception ("TagManager.GetTag () called with an empty tag name.");
+
+    std::vector<std::string> splits;
+    sharp::string_split(splits, normalized_tag_name, ":");
+    if ((splits.size() > 2) || Glib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)) {
+      Glib::Mutex::Lock lock(m_locker);
+      std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
+      if(iter != m_internal_tags.end()) {
+        return iter->second;
+      }
+      return Tag::Ptr();
+    }
+    std::map<std::string, Gtk::TreeIter>::const_iterator iter = m_tag_map.find(normalized_tag_name);
+    if (iter != m_tag_map.end()) {
+      Gtk::TreeIter tree_iter = iter->second;
+      return (*tree_iter)[m_columns.m_tag];
+    }
+
+    return Tag::Ptr();
+  }
+#endif
+ 
    
 } // namespace gnote 

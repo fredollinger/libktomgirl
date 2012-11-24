@@ -23,12 +23,15 @@ int main( int argc, char *argv[] )
 	gnote::Note::Ptr note = m_gnmanager->find("Cycle Bullying: With Malice Towards None II");
 	std::cout << "Title: " << note->get_title() << std::endl;
   	const char * NOTEBOOK_TAG_PREFIX = "notebook:";
+	std::string name = "bob";
+/*
 	gnote::Tag::Ptr tag;
 	gnote::Tag::Ptr t;
 
-	std::string name = "bob";
 	std::cout << "get_or_create_system_tag()";
 	tag = gnote::TagManager::obj().get_or_create_system_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
+
+
 	std::cout << "SUCCESS: get_or_create_system_tag()";
 	t = gnote::TagManager::obj().get_tag ( std::string(NOTEBOOK_TAG_PREFIX) + name);
 	std::cout << "calling add_tag(): \n" << t->name() << std::endl;
@@ -39,6 +42,10 @@ int main( int argc, char *argv[] )
 		std::cout << "no tag\n";
 
 //	note->save();
+*/
+
+        //Tag::Ptr t(new Tag(tag_name));
+        gnote::Tag::Ptr t(new gnote::Tag(std::string(NOTEBOOK_TAG_PREFIX) + name));
 	return 0;
 }
 // Mon Sep  3 16:23:15 PDT 2012

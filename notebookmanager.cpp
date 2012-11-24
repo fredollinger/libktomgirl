@@ -107,13 +107,17 @@ NotebookManager::NotebookManager()
     if (notebookName.empty())
         throw sharp::Exception ("NotebookManager.GetNotebook () called with a null name.");
       
+    std::cout << "NotebookManager::get_notebook()" << std::endl;
     Notebook::Ptr notebook = get_notebook (notebookName);
 
     if (notebook) {
+    	std::cout << "NotebookManager:: return notebook()" << std::endl;
         return notebook;
     }
 
 	try {
+
+    	std::cout << "NotebookManager:: making notebook()" << std::endl;
           m_adding_notebook = true;
           notebook = Notebook::Ptr(new Notebook (notebookName));
     }
@@ -129,17 +133,21 @@ NotebookManager::NotebookManager()
 //        iter = m_notebooks->append ();
  //       iter->set_value(0, notebook);
         //m_notebookMap [notebook->get_normalized_name()] = iter;
+
+    	std::cout << "NotebookManager:: adding notebook to map()" << std::endl;
         m_notebookMap [notebook->get_normalized_name()] = notebook;
         
         // Create the template note so the system tag
         // that represents the notebook actually gets
         // saved to a note (and persisted after Tomboy
         // is shut down).
+    	std::cout << "NotebookManager:: get template note()" << std::endl;
         Note::Ptr templateNote = notebook->get_template_note ();
         
         // Make sure the template note has the notebook tag.
         // Since it's possible for the template note to already
         // exist, we need to make sure it gets tagged.
+    	std::cout << "NotebookManager:: adding tag to template()" << std::endl;
         templateNote->add_tag (notebook->get_tag());
 		// FIXME: Figure this out!
         // m_note_added_to_notebook (*templateNote, notebook);

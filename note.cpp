@@ -483,6 +483,7 @@ NoteData *NoteArchiver::_read(const std::string & read_file, const std::string &
                 iter != tag_strings.end(); ++iter) {
 	      // FRED: FIXME:
                Tag::Ptr tag = TagManager::obj().get_or_create_tag(*iter);
+	       std::cout << "NoteArchiver::_read(): tag created success!!: " << std::endl;
                note->tags()[tag->normalized_name()] = tag;
             }
             xmlFreeDoc(doc2);
