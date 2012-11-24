@@ -449,6 +449,11 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
                     notebook_b->get_name().c_str());
     }
 #endif
+
+
+KTGlib::StringList NotebookManager::get_notebook_list(){
+	return m_notebookList;
+}
     
 // BEGIN void NotebookManager::load_notebooks()
     /// <summary>
@@ -480,6 +485,7 @@ void NotebookManager::load_notebooks(){ // FIXME: Implement this
         Notebook::Ptr notebook(new Notebook (tag));
         m_notebookMap [notebook->get_normalized_name()] = notebook;
         std::cout << "loading: " << notebook->get_normalized_name();
+	m_notebookList.push_back(notebook->get_normalized_name());
      }
 }
 

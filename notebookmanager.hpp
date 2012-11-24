@@ -28,6 +28,7 @@
 #include "notebook.hpp"
 #include "note.hpp"
 #include "tag.hpp"
+#include "ktglib.hpp"
 
 namespace gnote {
   namespace notebooks {
@@ -52,8 +53,7 @@ public:
       return m_adding_notebook;
     }
 
-  //Glib::RefPtr<Gtk::TreeModel> get_notebooks()
-    //{ return m_filteredNotebooks; }
+  KTGlib::StringList get_notebook_list(void);
   /// <summary>
   /// A Gtk.TreeModel that contains all of the items in the
   /// NotebookManager TreeStore including SpecialNotebooks
@@ -92,6 +92,8 @@ private:
   void load_notebooks();
   //static bool filter_notebooks(const Gtk::TreeIter &);
 
+  // std::string version of the notebooks
+  KTGlib::StringList m_notebookList;
 
  //std::auto_ptr<KTGlib::Tree>         m_notebooks;
   #if 0
