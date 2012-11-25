@@ -110,10 +110,8 @@ namespace notebooks {
   {
     NoteManager & noteManager = Gnote::obj().default_note_manager();
     Note::Ptr note = noteManager.find (m_template_note_title);
-#if 0
-    //if (!note) {
-      //note =
-        // noteManager.create (m_template_note_title, NoteManager::get_note_template_content ( m_template_note_title));
+    if (!note) {
+      note = noteManager.create (m_template_note_title, NoteManager::get_note_template_content ( m_template_note_title));
           
       // Select the initial text
       //NoteBuffer::Ptr buffer = note->get_buffer();
@@ -135,7 +133,6 @@ namespace notebooks {
         
       //note->queue_save (Note::CONTENT_CHANGED);
     } 
-#endif
 
     return note;
   }
