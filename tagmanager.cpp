@@ -82,6 +82,14 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     if (normalized_tag_name.empty())
       throw sharp::Exception ("TagManager.GetOrCreateTag () called with an empty tag name.");
 
+// BEGIN NASTY HACK
+// nasty hack to make things work
+// force making of a tag even if we have one all ready
+        Tag::Ptr t(new Tag(tag_name));
+	      std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
+        m_internal_tags [ t->normalized_name() ] = t;
+        return Tag::Ptr();
+// END NASTY HACK
     //FRED
     // FIXME: Get rid of next line and debug below...
     //return Tag::Ptr();
@@ -93,15 +101,15 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
 	std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
 
       if(iter != m_internal_tags.end()) {
-	std::cout << "TagManager::get_or_create_tag(): found tag" << std::endl;
+	      std::cout << "TagManager::get_or_create_tag(): found tag" << std::endl;
         return iter->second;
       }
       else {
-	std::cout << "TagManager::get_or_create_tag(): empty tag" << tag_name <<std::endl;
+	      std::cout << "TagManager::get_or_create_tag(): empty tag" << tag_name <<std::endl;
 
-        //Tag::Ptr t(new Tag(tag_name));
-	std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
-        //m_internal_tags [ t->normalized_name() ] = t;
+        Tag::Ptr t(new Tag(tag_name));
+	      std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
+        m_internal_tags [ t->normalized_name() ] = t;
         return Tag::Ptr();
       }
     } // END if ((splits.size() > 2) 

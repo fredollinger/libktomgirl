@@ -29,6 +29,8 @@
 #include "tag.hpp"
 #include "tagmanager.hpp"
 
+#include <iostream>
+
 namespace gnote {
 namespace notebooks {
 
@@ -105,37 +107,39 @@ namespace notebooks {
     return m_tag; 
   }
 
-
-  Note::Ptr Notebook::get_template_note() const
-  {
+// BEGIN Notebook::get_template_note()
+Note::Ptr Notebook::get_template_note() const {
+    std::cout << "Notebook:: get template note()";
     NoteManager & noteManager = Gnote::obj().default_note_manager();
     Note::Ptr note = noteManager.find (m_template_note_title);
+    std::cout << "Notebook:: find note";
     if (!note) {
-      note = noteManager.create (m_template_note_title, NoteManager::get_note_template_content ( m_template_note_title));
+    std::cout << "Notebook:: no note";
+      note =
+        noteManager.create (m_template_note_title,
+                            NoteManager::get_note_template_content (
+                              m_template_note_title));
           
-      // Select the initial text
-      //NoteBuffer::Ptr buffer = note->get_buffer();
-      //Gtk::TextIter iter = buffer->get_iter_at_line_offset (2, 0);
-      buffer->move_mark (buffer->get_selection_bound(), iter);
-      buffer->move_mark (buffer->get_insert(), buffer->end());
-
       // Flag this as a template note
-      Tag::Ptr tag = TagManager::obj()
+    //qDebug() << "Notebook:: get or create sys tag 2";
+      Tag::Ptr tag = TagManager::obj().get_or_create_system_tag (TagManager::TEMPLATE_NOTE_SYSTEM_TAG);
       note->add_tag (tag);
 
       // Add on the notebook system tag so Tomboy
       // will persist the tag/notebook across sessions
       // if no other notes are added to the notebook.
-      tag = TagManager::obj()
-        .get_or_create_system_tag (NOTEBOOK_TAG_PREFIX + get_name());
+    //qDebug() << "Notebook:: get or create sys tag 3";
+      tag = TagManager::obj().get_or_create_system_tag (NOTEBOOK_TAG_PREFIX + get_name());
       note->add_tag (tag);
-
         
       //note->queue_save (Note::CONTENT_CHANGED);
-    } 
+    }
+    else
+      std::cout << "Notebook:: note found";
 
     return note;
-  }
+} // END Notebook::get_template_note()
+
 
   /// <summary>
   /// Returns true when the specified note exists in the notebook
@@ -195,5 +199,6 @@ namespace notebooks {
     return "___NotebookManager___UnfiledNotes__Notebook___";
   }
 
-}
-}
+} // namespace gnote {
+} // namespace notebooks {
+// Sun Nov 25 18:38:18 PST 2012
