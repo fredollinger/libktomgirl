@@ -270,14 +270,11 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
     /// </returns>
     bool NotebookManager::is_notebook_tag(const Tag::Ptr & tag)
     {
-	// FIXME: Implement
-	#if 0
       std::string fullTagName = tag->name();
 
-      return Glib::str_has_prefix(fullTagName,
+      return KTGlib::str_has_prefix(fullTagName,
                                   std::string(Tag::SYSTEM_TAG_PREFIX)
                                   + Notebook::NOTEBOOK_TAG_PREFIX);
-	#endif
     }
 
 
