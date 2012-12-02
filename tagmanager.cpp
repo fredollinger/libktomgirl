@@ -88,6 +88,7 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
         Tag::Ptr t(new Tag(tag_name));
 	      std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
         m_internal_tags [ t->normalized_name() ] = t;
+        m_tag_map [ t->normalized_name() ] = t;
         return t;
         //return Tag::Ptr();
 // END NASTY HACK
@@ -225,11 +226,12 @@ void TagManager::all_tags(std::list<Tag::Ptr> & tags) const {
     // Now all the other tags
     for(TagMap::const_iterator iter = m_tag_map.begin();
         iter != m_tag_map.end(); ++iter) {
-		std::cout << "TagManager::all_tags4" << std::endl;
       	Tag::Ptr tag;
       	// FIXME: NEED TO TEST
       	//iter->second->get_value(0, tag);      
       	tag = iter->second;
+		    std::cout << "TagManager::all_tags4: " << tag->name() << std::endl;
+         
      	tags.push_back(tag);
     }
 } // END TagManager::all_tags()
