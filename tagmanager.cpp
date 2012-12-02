@@ -88,7 +88,8 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
         Tag::Ptr t(new Tag(tag_name));
 	      std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
         m_internal_tags [ t->normalized_name() ] = t;
-        return Tag::Ptr();
+        return t;
+        //return Tag::Ptr();
 // END NASTY HACK
     //FRED
     // FIXME: Get rid of next line and debug below...
