@@ -143,12 +143,9 @@ Note::Ptr Note::create_existing_note(NoteData *data,
                                  NoteManager & manager)
 {
     if (!data->change_date().is_valid()) {
-//      std::cout << "Note::Ptr Note::create_existing_note() change_date valid";
       sharp::DateTime d(boost::filesystem::last_write_time(filepath));
       data->set_change_date(d);
     }
- //   else
-  //    std::cout << "Note::Ptr Note::create_existing_note() change_date NOT valid";
     if (!data->create_date().is_valid()) {
       if(data->change_date().is_valid()) {
         data->create_date() = data->change_date();
@@ -270,7 +267,6 @@ void Note::write(const std::string & _write_file, const NoteData & note)
 
   void NoteArchiver::write(const std::string & write_file, const NoteData & data)
 {
-    std::cout << "NoteArchiver::write()\n";
     obj().write_file(write_file, data);
 }
 
@@ -306,7 +302,7 @@ void NoteArchiver::write_file(const std::string & _write_file, const NoteData & 
     }
     catch(const std::exception & e)
     {
-		std::cout << "save fail";
+		  std::cout << "save fail";
     }
   } // END NoteArchiver::write_file()
 
@@ -314,8 +310,6 @@ void NoteArchiver::write_file(const std::string & _write_file, const NoteData & 
 // BEGIN NOTEARCHIVER::WRITE
 void NoteArchiver::write(sharp::XmlWriter & xml, const NoteData & note)
 {
-    std::cout << "NoteArchiver::write()\n";
-
     xml.write_start_document();
     xml.write_start_element("", "note", "http://beatniksoftware.com/tomboy");
     xml.write_attribute_string("",
@@ -385,9 +379,9 @@ void NoteArchiver::write(sharp::XmlWriter & xml, const NoteData & note)
 
     // BEGIN DEPRECATED
     if (note.tags().size() > 0) 
-	std::cout << "NoteArchiver::write(): have tags!\n";
+	    std::cout << "NoteArchiver::write(): have tags!\n";
     else
-	std::cout << "NoteArchiver::write(): have NO tags!\n";
+	    std::cout << "NoteArchiver::write(): have NO tags!\n";
     // END DEPRECATED
 	
     if (note.tags().size() > 0) {
@@ -483,8 +477,6 @@ NoteData *NoteArchiver::_read(const std::string & read_file, const std::string &
                 iter != tag_strings.end(); ++iter) {
 	      // FRED: FIXME:
                Tag::Ptr tag = TagManager::obj().get_or_create_tag(*iter);
-	             std::cout << "NoteArchiver::_read(): tag created success!!: " << std::endl;
-	             std::cout << "NoteArchiver::_read(): tag name!!: " << tag->normalized_name() <<std::endl;
                note->tags()[tag->normalized_name()] = tag;
             }
             xmlFreeDoc(doc2);
@@ -532,7 +524,6 @@ NoteData *NoteArchiver::_read(const std::string & read_file, const std::string &
 
   void NoteDataBufferSynchronizer::set_text(const std::string & t)
   {
-	std::cout << "NoteDataBufferSynchronizer::set_text(): " << t;
     m_data->text() = t;
     synchronize_buffer();
   }
@@ -656,19 +647,15 @@ void Note::delete_note()
 
   void Note::remove_tag(Tag & tag)
   {
-    std::cout << "Note::remove_tag(): " << tag.name() << std::endl;
     std::string tag_name = tag.normalized_name();
     NoteData::TagMap & thetags(m_data.data().tags());
     NoteData::TagMap::iterator iter;
-
-    std::cout << "Note::remove_tag(): " << tag.name() << std::endl;
 
     // if we are deleting the note, no need to check for the tag, we 
     // know it is there.
     if(!m_is_deleting) {
       iter = thetags.find(tag_name);
       if (iter == thetags.end())  {
-        std::cout << "Note::remove_tag(): " << tag.name() << " FAIL"<<std::endl;
         return;
       }
     }
@@ -691,10 +678,9 @@ void Note::delete_note()
 
   void Note::remove_tag(const Tag::Ptr & tag)
   {
-    std::cout << "Note::remove_tag(): " << tag->name() << std::endl;
     if (!tag)
       std::cout << "Note.RemoveTag () called with a null tag."<<std::endl;
-      //throw sharp::Exception ("Note.RemoveTag () called with a null tag.");
+
     remove_tag(*tag);
   }
 
@@ -705,11 +691,9 @@ void Note::delete_note()
   }
 
 void Note::add_tag(const Tag::Ptr & tag) {
-    std::cout << "Note::add_tag()";
     if(!tag) {
-	std::cout << "note::add_tag() called with a NULL tag.";
-  //    throw sharp::Exception ("note::add_tag() called with a NULL tag.");
-	return;
+	     std::cout << "note::add_tag() called with a NULL tag.";
+	     return;
     }
     tag->add_note (*this);
 

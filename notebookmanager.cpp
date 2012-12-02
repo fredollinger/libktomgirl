@@ -40,8 +40,7 @@ namespace gnote {
 NotebookManager::NotebookManager()
 	: m_adding_notebook(false)
 { 
-	std::cout << "NotebookManager::NotebookManager(): called\n";
-     load_notebooks ();
+  load_notebooks ();
 }
 
 
@@ -86,41 +85,29 @@ bool NotebookManager::notebook_exists(const std::string & notebookName) const
 
 // BEGIN NotebookManager::get_or_create_notebook()
 Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebookName) {
-	std::cout << "NotebookManager::get_or_create_notebook()" << std::endl;
-	//Notebook::Ptr notebook; // FIXME: delete this line
     if (notebookName.empty())
         throw sharp::Exception ("NotebookManager.GetNotebook () called with a null name.");
       
-    std::cout << "NotebookManager::get_notebook()" << std::endl;
     Notebook::Ptr notebook = get_notebook (notebookName);
 
-    if (notebook) {
-    	std::cout << "NotebookManager:: return notebook()" << std::endl;
+  if (notebook) {
       return notebook;
-    }
+  }
 
 	try {
-
-    	std::cout << "NotebookManager:: making notebook()" << std::endl;
           m_adding_notebook = true;
           notebook = Notebook::Ptr(new Notebook (notebookName));
     }
 
-	catch(...)
-    {
+	catch(...){
           // set flag to fast and rethrow
           m_adding_notebook = false;
           throw;
-    }
+  }
 
         m_adding_notebook = false;
-//        iter = m_notebooks->append ();
- //       iter->set_value(0, notebook);
-        //m_notebookMap [notebook->get_normalized_name()] = iter;
-
         m_notebookMap [notebook->get_normalized_name()] = notebook;
 	      m_notebookList.push_back(notebook->get_normalized_name());
-    	  std::cout << "NotebookManager:: adding notebook to map()" << notebook->get_normalized_name() << " "  <<m_notebookMap.size() << std::endl;
 
         // FIXME: DELETE NEXT LINE
         return notebook;
@@ -135,7 +122,6 @@ Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebo
         // Make sure the template note has the notebook tag.
         // Since it's possible for the template note to already
         // exist, we need to make sure it gets tagged.
-    	  std::cout << "NotebookManager:: adding tag to template()" << std::endl;
         templateNote->add_tag (notebook->get_tag());
 		// FIXME: Figure this out!
         // m_note_added_to_notebook (*templateNote, notebook);
@@ -146,11 +132,11 @@ Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebo
 
 void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
 {
-      if (!notebook)
-	std::cout << "NotebookManager::delete_notebook () called with a null argument."<< std::endl;
-        //throw sharp::Exception ("NotebookManager::delete_notebook () called with a null argument.");
+  if (!notebook){
+    std::cout << "NotebookManager::delete_notebook () called with a null argument."<< std::endl;
+    return;
+  }
       std::string normalized_name = notebook->get_normalized_name();
-       // std::map<std::string, Notebook>::iterator map_iter = m_notebookMap.find (normalized_name);
 	/*
       if (map_iter == m_notebookMap.end())
         return;
@@ -175,11 +161,9 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
         for(std::list<Note *>::const_iterator note_iter = notes.begin();
             note_iter != notes.end(); ++note_iter) {
           Note * note = *note_iter;
-		// FIXME:
           //note->remove_tag (notebook->get_tag());
           //m_note_removed_from_notebook (*note, notebook);
         }
-//      }
     }
 
     /// <summary>
@@ -237,18 +221,18 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
       return Notebook::Ptr();
 }
 
-    /// <summary>
-    /// Returns the Notebook associated with the specified tag
-    /// or null if the Tag does not represent a notebook.
-    /// </summary>
-    /// <param name="tag">
-    /// A <see cref="Tag"/>
-    /// </param>
-    /// <returns>
-    /// A <see cref="Notebook"/>
-    /// </returns>
+// BEGIN NotebookManager::get_notebook_from_tag()
+/// <summary>
+/// Returns the Notebook associated with the specified tag
+/// or null if the Tag does not represent a notebook.
+/// </summary>
+/// <param name="tag">
+/// A <see cref="Tag"/>
+/// </param>
+/// <returns>
+/// A <see cref="Notebook"/>
+/// </returns>
 Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
-  std::cout << "NotebookManager::get_notebook_from_tag()" << std::endl;
   if (!is_notebook_tag (tag)) {
     return Notebook::Ptr();
   }
@@ -259,11 +243,9 @@ Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
         + Notebook::NOTEBOOK_TAG_PREFIX;
       std::string notebookName = sharp::string_substring(tag->name(), 
                                                          systemNotebookPrefix.size());
-
-      std::cout << "NotebookManager::get_notebook_from_tag(): " << notebookName  << std::endl;
       
       return get_notebook (notebookName);
-    }
+} // BEGIN NotebookManager::get_notebook_from_tag()
     
 
     /// <summary>
@@ -402,7 +384,6 @@ Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
         return true; // It's already there.
       
       if (currentNotebook) {
-        std::cout << " all ready in notebook, removing..."<<std::endl;
         note->remove_tag (currentNotebook->get_tag());
         //m_note_removed_from_notebook(*note, currentNotebook);
       }
@@ -461,8 +442,6 @@ KTGlib::StringList NotebookManager::get_notebook_list(){
     /// Loop through the system tags looking for notebooks
     /// </summary>
 void NotebookManager::load_notebooks(){ // FIXME: Implement this
-	std::cout << "load_notebooks called" << std::endl;
-
       /* The code is being translated. We'll put the old line above
        * as a comment and the new line below it. */
 
@@ -485,7 +464,6 @@ void NotebookManager::load_notebooks(){ // FIXME: Implement this
 
         Notebook::Ptr notebook(new Notebook (tag));
         m_notebookMap [notebook->get_normalized_name()] = notebook;
-        std::cout << "loading: " << notebook->get_normalized_name();
 	      m_notebookList.push_back(notebook->get_normalized_name());
      }
 }

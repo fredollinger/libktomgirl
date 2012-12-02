@@ -47,7 +47,6 @@ TagManager::TagManager()
 // null will be returned.
 // </summary>
 Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
-  std::cout << "TagManager::get_tag():FIXME: STUB" << std::endl;
     if (tag_name.empty())
       throw sharp::Exception("TagManager.GetTag () called with a null tag name.");
 
@@ -57,14 +56,13 @@ Tag::Ptr TagManager::get_tag (const std::string & tag_name) const {
 
     std::vector<std::string> splits;
     sharp::string_split(splits, normalized_tag_name, ":");
-    if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)) {
-  	std::cout << "TagManager::get_tag():FIXME: STUB" << std::endl;
-  	KTGlib::Tree m_internal_tags;
+    if ((splits.size() > 2) || KTGlib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)) 
+    {
+  	    KTGlib::Tree m_internal_tags;
       	KTGlib::TreeIter iter = m_internal_tags.find(normalized_tag_name);
       return Tag::Ptr();
     }
-  std::cout << "TagManager::get_tag():FIXME: STUB" << std::endl;
-  return Tag::Ptr();
+    return Tag::Ptr();
 } // END TagManager::get_tag ()
   
 // BEGIN TagManager::get_or_create_tag()
@@ -76,22 +74,20 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
     if (tag_name.empty())
       throw sharp::Exception ("TagManager.GetOrCreateTag () called with a null tag name.");
 
-	std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
-	std::cout << "TagManager::get_or_create_tag()" << normalized_tag_name  <<std::endl;
+	  std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
 
     if (normalized_tag_name.empty())
       throw sharp::Exception ("TagManager.GetOrCreateTag () called with an empty tag name.");
 
-// BEGIN NASTY HACK
-// nasty hack to make things work
-// force making of a tag even if we have one all ready
-        Tag::Ptr t(new Tag(tag_name));
-	      std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
-        m_internal_tags [ t->normalized_name() ] = t;
-        m_tag_map [ t->normalized_name() ] = t;
-        return t;
-        //return Tag::Ptr();
-// END NASTY HACK
+    // BEGIN NASTY HACK
+    // nasty hack to make things work
+    // force making of a tag even if we have one all ready
+    Tag::Ptr t(new Tag(tag_name));
+    m_internal_tags [ t->normalized_name() ] = t;
+    m_tag_map [ t->normalized_name() ] = t;
+    return t;
+    //return Tag::Ptr();
+    // END NASTY HACK
     //FRED
     // FIXME: Get rid of next line and debug below...
     //return Tag::Ptr();
@@ -103,14 +99,10 @@ Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
 	std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
 
       if(iter != m_internal_tags.end()) {
-	      std::cout << "TagManager::get_or_create_tag(): found tag" << std::endl;
         return iter->second;
       }
       else {
-	      std::cout << "TagManager::get_or_create_tag(): empty tag" << tag_name <<std::endl;
-
         Tag::Ptr t(new Tag(tag_name));
-	      std::cout << "TagManager::get_or_create_tag(): adding to list" << std::endl;
         m_internal_tags [ t->normalized_name() ] = t;
         return Tag::Ptr();
       }
@@ -160,8 +152,6 @@ Tag::Ptr TagManager::get_or_create_system_tag (const std::string & tag_name) {
 // and from the main list of tags.
 // </summary>
 void TagManager::remove_tag (const Tag::Ptr & tag) {
-    std::cout << "TagManager:remove_tag BEGIN";
-
     if (!tag){
       std::cout << "TagManager.RemoveTag () called with a null tag";
       return;
@@ -177,12 +167,10 @@ void TagManager::remove_tag (const Tag::Ptr & tag) {
     TagMap::iterator map_iter;
     map_iter = m_tag_map.find(tag->normalized_name());
     if (map_iter != m_tag_map.end()) {
-       std::cout << "TagManager:remove_tag checking: " << map_iter->first<<std::endl;
       map_iter = m_tag_map.find(tag->normalized_name());
       if (map_iter != m_tag_map.end()) {
         Tag::Ptr iter = map_iter->second;
         if (!m_tags->erase(iter)) {
-          // DBG_OUT("TagManager: Removed tag: %s", tag->normalized_name().c_str());
           std::cout << "TagManager: Removed tag: %s", tag->normalized_name().c_str();
         } 
         else { 
@@ -191,7 +179,6 @@ void TagManager::remove_tag (const Tag::Ptr & tag) {
         }
 
         m_tag_map.erase(map_iter);
-        //DBG_OUT("Removed TreeIter from tag_map: %s", tag->normalized_name().c_str());
         std::cout << "Removed TreeIter from tag_map: %s", tag->normalized_name().c_str();
         tag_removed = true;
 
@@ -204,24 +191,17 @@ void TagManager::remove_tag (const Tag::Ptr & tag) {
       }
     }
 
-    std::cout << "TagManager:remove_tag END";
     return;
 } // END TagManager::remove_tag ()
   
 void TagManager::all_tags(std::list<Tag::Ptr> & tags) const {
-    std::cout << "TagManager::all_tags" << std::endl;
-    // FIXME: UNCOMMENT IMPLEMENT
-    // Add in the system tags first
-    // sharp::map_get_values(m_internal_tags, tags);
+  // FIXME: UNCOMMENT IMPLEMENT
+  // Add in the system tags first
+  // sharp::map_get_values(m_internal_tags, tags);
 
-	// FIXME: Delete next line:
-    TagMap::const_iterator iter = m_tag_map.begin();
+  TagMap::const_iterator iter = m_tag_map.begin();
 
-    std::cout << "TagManager::all_tags2" << std::endl;
-
-	std::cout << "mymap.size() is " << (int) m_tag_map.size() << std::endl;
 	if (m_tag_map.empty()) return;
-    std::cout << "TagManager::all_tags3" << std::endl;
     // Now all the other tags
     for(TagMap::const_iterator iter = m_tag_map.begin();
         iter != m_tag_map.end(); ++iter) {
@@ -229,105 +209,8 @@ void TagManager::all_tags(std::list<Tag::Ptr> & tags) const {
       	// FIXME: NEED TO TEST
       	//iter->second->get_value(0, tag);      
       	tag = iter->second;
-		    std::cout << "TagManager::all_tags4: " << tag->name() << std::endl;
          
      	tags.push_back(tag);
     }
 } // END TagManager::all_tags()
-
-#if 0 
-  // <summary>
-  // Same as GetTag () but will create a new tag if one doesn't already exist.
-  // </summary>
-  Tag::Ptr TagManager::get_or_create_tag(const std::string & tag_name)
-  {
-    if (tag_name.empty())
-      throw sharp::Exception ("TagManager.GetOrCreateTag () called with a null tag name.");
-
-    std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
-    if (normalized_tag_name.empty())
-      throw sharp::Exception ("TagManager.GetOrCreateTag () called with an empty tag name.");
-
-    std::vector<std::string> splits;
-    sharp::string_split(splits, normalized_tag_name, ":");
-
-    if ((splits.size() > 2) || Glib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)){
-      Glib::Mutex::Lock lock(m_locker);
-
-      std::map<std::string, Tag::Ptr>::iterator iter;
-      iter = m_internal_tags.find(normalized_tag_name);
-      if(iter != m_internal_tags.end()) {
-        return iter->second;
-      }
-      else {
-        Tag::Ptr t(new Tag(tag_name));
-        m_internal_tags [ t->normalized_name() ] = t;
-        return t;
-
-      }
-
-    }
-
-    Gtk::TreeIter iter;
-    bool tag_added = false;
-    Tag::Ptr tag = get_tag (normalized_tag_name);
-
-    if (!tag) {
-
-      Glib::Mutex::Lock lock(m_locker);
-
-      tag = get_tag (normalized_tag_name);
-      if (!tag) {
-        tag.reset(new Tag (sharp::string_trim(tag_name)));
-        iter = m_tags->append ();
-        (*iter)[m_columns.m_tag] = tag;
-        m_tag_map [tag->normalized_name()] = iter;
-
-        tag_added = true;
-      }
-    }
-
-    if (tag_added) {
-      m_signal_tag_added(tag, iter);
-    }
-
-    return tag;
-  }
-#endif
-
-#if 0
-  // <summary>
-  // Return an existing tag for the specified tag name.  If no Tag exists
-  // null will be returned.
-  // </summary>
-  Tag::Ptr TagManager::get_tag (const std::string & tag_name) const
-  {
-    if (tag_name.empty())
-      throw sharp::Exception("TagManager.GetTag () called with a null tag name.");
-
-    std::string normalized_tag_name = sharp::string_to_lower(sharp::string_trim(tag_name));
-    if (normalized_tag_name.empty())
-      throw sharp::Exception ("TagManager.GetTag () called with an empty tag name.");
-
-    std::vector<std::string> splits;
-    sharp::string_split(splits, normalized_tag_name, ":");
-    if ((splits.size() > 2) || Glib::str_has_prefix(normalized_tag_name, Tag::SYSTEM_TAG_PREFIX)) {
-      Glib::Mutex::Lock lock(m_locker);
-      std::map<std::string, Tag::Ptr>::const_iterator iter = m_internal_tags.find(normalized_tag_name);
-      if(iter != m_internal_tags.end()) {
-        return iter->second;
-      }
-      return Tag::Ptr();
-    }
-    std::map<std::string, Gtk::TreeIter>::const_iterator iter = m_tag_map.find(normalized_tag_name);
-    if (iter != m_tag_map.end()) {
-      Gtk::TreeIter tree_iter = iter->second;
-      return (*tree_iter)[m_columns.m_tag];
-    }
-
-    return Tag::Ptr();
-  }
-#endif
- 
-   
 } // namespace gnote 
