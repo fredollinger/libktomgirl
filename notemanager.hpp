@@ -77,7 +77,7 @@ public:
     //Note::Ptr create(void);
     //Note::Ptr create(void); // shuts up compiler error
     Note::Ptr create(const std::string & title);
-    Note::Ptr create(const std::string & title, const std::string & xml_content);
+    //Note::Ptr create(const std::string & title, const std::string & xml_content);
     // Import a note read from file_path
     // Will ensure the sanity including the unique title.
     Note::Ptr import_note(const std::string & file_path);

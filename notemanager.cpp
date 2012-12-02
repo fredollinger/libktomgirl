@@ -84,7 +84,7 @@ void NoteManager::_common_init(const std::string & directory, const std::string 
 
 /* FIXME: This is to shut up a build error, but this should probably 
  * come up with a fake name and a proper uuid. */
-/*
+ /*
 Note::Ptr NoteManager::create(){
 	return create_new_note("Untitled Note", "");
 }

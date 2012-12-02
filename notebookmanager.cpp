@@ -28,7 +28,6 @@
 #include "ktgtreeiter.hpp"
 #include "string.hpp"
 #include "exception.hpp"
-//#include "createnotebookdialog.hpp"
 #include "notebookmanager.hpp"
 #include "debug.hpp"
 #include "gnote.hpp"

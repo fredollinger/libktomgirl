@@ -115,10 +115,12 @@ Note::Ptr Notebook::get_template_note() const {
     std::cout << "Notebook:: find note";
     if (!note) {
     std::cout << "Notebook:: no note";
-      note =
-        noteManager.create (m_template_note_title,
-                            NoteManager::get_note_template_content (
-                              m_template_note_title));
+      // FIXME: need to get a unique name as well as uuid
+      // we should have a default create() function which fills all this junk in...
+      note = noteManager.create_new_note("New Note", "");
+      //note = noteManager.create (m_template_note_title,
+       //                     NoteManager::get_note_template_content (
+        //                      m_template_note_title));
           
       // Flag this as a template note
     //qDebug() << "Notebook:: get or create sys tag 2";
