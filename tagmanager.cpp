@@ -160,6 +160,7 @@ Tag::Ptr TagManager::get_or_create_system_tag (const std::string & tag_name) {
 // and from the main list of tags.
 // </summary>
 void TagManager::remove_tag (const Tag::Ptr & tag) {
+    std::cout << "TagManager:remove_tag BEGIN";
 
     if (!tag){
       std::cout << "TagManager.RemoveTag () called with a null tag";
@@ -176,9 +177,7 @@ void TagManager::remove_tag (const Tag::Ptr & tag) {
     TagMap::iterator map_iter;
     map_iter = m_tag_map.find(tag->normalized_name());
     if (map_iter != m_tag_map.end()) {
-
-      // Glib::Mutex::Lock lock(m_locker);
-
+       std::cout << "TagManager:remove_tag checking: " << map_iter->first<<std::endl;
       map_iter = m_tag_map.find(tag->normalized_name());
       if (map_iter != m_tag_map.end()) {
         Tag::Ptr iter = map_iter->second;
@@ -205,6 +204,7 @@ void TagManager::remove_tag (const Tag::Ptr & tag) {
       }
     }
 
+    std::cout << "TagManager:remove_tag END";
     return;
 } // END TagManager::remove_tag ()
   

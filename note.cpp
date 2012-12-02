@@ -656,15 +656,19 @@ void Note::delete_note()
 
   void Note::remove_tag(Tag & tag)
   {
+    std::cout << "Note::remove_tag(): " << tag.name() << std::endl;
     std::string tag_name = tag.normalized_name();
     NoteData::TagMap & thetags(m_data.data().tags());
     NoteData::TagMap::iterator iter;
+
+    std::cout << "Note::remove_tag(): " << tag.name() << std::endl;
 
     // if we are deleting the note, no need to check for the tag, we 
     // know it is there.
     if(!m_is_deleting) {
       iter = thetags.find(tag_name);
       if (iter == thetags.end())  {
+        std::cout << "Note::remove_tag(): " << tag.name() << " FAIL"<<std::endl;
         return;
       }
     }
@@ -687,7 +691,9 @@ void Note::delete_note()
 
   void Note::remove_tag(const Tag::Ptr & tag)
   {
+    std::cout << "Note::remove_tag(): " << tag->name() << std::endl;
     if (!tag)
+      std::cout << "Note.RemoveTag () called with a null tag."<<std::endl;
       //throw sharp::Exception ("Note.RemoveTag () called with a null tag.");
     remove_tag(*tag);
   }

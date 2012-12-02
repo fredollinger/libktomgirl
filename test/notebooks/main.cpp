@@ -16,7 +16,16 @@ int main( int argc, char *argv[] )
 {
 	gnote::NoteManager *m_gnmanager;
 	m_gnmanager = new gnote::NoteManager();
-	gnote::Note::Ptr gnote = m_gnmanager->find("Cycle Bullying: With Malice Towards None II");
+  std::string title = "Notemanager Test Note";
+  gnote::Note::Ptr gnote = m_gnmanager->create_new_note (title, "");
+	//gnote = m_gnmanager->find(title);
+
+  gnote::notebooks::NotebookManager::instance().get_or_create_notebook("one");
+  gnote::notebooks::NotebookManager::instance().get_or_create_notebook("two");
+
+  gnote::notebooks::NotebookManager::instance().move_note_to_notebook(gnote, "one");
+  gnote::notebooks::NotebookManager::instance().move_note_to_notebook(gnote, "two");
+  gnote->save();
 
 	Notebook::Ptr notebook = NotebookManager::instance().get_notebook_from_note(gnote);
 	std::cout << "Title: " << gnote->get_title() << std::endl;
@@ -25,6 +34,7 @@ int main( int argc, char *argv[] )
 	  std::cout << "Notebook: " << notebook->get_name() << std::endl;
   else
 	  std::cout << "This note has no notebook." << std::endl;
+
 
 	return 0;
 }
