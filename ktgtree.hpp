@@ -37,12 +37,13 @@ public:
 	TreeIter append(void);
 	TreeIter append(const std::string&);
 	TreeIter find(std::string);
+  bool erase(std::tr1::shared_ptr<gnote::Tag>&);
 	bool operator=(TreeIter);
 	TreeIter begin();
 	TreeIter end();
 protected:
 	int m_count; // row count
-  	typedef std::map<std::string, KTGlib::TreeIter> TreeMap;
+	typedef std::map<std::string, KTGlib::TreeIter> TreeMap;
 	TreeMap m_tree;
 }; // END class TreeIter
 }  // namespace KTGlib

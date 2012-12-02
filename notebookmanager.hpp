@@ -46,7 +46,6 @@ public:
       return *s_instance;
     }
 
-  //typedef sigc::signal<void, const Note &, const Notebook::Ptr &> NotebookEventHandler;
   bool is_adding_notebook() const
     {
       return m_adding_notebook;
@@ -75,43 +74,17 @@ public:
   Notebook::Ptr get_notebook_from_note(const Note::Ptr &);
   Notebook::Ptr get_notebook_from_tag(const Tag::Ptr &);
   static bool is_notebook_tag(const Tag::Ptr &);
-  //static Notebook::Ptr prompt_create_new_notebook(Gtk::Window *);
- // static Notebook::Ptr prompt_create_new_notebook(Gtk::Window *, const Note::List & notesToAdd);
-  //static void prompt_delete_notebook(Gtk::Window *, const Notebook::Ptr &);
   bool move_note_to_notebook (const Note::Ptr &, const Notebook::Ptr &);
   bool move_note_to_notebook (const Note::Ptr &, const std::string &);
 
-  //NotebookEventHandler & signal_note_added_to_notebook() { return m_note_added_to_notebook; }
-
-  //NotebookEventHandler & signal_note_removed_from_notebook() { return m_note_removed_from_notebook; }
-
 private:
   NotebookManager();
-
-  //static int compare_notebooks_sort_func(const Gtk::TreeIter &, const Gtk::TreeIter &);
   void load_notebooks();
   //static bool filter_notebooks(const Gtk::TreeIter &);
 
   // std::string version of the notebooks
   KTGlib::StringList m_notebookList;
 
- //std::auto_ptr<KTGlib::Tree>         m_notebooks;
-  #if 0
-  class ColumnRecord
-  //  : public Gtk::TreeModelColumnRecord
-  {
-  public:
-    ColumnRecord() { add(m_col1); }
-	// FRED
-    //const Gtk::TreeModelColumn<Notebook::Ptr> m_col1;
-    //const Note::List & get_notes() const
-   // Gtk::TreeModelColumn<Notebook::Ptr> m_col1;
-  };
-  
-
-//  Glib::RefPtr<Gtk::ListStore>         m_notebooks;
-  ColumnRecord                         m_column_types;
-#endif
  // Glib::RefPtr<Gtk::TreeModelSort>     m_sortedNotebooks;
   //Glib::RefPtr<Gtk::TreeModelFilter>   m_filteredNotebooks;
   // <summary>

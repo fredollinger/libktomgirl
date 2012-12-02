@@ -48,8 +48,6 @@ TreeIter::TreeIter(int type)
 	return;
 }
 
-
-
 void TreeIter::setCount(int c){
 	m_count = c;
 	return;
@@ -68,13 +66,22 @@ int TreeIter::count(){
 }
 
 bool TreeIter::operator!=(TreeIter iter){
-	if (type() == iter.type() && count() == iter.count()) return true;
+	if (type() == iter.type() && count() == iter.count()) return false;
+	return true;
+}
+
+bool TreeIter::operator==(TreeIter iter){
+  // if we are begin or end iter and we are equal then we are the same
+  if (iter.type() !=  KTGLIB_TREE_ITER_TYPE_ELEMENT && type() == iter.type()) return true;
+
+  // else we are an element type iter which needs to be matched
+	if (count() == iter.count()) return true;
+
 	return false;
 }
 
 gnote::Tag::Ptr TreeIter::operator*(void){
 	return m_tag;
-
 }
 
 } // namespace KTGlib

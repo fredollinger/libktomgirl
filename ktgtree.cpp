@@ -72,23 +72,33 @@ TreeIter Tree::find(std::string st){
 }
 
 TreeIter Tree::begin(){
-	// FIXME STUB
 	return TreeIter(KTGLIB_TREE_ITER_TYPE_BEGIN);
-	//std::map<std::string, KTGlib::TreeIter>::const_iterator begin = m_tree.begin();
-	//return (*begin).second;
 }
 
 TreeIter Tree::end(){
-	// FIXME STUB
 	return TreeIter(KTGLIB_TREE_ITER_TYPE_END);
-//	std::map<std::string, KTGlib::TreeIter>::const_iterator end = m_tree.end();
-//	return (*end).second;
 }
 
-bool Tree::operator=(TreeIter){
+bool Tree::operator=(TreeIter ti){
 	// FIXME STUB
 	return true;
 }
 
+//home/follinge/projects/libktomgirl/tagmanager.cpp :185: error: no matching function for call to 'KTGlib::Tree::erase(std::tr1::shared_ptr<gnote::Tag>&)'
+//home/follinge/projects/libktomgirl/ktgtree.hpp:40: note: candidates are: bool KTGlib::Tree::erase(KTGlib::TreeIter)
+bool KTGlib::Tree::erase(std::tr1::shared_ptr<gnote::Tag> &tag){
+  TreeMap::iterator iter;
+  TreeIter l_ti;
+  for (iter = m_tree.begin(); iter != m_tree.end(); iter++) {
+    l_ti = iter->second;
+    if (tag == *l_ti){
+      std::cout << "Tree:erasing: " << iter->first << std::endl;
+      m_tree.erase(iter); 
+      return true;
+    } 
+  }
+  return false;
+}
+
 } // namespace KTGlib 
-// Mon Oct 16 12:36:54 PDT 2012
+// Sun Dec  2 11:25:13 PST 2012

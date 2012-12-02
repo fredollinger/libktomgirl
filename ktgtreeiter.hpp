@@ -45,6 +45,7 @@ public:
 	int count(void);
 	void operator++(void);
 	bool operator!=(TreeIter);
+	bool operator==(TreeIter);
 	gnote::Tag::Ptr operator*(void);
 	int type(void);
 	void setCount(int);
@@ -53,7 +54,7 @@ protected:
 	Tree *model;
 	int m_count;
 	int m_type;
-    	//typedef std::tr1::shared_ptr<Tag> Ptr;
+ 	//typedef std::tr1::shared_ptr<Tag> Ptr;
 	gnote::Tag::Ptr m_tag;
 
 
