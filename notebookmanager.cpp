@@ -55,10 +55,16 @@ Notebook::Ptr NotebookManager::get_notebook(const std::string & notebookName) co
         //throw sharp::Exception ("NotebookManager::get_notebook() called with an empty name.");
    }
 
-// FIXME:
+  //std::map<std::string, Notebook::Ptr> m_notebookMap;
+    std::map<std::string, Notebook::Ptr>::const_iterator map_iter = m_notebookMap.find(normalizedName);
+      if (map_iter != m_notebookMap.end()) {
+        Notebook::Ptr notebook;
+        notebook = map_iter->second;
+        return notebook;
+      }
+
 #if 0
-      std::map<std::string, Gtk::TreeIter>::const_iterator map_iter 
-        = m_notebookMap.find(normalizedName);
+      std::map<std::string, Gtk::TreeIter>::const_iterator map_iter = m_notebookMap.find(normalizedName);
       if (map_iter != m_notebookMap.end()) {
         Gtk::TreeIter iter = map_iter->second;
         Notebook::Ptr notebook;
@@ -241,11 +247,11 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
     /// <returns>
     /// A <see cref="Notebook"/>
     /// </returns>
-    Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag)
-    {
-      if (!is_notebook_tag (tag)) {
-        return Notebook::Ptr();
-      }
+Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
+  std::cout << "NotebookManager::get_notebook_from_tag()" << std::endl;
+  if (!is_notebook_tag (tag)) {
+    return Notebook::Ptr();
+  }
       
       // Parse off the system and notebook prefix to get
       // the name of the notebook and then look it up.
@@ -253,6 +259,8 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
         + Notebook::NOTEBOOK_TAG_PREFIX;
       std::string notebookName = sharp::string_substring(tag->name(), 
                                                          systemNotebookPrefix.size());
+
+      std::cout << "NotebookManager::get_notebook_from_tag(): " << notebookName  << std::endl;
       
       return get_notebook (notebookName);
     }
