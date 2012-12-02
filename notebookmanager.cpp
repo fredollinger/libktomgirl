@@ -402,6 +402,7 @@ Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
         return true; // It's already there.
       
       if (currentNotebook) {
+        std::cout << " all ready in notebook, removing..."<<std::endl;
         note->remove_tag (currentNotebook->get_tag());
         //m_note_removed_from_notebook(*note, currentNotebook);
       }
@@ -505,6 +506,7 @@ bool NotebookManager::filter_notebooks(const Gtk::TreeIter & iter){
 	//return;
 } // END void NotebookManager::load_notebooks()
 #endif
+
 } // namespace notebooks 
 } // namespace gnote 
 // Sun Oct  7 15:21:48 PDT 2012
