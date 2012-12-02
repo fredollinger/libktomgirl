@@ -14,21 +14,24 @@ using namespace gnote::notebooks;
 
 int main( int argc, char *argv[] )
 {
-	std::string notebookName = "bob";
+	std::string notebookName = "bill";
 	std::cout << "getting notebooks" << std::endl;
 	Notebook::Ptr notebook = NotebookManager::instance().get_or_create_notebook(notebookName);
-	std::cout << "getting notebooks name" << std::endl;
-/*
+	notebookName = "joe";
+	Notebook::Ptr notebook2 = NotebookManager::instance().get_or_create_notebook(notebookName);
+  /*
+	std::cout << "getting notebooks name..." << std::endl;
 	std::cout << notebook->get_normalized_name();
-	std::cout << "SUCCESS" << std::endl;
-	KTGlib::StringList fifth = NotebookManager::instance().get_notebook_list();
+	std::cout << notebook2->get_normalized_name();
+  */
 
+	KTGlib::StringList fifth = NotebookManager::instance().get_notebook_list();
+  std::cout << "notebook list size: "<< fifth.size() << std::endl;
 	for (KTGlib::StringList::iterator it = fifth.begin(); it != fifth.end(); it++){
-    		std::cout << *it << " ";
+   		std::cout << "notebook: "<< *it << " ";
   		std::cout << endl;
 	 }
-*/
 
 	return 0;
 }
-// Wed Oct 31 15:05:03 PDT 2012
+// Sat Dec  1 19:51:48 PST 2012

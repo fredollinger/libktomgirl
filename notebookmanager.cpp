@@ -41,41 +41,19 @@ NotebookManager::NotebookManager()
 	: m_adding_notebook(false)
 { 
 	std::cout << "NotebookManager::NotebookManager(): called\n";
-	#if 0
-     m_notebooks = Gtk::ListStore::create(m_column_types);
-
-     m_sortedNotebooks = Gtk::TreeModelSort::create (m_notebooks);
-     m_sortedNotebooks->set_sort_func (
-       0, sigc::ptr_fun(&NotebookManager::compare_notebooks_sort_func));
-     m_sortedNotebooks->set_sort_column_id (0, Gtk::SORT_ASCENDING);
-      
-     m_filteredNotebooks = Gtk::TreeModelFilter::create (m_sortedNotebooks);
-     m_filteredNotebooks->set_visible_func(
-       sigc::ptr_fun(&NotebookManager::filter_notebooks));
-      
-     Notebook::Ptr allNotesNotebook(new AllNotesNotebook ());
-     Gtk::TreeIter iter = m_notebooks->append ();
-     iter->set_value(0, Notebook::Ptr(allNotesNotebook));
-      
-     Notebook::Ptr unfiledNotesNotebook(new UnfiledNotesNotebook ());
-     iter = m_notebooks->append ();
-     iter->set_value(0, Notebook::Ptr(unfiledNotesNotebook));
-	#endif
      load_notebooks ();
-    }
+}
 
 
-    Notebook::Ptr NotebookManager::get_notebook(const std::string & notebookName) const
-    {
-      if (notebookName.empty()) {
+Notebook::Ptr NotebookManager::get_notebook(const std::string & notebookName) const{
+  if (notebookName.empty()) {
 	std::cout << "NotebookManager::get_notebook() called with an empty name."<<std::endl;
-        // throw sharp::Exception ("NotebookManager::get_notebook() called with an empty name.");
-      }
-      std::string normalizedName = Notebook::normalize(notebookName);
-      if (normalizedName.empty()) {
-	std::cout << "NotebookManager::get_notebook() called with an empty name." << std::endl;
+  }
+  std::string normalizedName = Notebook::normalize(notebookName);
+  if (normalizedName.empty()) {
+	  std::cout << "NotebookManager::get_notebook() called with an empty name." << std::endl;
         //throw sharp::Exception ("NotebookManager::get_notebook() called with an empty name.");
-      }
+   }
 
 // FIXME:
 #if 0
@@ -93,11 +71,11 @@ NotebookManager::NotebookManager()
     }
     
 
-    bool NotebookManager::notebook_exists(const std::string & notebookName) const
-    {
+bool NotebookManager::notebook_exists(const std::string & notebookName) const
+{
       std::string normalizedName = Notebook::normalize(notebookName);
       return m_notebookMap.find(normalizedName) != m_notebookMap.end();
-    }
+}
 
 
 // BEGIN NotebookManager::get_or_create_notebook()
@@ -112,7 +90,7 @@ Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebo
 
     if (notebook) {
     	std::cout << "NotebookManager:: return notebook()" << std::endl;
-        return notebook;
+      return notebook;
     }
 
 	try {
@@ -134,8 +112,9 @@ Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebo
  //       iter->set_value(0, notebook);
         //m_notebookMap [notebook->get_normalized_name()] = iter;
 
-    	  std::cout << "NotebookManager:: adding notebook to map()" << std::endl;
         m_notebookMap [notebook->get_normalized_name()] = notebook;
+	      m_notebookList.push_back(notebook->get_normalized_name());
+    	  std::cout << "NotebookManager:: adding notebook to map()" << notebook->get_normalized_name() << " "  <<m_notebookMap.size() << std::endl;
 
         // FIXME: DELETE NEXT LINE
         return notebook;
@@ -384,6 +363,11 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
     }
 #endif
 
+    bool NotebookManager::move_note_to_notebook (const Note::Ptr & note, const std::string &notebook){
+        return move_note_to_notebook(note, m_notebookMap[notebook]);
+}
+
+
     /// <summary>
     /// Place the specified note into the specified notebook.  If the
     /// note already belongs to a notebook, it will be removed from that
@@ -397,8 +381,7 @@ void NotebookManager::delete_notebook(const Notebook::Ptr & notebook)
     /// be removed from its current notebook.
     /// </param>
     /// <returns>True if the note was successfully moved.</returns>
-    bool NotebookManager::move_note_to_notebook (const Note::Ptr & note, 
-                                                 const Notebook::Ptr & notebook)
+    bool NotebookManager::move_note_to_notebook (const Note::Ptr & note, const Notebook::Ptr & notebook)
     {
       if (!note) {
         return false;
@@ -497,7 +480,7 @@ void NotebookManager::load_notebooks(){ // FIXME: Implement this
         Notebook::Ptr notebook(new Notebook (tag));
         m_notebookMap [notebook->get_normalized_name()] = notebook;
         std::cout << "loading: " << notebook->get_normalized_name();
-	m_notebookList.push_back(notebook->get_normalized_name());
+	      m_notebookList.push_back(notebook->get_normalized_name());
      }
 }
 

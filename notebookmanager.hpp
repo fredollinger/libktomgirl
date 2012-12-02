@@ -79,6 +79,7 @@ public:
  // static Notebook::Ptr prompt_create_new_notebook(Gtk::Window *, const Note::List & notesToAdd);
   //static void prompt_delete_notebook(Gtk::Window *, const Notebook::Ptr &);
   bool move_note_to_notebook (const Note::Ptr &, const Notebook::Ptr &);
+  bool move_note_to_notebook (const Note::Ptr &, const std::string &);
 
   //NotebookEventHandler & signal_note_added_to_notebook() { return m_note_added_to_notebook; }
 
