@@ -185,7 +185,7 @@ DateTime DateTime::now()
 	n.tv_sec = tt;
 	n.tv_usec = 0;
 
-	std::cout << "seconds: " << t.tm_sec;
+	//std::cout << "seconds: " << t.tm_sec;
 
 	return DateTime(n);
 }
