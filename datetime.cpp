@@ -39,7 +39,7 @@ using namespace boost::posix_time;
 
 namespace sharp {
 
-const char* dt_months[] = {"Zero", "January", "February", "March", "April", "May", "June", "July", "August", "September", "November", "December"};
+const char* dt_months[] = {"Zero", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 #define SEC_PER_MINUTE 60
 #define SEC_PER_HOUR (SEC_PER_MINUTE * 60)
@@ -60,7 +60,7 @@ const char* dt_months[] = {"Zero", "January", "February", "March", "April", "May
   DateTime::DateTime(const GTimeVal & v)
     : m_date(v)
   {
-	//std::cout << m_date.tv_sec;
+	  std::cout << "DateTime(GTimeVal): " << m_date.tv_sec << std::endl;
   }
 
   DateTime & DateTime::add_days(int days)
@@ -122,13 +122,15 @@ const char* dt_months[] = {"Zero", "January", "February", "March", "April", "May
     return ((m_date.tv_sec != -1) && (m_date.tv_usec != -1));
   }
 
-  /* If you just want a decent string, this is the choice to make... */
-  std::string DateTime::to_string() const{
+// FRED: FIX
+/* If you just want a decent string, this is the choice to make... */
+std::string DateTime::to_string() const{
 	DateTime dt_now = now();
 	ptime pt = from_time_t(m_date.tv_sec);
 	char c_d[4];
 	char c_y[10] = ", "; 
 	char c_t[10] = ""; 
+  std::cout << "DateTime::to_string(): day: " << day() << std::endl;
 	sprintf(c_d, " %i", day());
 
 	if (dt_now.year() != year())
@@ -140,6 +142,7 @@ const char* dt_months[] = {"Zero", "January", "February", "March", "April", "May
 		sprintf(c_t, " %i:0%i", hour(), minute());
 
 	std::string st = dt_months[month()];
+  std::cout << "DateTime::to_string(): month: " << month() << std::endl;
 	st = st + c_d + c_y + c_t;
 	if (hour() > 11) st = st + " PM";
 	else st = st + " AM";

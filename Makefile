@@ -23,3 +23,6 @@ nbtest:
 	sudo make install && cd test/notebooks && make && make test
 tagtest:
 	sudo make install && cd test/tags && make && make test
+
+datetest:
+	make && sudo make install && cd test/datetime && make && make test
