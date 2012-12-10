@@ -104,7 +104,7 @@ Note::Note(NoteData * _data, const std::string & filepath, NoteManager & _manage
 
 Note::~Note()
 {
-	std::cout << "~Note()" <<  m_filepath;
+	//std::cout << "~Note()" <<  m_filepath << std::end;
 }
 
 /* Reload the note. */
@@ -210,14 +210,14 @@ void Note::parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags) 
 // so we can have things like lists and bolded text and so on
 // this is down the road. When we get there, get rid of this...
 std::string Note::text_content_plain(){
-	std::cout << "std::string Note::text_content_plain()" << xml_content();
+	//std::cout << "std::string Note::text_content_plain()" << xml_content();
 	return utils::decode(xml_content());
 	//return m_text_content;
 }
 
 std::string Note::text_content()
 {
-	std::cout << "std::string Note::text_content()" << m_text_content;
+	//std::cout << "std::string Note::text_content()" << m_text_content;
 	m_text_content=utils::decode(xml_content());
 	return m_text_content;
     /*
@@ -230,7 +230,7 @@ std::string Note::text_content()
 
   void Note::set_text_content(const std::string & text)
   {
-    std::cout << "Note::set_text_content(): " << text;
+    //std::cout << "Note::set_text_content(): " << text;
     m_data.data().text() = text;
     m_text_content = text;
     return;
@@ -302,7 +302,7 @@ void NoteArchiver::write_file(const std::string & _write_file, const NoteData & 
     }
     catch(const std::exception & e)
     {
-		  std::cout << "save fail";
+		  std::cout << "ERROR: NoteArchiver::write_file(): save fail." << std::endl;
     }
   } // END NoteArchiver::write_file()
 
@@ -378,10 +378,12 @@ void NoteArchiver::write(sharp::XmlWriter & xml, const NoteData & note)
     xml.write_end_element();
 
     // BEGIN DEPRECATED
+    #if 0
     if (note.tags().size() > 0) 
 	    std::cout << "NoteArchiver::write(): have tags!\n";
     else
 	    std::cout << "NoteArchiver::write(): have NO tags!\n";
+    #endif
     // END DEPRECATED
 	
     if (note.tags().size() > 0) {
@@ -616,7 +618,6 @@ Note::Ptr Note::create_new_note(const std::string & title,
     // BEGIN SET DATE
     sharp::DateTime date(sharp::DateTime::now());
     note_data->create_date() = date;
-    std::cout << date.to_iso8601();
     note_data->set_change_date(date);
     // END SET DATE
       
