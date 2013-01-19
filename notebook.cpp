@@ -155,8 +155,8 @@ Note::Ptr Notebook::get_template_note() const {
   bool Notebook::contains_note(const Note::Ptr & note)
   {
 	// FIXME: IMPLEMENT
-	return true;
-    // return note->contains_tag (m_tag);
+//	return true;
+    return note->contains_tag (m_tag);
   }
 
   std::string Notebook::normalize(const std::string & s)

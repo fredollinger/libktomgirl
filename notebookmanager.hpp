@@ -22,8 +22,6 @@
 #ifndef _NOTEBOOK_MANAGER_HPP__
 #define _NOTEBOOK_MANAGER_HPP__
 
-//#include <sigc++/signal.h>
-
 #include "ktgtree.hpp"
 #include "notebook.hpp"
 #include "note.hpp"
@@ -31,7 +29,7 @@
 #include "ktglib.hpp"
 
 namespace gnote {
-  namespace notebooks {
+namespace notebooks {
 
 
 class NotebookManager

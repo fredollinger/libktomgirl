@@ -45,12 +45,6 @@ public:
   Tag::Ptr get_system_tag (const std::string & tag_name) const;
   Tag::Ptr get_or_create_system_tag(const std::string & name);
   void remove_tag (const Tag::Ptr & tag);
-	#if 0
-   Glib::RefPtr<Gtk::TreeModel> get_tags() const
-    {
-      return m_sorted_tags;
-    }
-#endif
   void all_tags(std::list<Tag::Ptr>  &) const;
 
 private:
