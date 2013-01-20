@@ -35,9 +35,6 @@ namespace notebooks {
 class NotebookManager
 {
 public:
-
-  // typedef std::list<Ptr> List;
-
   static NotebookManager & instance()
     {
       static NotebookManager *s_instance = new NotebookManager();
@@ -68,7 +65,6 @@ public:
   bool notebook_exists(const std::string & notebookName) const;
   Notebook::Ptr get_or_create_notebook(const std::string &);
   void delete_notebook(const Notebook::Ptr &);
-  //bool get_notebook_iter(const Notebook::Ptr &, Gtk::TreeIter & );
   Notebook::Ptr get_notebook_from_note(const Note::Ptr &);
   Notebook::Ptr get_notebook_from_tag(const Tag::Ptr &);
   static bool is_notebook_tag(const Tag::Ptr &);
