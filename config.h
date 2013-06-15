@@ -1,17 +1,37 @@
-/* config.h.  Generated from config.h.in by configure.  */
-/* config.h.in.  Generated from configure.ac by autoheader.  */
+/*
+ * gnote
+ *
+ * Copyright (C) 2010 Debarshi Ray
+ * Copyright (C) 2009 Hubert Figuiere
+ * 
+ * 2012, 2013 Modified by Fred Ollinger <follinge@gmail.com> for KTomGirl
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 
 /* Define to 1 if DBus is enabled */
-#define ENABLE_DBUS 1
+#define ENABLE_DBUS 0
 
 /* always defined to indicate that i18n is enabled */
 #define ENABLE_NLS 1
 
 /* Set if the GtkSpell library is recent enough. */
-#define FIXED_GTKSPELL 1
+#define FIXED_GTKSPELL 0
 
 /* The domain to use with gettext */
-#define GETTEXT_PACKAGE "gnote"
+#define GETTEXT_PACKAGE "libktomgirl"
 
 /* The string used to hardcode the build config. */
 #define GNOTE_BUILD_CONFIG " gcc-options=-Wall -Wextra -Wsign-compare -Wpointer-arith -Wchar-subscripts -Wwrite-strings -Wunused -Wpointer-arith -Wshadow -fshow-column "
@@ -41,7 +61,7 @@
 #define HAVE_BOOST_TEST_UNIT_TEST_HPP 1
 
 /* Define to 1 if class Gtk::Widget has signal_popup_menu */
-#define HAVE_CLASS_GTK__WIDGET_SIGNAL_POPUP_MENU 1
+#define HAVE_CLASS_GTK__WIDGET_SIGNAL_POPUP_MENU 0
 
 /* Define to 1 if you have the `dcgettext' function. */
 #define HAVE_DCGETTEXT 1
@@ -53,7 +73,7 @@
 #define HAVE_GETTEXT 1
 
 /* Define to 1 if you have gtk_show_uri */
-#define HAVE_GTK_SHOW_URI 1
+#define HAVE_GTK_SHOW_URI 0
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -96,25 +116,25 @@
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
-#define LT_OBJDIR ".libs/"
+//#define LT_OBJDIR ".libs/"
 
 /* Name of package */
-#define PACKAGE "gnote"
+#define PACKAGE "libktomgirl"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT ""
+#define PACKAGE_BUGREPORT "follinge@gmail.com"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "gnote"
+#define PACKAGE_NAME "libktomgirl"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "gnote 0.7.1"
+#define PACKAGE_STRING "libktomgirl 0.8.0"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "gnote"
+#define PACKAGE_TARNAME "libktomgirl"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.7.1"
+#define PACKAGE_VERSION "0.8.0"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -142,7 +162,7 @@
 
 
 /* Version number of package */
-#define VERSION "0.7.1"
+#define VERSION "0.8.0"
 
 /* Define to 1 if on MINIX. */
 /* #undef _MINIX */

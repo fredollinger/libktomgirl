@@ -41,25 +41,35 @@ namespace sharp {
   }
 
 
-  std::string file_basename(const std::string & p)
-  {
-#if BOOST_VERSION >= 103600
-    return boost::filesystem::path(p).stem();
+std::string file_basename(const std::string & p){
+/* Stupid boost changed again. Leaving commented out old stuff if people have 
+ * a really old version of boost. Sigh. */
+//#define BOOST_VERSION 104601
+#if BOOST_VERSION >= 104601
+    return boost::filesystem::path(p).stem().string();
 #else
-    return boost::filesystem::basename(boost::filesystem::path(p));
+//#if BOOST_VERSION >= 103600
+    return boost::filesystem::path(p).stem();
+//#else
+ //   return boost::filesystem::basename(boost::filesystem::path(p));
 #endif
   }
 
-  std::string file_dirname(const std::string & p)
-  {
+std::string file_dirname(const std::string & p){
+#if BOOST_VERSION >= 104601
     return boost::filesystem::path(p).branch_path().string();
-  }
+#else
+    return boost::filesystem::path(p).branch_path();
+#endif
+}
 
-
-  std::string file_filename(const std::string & p)
-  {
+std::string file_filename(const std::string & p){
+#if BOOST_VERSION >= 104601
+    return boost::filesystem::path(p).leaf().string();
+#else
     return boost::filesystem::path(p).leaf();
-  }
+#endif
+}
 
   void file_delete(const std::string & p)
   {

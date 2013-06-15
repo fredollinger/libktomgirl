@@ -20,6 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <boost/version.hpp>
 #include "config.h"
 
 #include <stdlib.h>
@@ -152,9 +153,12 @@ KTGlib::StringList Gnote::get_note_list(){
 
 	// boost::filesystem::directory_iterator itr(p);
 
-	for (boost::filesystem::directory_iterator itr(p); itr!=boost::filesystem::directory_iterator(); ++itr)
-	{
+	for (boost::filesystem::directory_iterator itr(p); itr!=boost::filesystem::directory_iterator(); ++itr){
+#if BOOST_VERSION >= 104601
+		fn = itr->path().filename().string();
+#else
 		fn = itr->path().filename();
+#endif
 //		std::cout << fn << ' '; // display filename only
 
 		if (is_regular_file(itr->status())){

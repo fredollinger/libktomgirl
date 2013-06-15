@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #include <string>
 
 #include "sharp.hpp"
@@ -26,6 +27,7 @@
 #include <boost/filesystem/convenience.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/version.hpp>
 
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/classification.hpp>
@@ -57,7 +59,11 @@ void directory_get_files_with_ext(const std::string & dir,
       // is_regular() is deprecated but is_regular_file isn't in 1.34.
       if ( is_regular(*itr) && (ext.empty() || (std_string_to_lower(extension(*itr)) == ext)) )
       {
+#if BOOST_VERSION >= 104601
+        list.push_back(itr->path().string());
+#else
         list.push_back(itr->string());
+#endif
       }
     }
   }
