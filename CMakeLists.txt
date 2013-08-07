@@ -38,6 +38,7 @@ xml.cpp
 xmlconvert.cpp
 xmlreader.cpp
 xmlwriter.cpp
+utils.cpp
 )
 
 add_library(ktomgirl SHARED ${ktomgirl_SRCS})
@@ -46,4 +47,4 @@ add_library(ktomgirl SHARED ${ktomgirl_SRCS})
 #install(TARGETS libtomgirl  DESTINATION ${LIB_INSTALL_DIR})
 #install(FILES  DESTINATION ${_INSTALL_DIR}/ktomgirl)
 #install(FILES DESTINATION ${BIN_INSTALL_DIR})
-# Sat Jun  9 16:38:25 PDT 2012
+#BIN_INSTALL_DIR Sat Jun  9 16:38:25 PDT 2012
