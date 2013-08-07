@@ -70,18 +70,21 @@ public:
       { 
         return m_start_note_uri; 
       }
-    Note::Ptr find(const std::string &) const;
-    Note::Ptr find_by_uri(const std::string &) const;
-    void delete_note(const Note::Ptr & note);
-
     //Note::Ptr create(void);
     //Note::Ptr create(void); // shuts up compiler error
     Note::Ptr create(const std::string & title);
+    Note::Ptr create_with_guid(const std::string & title, std::string & guid);
     //Note::Ptr create(const std::string & title, const std::string & xml_content);
+
+    void delete_note(const Note::Ptr & note);
+
+    Note::Ptr find(const std::string &) const;
+    Note::Ptr find_by_uri(const std::string &) const;
+
     // Import a note read from file_path
     // Will ensure the sanity including the unique title.
     Note::Ptr import_note(const std::string & file_path);
-    Note::Ptr create_with_guid(const std::string & title, std::string & guid);
+
     Note::Ptr get_or_create_template_note();
     static std::string get_note_template_content(const std::string & title);
     static std::string split_title_from_content (std::string title, std::string & body);

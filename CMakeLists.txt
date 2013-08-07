@@ -30,6 +30,7 @@ notedata.cpp
 notemanager.cpp
 preferences.cpp
 sharp.cpp
+search.cpp
 string.cpp
 tag.cpp
 tagmanager.cpp

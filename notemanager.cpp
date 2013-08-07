@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2009 Hubert Figuiere
  *
- * 2012 Modified by Fred Ollinger <follinge@gmail.com> for KTomGirl
+ * 2012, 2013 Modified by Fred Ollinger <follinge@gmail.com> for KTomGirl
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@
 #include "notemanager.hpp"
 #include "preferences.hpp"
 #include "sharp.hpp"
+#include "search.hpp"
 #include "string.hpp"
 #include "tagmanager.hpp"
 #include "trie.hpp"
@@ -262,4 +263,4 @@ std::string NoteManager::get_note_template_content(const std::string & title) {
 }
 
 } // namespace gnote
-// Sun May 27 14:07:53 PDT 2012
+// Wed Aug  7 15:47:36 PDT 2013
