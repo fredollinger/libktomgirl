@@ -26,7 +26,7 @@
 #include "utils.hpp"
 
 namespace gnote {
-  Search::Search(NoteManager & manager)
+  Search::Search(NoteManager *manager)
     : m_manager(manager)
   {
   }
@@ -46,8 +46,8 @@ namespace gnote {
       // Skip over notes that are template notes
     Tag::Ptr template_tag = TagManager::obj().get_or_create_system_tag (TagManager::TEMPLATE_NOTE_SYSTEM_TAG);
 
-    for(Note::List::const_iterator iter = m_manager.get_notes().begin();
-        iter != m_manager.get_notes().end(); ++iter) {
+    for(Note::List::const_iterator iter = m_manager->get_notes().begin();
+        iter != m_manager->get_notes().end(); ++iter) {
       const Note::Ptr & note(*iter);
 
       // Skip template notes

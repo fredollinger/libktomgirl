@@ -41,7 +41,7 @@ public:
   typedef std::map<Note::Ptr,int> Results;
   typedef std::tr1::shared_ptr<Results> ResultsPtr;
 
-  Search(NoteManager &);
+  Search(NoteManager*);
 
     
   /// <summary>
@@ -68,7 +68,7 @@ public:
   int find_match_count_in_note(std::string note_text, const std::vector<std::string> &,
                                bool match_case);
 private:
-  NoteManager &m_manager;
+  NoteManager *m_manager;
 };
 
 
