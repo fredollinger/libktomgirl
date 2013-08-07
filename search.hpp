@@ -61,6 +61,8 @@ public:
   /// <returns>
   /// A <see cref="IDictionary`2"/>
   /// </returns>  
+
+  ResultsPtr search_notes(const std::string & query, bool case_sensitive);
   ResultsPtr search_notes(const std::string &, bool, 
                           const notebooks::Notebook::Ptr & );
   bool check_note_has_match(const Note::Ptr & note, const std::vector<std::string> & ,

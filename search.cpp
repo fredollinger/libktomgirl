@@ -31,6 +31,10 @@ namespace gnote {
   {
   }
 
+  Search::ResultsPtr Search::search_notes(const std::string & query, bool case_sensitive){
+					notebooks::Notebook::Ptr selected_notebook = notebooks::Notebook::Ptr();
+					return search_notes(query, case_sensitive, selected_notebook);
+	}
 
   Search::ResultsPtr Search::search_notes(const std::string & query, bool case_sensitive, 
                                   const notebooks::Notebook::Ptr & selected_notebook)
