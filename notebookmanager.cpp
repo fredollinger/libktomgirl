@@ -85,6 +85,7 @@ bool NotebookManager::notebook_exists(const std::string & notebookName) const
 
 // BEGIN NotebookManager::get_or_create_notebook()
 Notebook::Ptr NotebookManager::get_or_create_notebook(const std::string & notebookName) {
+	  std::cout << __PRETTY_FUNCTION__ << std::endl;
     if (notebookName.empty())
         throw sharp::Exception ("NotebookManager.GetNotebook () called with a null name.");
       
@@ -371,6 +372,7 @@ Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
     bool NotebookManager::move_note_to_notebook (const Note::Ptr & note, const Notebook::Ptr & notebook)
     {
       if (!note) {
+				std::cout << __PRETTY_FUNCTION__ << " FAILED" << std::endl;
         return false;
       }
       
@@ -380,8 +382,10 @@ Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
       // exist in one notebook at a time.
       
       Notebook::Ptr currentNotebook = get_notebook_from_note (note);
-      if (currentNotebook == notebook)
+      if (currentNotebook == notebook){
+				std::cout << __PRETTY_FUNCTION__ << " WARN: Note all ready in notebook" << std::endl;
         return true; // It's already there.
+			}
       
       if (currentNotebook) {
         note->remove_tag (currentNotebook->get_tag());
@@ -393,6 +397,7 @@ Notebook::Ptr NotebookManager::get_notebook_from_tag(const Tag::Ptr &tag) {
       if (notebook && !std::tr1::dynamic_pointer_cast<SpecialNotebook>(notebook)) {
         note->add_tag (notebook->get_tag());
         //m_note_added_to_notebook(*note, notebook);
+				std::cout << __PRETTY_FUNCTION__ << " Adding note to notebook." << std::endl;
       }
       
       return true;

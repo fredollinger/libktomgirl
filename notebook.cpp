@@ -64,6 +64,7 @@ namespace notebooks {
   /// </param>
   Notebook::Notebook(const Tag::Ptr & notebookTag)
   {
+  std::cout << __PRETTY_FUNCTION__ << std::endl;
   // Parse the notebook name from the tag name
     std::string systemNotebookPrefix = std::string(Tag::SYSTEM_TAG_PREFIX)
       + NOTEBOOK_TAG_PREFIX;

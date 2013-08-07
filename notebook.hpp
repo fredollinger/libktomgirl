@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #ifndef __NOTEBOOKS_NOTEBOOK_HPP_
 #define __NOTEBOOKS_NOTEBOOK_HPP_
 
