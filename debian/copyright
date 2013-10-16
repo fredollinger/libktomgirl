@@ -1,0 +1,38 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: libktomgirl
+Source: https://github.com/fredollinger/libktomgirl
+
+Files: *
+Copyright: 2012-2013 Frederick Ollinger <follinge@gmail.com>
+ 	         2009 Hubert Figuiere
+ 					 2010 Debarshi Ray
+					 2008 Free Software Foundation
+			     2008 Boyd Timothy
+           2008 Sandy Armstrong
+           2008 Paul Cutler
+			     2005-2006 Written by Aaron Bockover <aaron@abock.org>
+					 2004-2011 Alex Graveley 
+
+# If you want to use GPL v2 or later for the /debian/* files use 
+# the following clauses, or change it to suit. Delete these two lines
+Files: debian/*
+Copyright: 2013 follinge <follinge@unknown>
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+# Please also look if there are files or directories which have a
+# different copyright/license attached and list them here.

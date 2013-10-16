@@ -11,6 +11,42 @@ include_directories("/usr/include/libxml2")
 
 set (CMAKE_CXX_FLAGS "-fexceptions -lboost_filesystem-mt -lboost_date_time-mt -lpcrecpp")
 
+set(ktomgirl_HEADERS
+ktglib.hpp
+xmlconvert.hpp
+sharp.hpp
+notemanager.hpp
+files.hpp
+gnote.hpp
+tagmanager.hpp
+notetag.hpp
+exception.hpp
+tag.hpp
+debug.hpp
+notebook.hpp
+utils.hpp
+preferences.hpp
+datetime.hpp
+note.hpp
+map.hpp
+triehit.hpp
+xmlreader.hpp
+macros.hpp
+string.hpp
+ktgtreeiter.hpp
+xmlwriter.hpp
+notebuffer.hpp
+actionmanager.hpp
+triecontroller.hpp
+notebookmanager.hpp
+notedata.hpp
+xml.hpp
+ktgtree.hpp
+trie.hpp
+search.hpp
+base/singleton.hpp
+)
+
 set(ktomgirl_SRCS
 actionmanager.cpp
 datetime.cpp
@@ -42,9 +78,4 @@ utils.cpp
 )
 
 add_library(ktomgirl SHARED ${ktomgirl_SRCS})
-#target_link_libraries(${LibXML_LIBRARIES}  ${SIGC2_LIBRARIES} )
-
-#install(TARGETS libtomgirl  DESTINATION ${LIB_INSTALL_DIR})
-#install(FILES  DESTINATION ${_INSTALL_DIR}/ktomgirl)
-#install(FILES DESTINATION ${BIN_INSTALL_DIR})
-#BIN_INSTALL_DIR Sat Jun  9 16:38:25 PDT 2012
+install(FILES ${ktomgirl_HEADERS} DESTINATION include/libktomgirl)

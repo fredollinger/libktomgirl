@@ -1,0 +1,37 @@
+Source: libktomgirl
+Priority: optional
+Maintainer: Frederick Ollinger <follinge@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), cmake (>= 2.8.7), libboost-filesystem-dev (>= 1.46.1), libboost-date-time-dev (>= 1.46.1), libpcre++-dev (>= 0.9.5), libstdc++6-4.6-dev (>= 4.6.3), libboost-system-dev (>= 1.46.1), libpcre3-dev (>= 8.12)
+Standards-Version: 3.9.2
+Section: libs
+Homepage: https://github.com/fredollinger/libktomgirl
+#Vcs-Git: git://git.debian.org/collab-maint/libktomgirl.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/libktomgirl.git;a=summary
+
+Package: libktomgirl-dev
+Section: libdevel
+Architecture: all
+Depends: libktomgirl (= 0.0.9)
+Description: Allows compiling of applications that use the Tomboy File Format (development headers) 
+ This is just a library and gives no actual end user interface to Tomboy style notes. 
+ However, this can be used to build Tomboy like (note taking) capabilities into
+ another app as it will fully support the Tomboy file format xml file as well as
+ normal operations such as making a new note, deleting a note, searching, and
+ much, much more.
+ This has been created by taking the gnote code and ripping out all the glib and
+ gtk dependencies. Thus, this is the smallest, most portable implementation of
+ the Tomboy File Format reader and writer.
+
+Package: libktomgirl
+Section: libs
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-filesystem1.46.1 (>= 1.46.1), libboost-date-time1.46.1 (>= 1.46.1), libboost-system1.46.1 (>= 1.46.1), libpcre3 (>= 8.12)
+Description: Implements the Tomboy File Format
+ This is just a library and gives no actual end user interface to Tomboy style notes. 
+ However, this can be used to build Tomboy like (note taking) capabilities into
+ another app as it will fully support the Tomboy file format xml file as well as
+ normal operations such as making a new note, deleting a note, searching, and
+ much, much more.
+ This has been created by taking the gnote code and ripping out all the glib and
+ gtk dependencies. Thus, this is the smallest, most portable implementation of
+ the Tomboy File Format reader and writer.
