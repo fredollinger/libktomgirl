@@ -78,4 +78,7 @@ utils.cpp
 )
 
 add_library(ktomgirl SHARED ${ktomgirl_SRCS})
+# this might be a bug bug if we use project in dir such as include/{project}
+# this will fail so I have to hard code it
 install(FILES ${ktomgirl_HEADERS} DESTINATION include/libktomgirl)
+INSTALL( TARGETS ktomgirl LIBRARY DESTINATION lib COMPONENT library)
