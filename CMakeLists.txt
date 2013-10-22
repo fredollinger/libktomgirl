@@ -33,6 +33,7 @@ triehit.hpp
 xmlreader.hpp
 macros.hpp
 string.hpp
+tree.hh
 ktgtreeiter.hpp
 xmlwriter.hpp
 notebuffer.hpp
@@ -44,7 +45,6 @@ xml.hpp
 ktgtree.hpp
 trie.hpp
 search.hpp
-base/singleton.hpp
 )
 
 set(ktomgirl_SRCS
@@ -81,4 +81,6 @@ add_library(ktomgirl SHARED ${ktomgirl_SRCS})
 # this might be a bug bug if we use project in dir such as include/{project}
 # this will fail so I have to hard code it
 install(FILES ${ktomgirl_HEADERS} DESTINATION include/libktomgirl)
+# stupid bug means we can't glob subdirs so we need to so this one separately
+install(FILES base/singleton.hpp DESTINATION include/libktomgirl/base)
 INSTALL( TARGETS ktomgirl LIBRARY DESTINATION lib COMPONENT library)
