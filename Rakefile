@@ -13,3 +13,8 @@ desc "Upload ppa to ubuntu"
 task :ppa  do
 	puts "dput ppa:follinge/precise-kde4-unasked-ppa libktomgirl_0.0.9-1_amd64.changes"
 end
+
+desc "Upload ppa to ubuntu"
+task :deb do
+    sh "debuild -i -us -uc -b"
+end
