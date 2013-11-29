@@ -53,6 +53,7 @@ NoteManager::NoteManager(const std::string & directory, const std::string & back
 
 NoteManager::NoteManager() 
 {
+  std::cout << __PRETTY_FUNCTION__;
 	std::string directory = Gnote::data_dir();
 	std::string backup = "";
 	_common_init(directory, backup);

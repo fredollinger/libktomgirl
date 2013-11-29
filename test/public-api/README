@@ -1,0 +1,3 @@
+Test the public api which means we're going to have a single header file:
+libktomgirl.h which is public. The rest of the library headers will be private.
+This will allow for an easier to read and maintain api.
