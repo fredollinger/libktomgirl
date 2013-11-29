@@ -54,7 +54,6 @@ Notebook::Ptr NotebookManager::get_notebook(const std::string & notebookName) co
         //throw sharp::Exception ("NotebookManager::get_notebook() called with an empty name.");
    }
 
-  //std::map<std::string, Notebook::Ptr> m_notebookMap;
     std::map<std::string, Notebook::Ptr>::const_iterator map_iter = m_notebookMap.find(normalizedName);
       if (map_iter != m_notebookMap.end()) {
         Notebook::Ptr notebook;

@@ -23,12 +23,31 @@
 
 #include <boost/shared_ptr.hpp>
 #include <list>
+#include <map>
 #include <memory>
 #include <string>
 #include <queue>
 #include <tr1/memory>
 
-//#include "note.hpp"
+namespace KTGlib {
+    class Tree;
+    typedef std::list<std::string> StringList;
+} // namespace KTGlib
+
+namespace base {
+  template <class _Type>
+  class Singleton 
+  {
+  public:
+    static _Type & obj()
+      {
+        // TODO make this thread safe;
+        static _Type * instance = new _Type();
+        return *instance;
+      }
+
+  };
+} // namespace base {
 
 namespace gnote {
   class AddinManager;
@@ -100,7 +119,67 @@ private:
     std::string m_backup_dir;
     std::string m_note_template_title;
   }; // class NoteManager 
-} // namespace gnote 
 
+class Tag{
+public:
+    typedef std::tr1::shared_ptr<Tag> Ptr;
+    static const char * SYSTEM_TAG_PREFIX;
+
+    Tag(const std::string & name);
+    ~Tag();
+private:
+    class NoteMap;
+    std::string m_name;
+    std::string m_normalized_name;
+    bool        m_issystem;
+    bool        m_isproperty;
+    // <summary>
+    // Used to track which notes are currently tagged by this tag.  The
+    // dictionary key is the Note.Uri.
+    // </summary>
+    NoteMap *   m_notes;
+}; // class Tag
+
+class TagManager
+  : public  base::Singleton<TagManager>
+{
+public:
+  TagManager();
+  typedef std::tr1::shared_ptr<Note> Ptr;
+  void all_tags(std::list<Tag::Ptr>  &) const;
+  typedef std::list<Ptr> List;
+private:
+	Tag::Ptr m_tag;
+  std::auto_ptr<KTGlib::Tree>     m_tags;
+  std::auto_ptr<KTGlib::Tree>     m_sorted_tags;
+  typedef std::map<std::string, Tag::Ptr> TagMap;
+  TagMap                           m_tag_map;
+  TagMap m_internal_tags;
+}; // class TagManager
+
+
+namespace notebooks {
+class Notebook{
+public:
+  typedef std::tr1::shared_ptr<Notebook> Ptr;
+}; // class Notebook
+
+class NotebookManager{
+public:
+  static NotebookManager & instance()
+    {
+      static NotebookManager *s_instance = new NotebookManager();
+      return *s_instance;
+  }
+  Notebook::Ptr get_or_create_notebook(const std::string &);
+  Notebook::Ptr get_notebook_from_note(const Note::Ptr &);
+  Notebook::Ptr get_notebook(const std::string & notebookName) const;
+private:
+  std::map<std::string, Notebook::Ptr> m_notebookMap;
+  KTGlib::StringList m_notebookList;
+  bool                                 m_adding_notebook;
+}; // class NoteookManager
+} // namespace notebooks 
+} // namespace gnote 
 #endif // __LIBKTOMGIRL_H__
 // Thu Nov 28 15:58:07 PST 2013
