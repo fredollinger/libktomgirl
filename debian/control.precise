@@ -25,7 +25,7 @@ Description: Allows compiling of applications that use the Tomboy File Format (d
 Package: libktomgirl
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-filesystem1.49.0 (>= 1.49.0), libboost-date-time1.49.0 (>= 1.49.0), libboost-system1.49.0 (>= 1.49.0), libpcre3 (>= 8.12)
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-filesystem1.46.1 (>= 1.46.1), libboost-date-time1.46.1 (>= 1.46.1), libboost-system1.46.1 (>= 1.46.1), libpcre3 (>= 8.12)
 Description: Implements the Tomboy File Format
  This is just a library and gives no actual end user interface to Tomboy style notes. 
  However, this can be used to build Tomboy like (note taking) capabilities into
