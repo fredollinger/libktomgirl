@@ -1,3 +1,9 @@
+libktomgirl (0.0.10-0) unstable; urgency=low
+
+  * Properly link to libxml. Oops.
+
+ -- Frederick Ollinger <follinge@gmail.com>  Sat, 14 Dec 2013 14:20:54 -0700
+
 libktomgirl (0.0.9-1) unstable; urgency=low
 
   * Initial release 
