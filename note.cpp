@@ -93,7 +93,8 @@ namespace utils{
 namespace gnote{
 // BEGIN NOTE
 Note::Note(NoteData * _data, const std::string & filepath, NoteManager & _manager)
-    : m_data(_data)
+    : m_text_content("")
+    , m_data(_data)
     , m_filepath(filepath)
     , m_save_needed(false)
     , m_is_deleting(false)
@@ -205,32 +206,18 @@ void Note::parse_tags(const xmlNodePtr tagnodes, std::list<std::string> & tags) 
 }
 // END PARSE_TAGS
 
-// FIXME: We need to get rid of this, we will turn the qtextedit content
-// which is html into the form of xml used in the tomboy spec for text
-// so we can have things like lists and bolded text and so on
-// this is down the road. When we get there, get rid of this...
-std::string Note::text_content_plain(){
-	//std::cout << "std::string Note::text_content_plain()" << xml_content();
-	return utils::decode(xml_content());
-	//return m_text_content;
-}
+std::string Note::text_content(){
+	if ( 0 == m_text_content.size()){
+				m_text_content=utils::decode(xml_content());
+  }
 
-std::string Note::text_content()
-{
-	//std::cout << "std::string Note::text_content()" << m_text_content;
-	m_text_content=utils::decode(xml_content());
+	std::cout << "std::string Note::text_content(): [" << m_text_content << "]";
 	return m_text_content;
-    /*
-    if(m_buffer) {
-      return m_buffer->get_slice(m_buffer->begin(), m_buffer->end());
-    }
-    */
-    // return utils::decode(xml_content());
 }
 
   void Note::set_text_content(const std::string & text)
   {
-    //std::cout << "Note::set_text_content(): " << text;
+    std::cout << "Note::set_text_content(): [" << text << "]";
     m_data.data().text() = text;
     m_text_content = text;
     return;

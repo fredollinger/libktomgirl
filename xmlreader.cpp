@@ -81,11 +81,11 @@ namespace sharp {
    */
   void XmlReader::load_buffer(const std::string &s)
   {
-	std::cout << "XmlReader::load_buffer: " << s;
-    close();
-    /** we copy the string. It shouldn't be a big deal as the strings
-     * are copy on write.
-     */
+	//std::cout << "XmlReader::load_buffer: " << s;
+  close();
+  /** we copy the string. It shouldn't be a big deal as the strings
+    * are copy on write.
+   */
     m_buffer = s;
     m_reader = xmlReaderForMemory(m_buffer.c_str(), m_buffer.size(), "",
                                   "UTF-8", 0);//XML_PARSE_RECOVER);

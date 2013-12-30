@@ -120,7 +120,7 @@ public:
   void remove_tag(const Tag::Ptr &);
 
   void set_text_content(const std::string & text);
-  std::string m_text_content;
+  std::string m_text_content; // make private
   typedef std::tr1::shared_ptr<Note> Ptr;
   typedef std::tr1::weak_ptr<Note> WeakPtr;
   typedef std::list<Ptr> List;
@@ -168,11 +168,10 @@ public:
     {
       return m_data.text();
     }
-  void set_xml_content(const std::string & xml);
-  std::string get_complete_note_xml();
+  //void set_xml_content(const std::string & xml);
+  //std::string get_complete_note_xml();
   void load_foreign_note_xml(const std::string & foreignNoteXml, ChangeType changeType);
   std::string text_content();
-  std::string text_content_plain();
   const NoteData & data() const;
   NoteData & data();
 

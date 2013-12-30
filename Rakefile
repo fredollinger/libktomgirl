@@ -6,7 +6,8 @@ task :default => [:build]
 
 desc "Build the project (default)"
 task :build  do
-	puts "default"
+  sh "mkdir -p builddir && cd builddir && cmake .. && make"
+	#puts "default"
 end
 
 desc "Upload ppa to ubuntu"
@@ -19,9 +20,15 @@ task :deb do
     sh "debuild -i -us -uc -b"
 end
 
+desc "install locally"
+task :install do
+    sh "cd build && sudo make install"
+end
+
 namespace :test do
 desc "Public api"
 task :public do
     sh "cd test/public-api/build && rm -f api-test && make && ./api-test"
 end 
+
 end # namespace :test
