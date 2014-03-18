@@ -6,10 +6,12 @@ pkg_check_modules(SIGC2 REQUIRED sigc++-2.0)
 include_directories(${SIGC2_INCLUDE_DIRS})
 
 find_package(LibXml2 REQUIRED)
-include_directories(${LibXML_INCLUDE_DIRS})
-include_directories("/usr/include/libxml2")
+include_directories(${LibXML2_INCLUDE_DIRS})
+include_directories("/usr/include/libxml2") # should be a variable but fixes broken build now...
 
-set (CMAKE_CXX_FLAGS "-fexceptions -lboost_filesystem-mt -lboost_date_time-mt -lpcrecpp -lxml2")
+set (CXX_LIBS "-lboost_filesystem-mt ${CXX_LIBS} -lboost_date_time-mt -lpcrecpp -lxml2") # BAD. Should find each and every lib. Works for now...
+
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions ${CXX_LIBS}")
 
 set(ktomgirl_HEADERS
 ktglib.hpp
@@ -78,6 +80,7 @@ utils.cpp
 )
 
 add_library(ktomgirl SHARED ${ktomgirl_SRCS})
+target_link_libraries(ktomgirl ${CXX_LIBS})
 # this might be a bug bug if we use project in dir such as include/{project}
 # this will fail so I have to hard code it
 install(FILES ${ktomgirl_HEADERS} DESTINATION include/libktomgirl)

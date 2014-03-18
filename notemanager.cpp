@@ -194,6 +194,7 @@ bool NoteManager::create_directory(const std::string & path) const
         iter != m_notes.end(); ++iter) {
       const Note::Ptr & note(*iter);
       if (sharp::string_to_lower(note->get_title()) == sharp::string_to_lower(linked_title))
+				std::cout << __PRETTY_FUNCTION__ << " uri: [" << note->uri() << std::endl;
         return note;
     }
     return Note::Ptr();
