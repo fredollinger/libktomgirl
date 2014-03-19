@@ -151,18 +151,14 @@ void NoteManager::load_notes()
 }
 // END LOAD_NOTES
 
-  Note::Ptr NoteManager::find_by_uri(const std::string & uri) const
-  {
-    for(Note::List::const_iterator iter = m_notes.begin();
-        iter != m_notes.end(); ++iter) {
+Note::Ptr NoteManager::find_by_uri(const std::string & uri) const {
+    for(Note::List::const_iterator iter = m_notes.begin(); iter != m_notes.end(); ++iter){ 
       const Note::Ptr & note(*iter);
-      if (note->uri() == uri) {
-        return note;
-      }
-    }
+			//std::cout << " searching note uri: [" << note->uri() << "]" << std::endl;
+      if (note->uri() == uri) return note;
+    } // for()
     return Note::Ptr();
-  }
-
+}
 
 std::string NoteManager::make_new_file_name(const std::string & guid) const
 {

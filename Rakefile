@@ -10,6 +10,7 @@ DEBIAN_VERSION=MAJOR_VERSION + "." + MINOR_VERSION + "." + MICRO_VERSION + "-" +
 APP_DIR=APP + "-" + WHOLE_VERSION
 LINKPATH="#{APP}-#{WHOLE_VERSION}"
 TARBALL="#{APP}_#{DEBIAN_VERSION}.orig.tar.gz"
+BUILD="builddir"
 
 CLEAN.include("../*.deb", "../#{TARBALL}", "obj-x86_64-linux-gnu", LINKPATH, "builddir")
 
@@ -33,7 +34,7 @@ end
 
 desc "install locally"
 task :install do
-    sh "cd build && sudo make install"
+    sh "cd #{BUILD} && sudo make install"
 end
 
 namespace :test do

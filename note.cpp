@@ -211,13 +211,13 @@ std::string Note::text_content(){
 				m_text_content=utils::decode(xml_content());
   }
 
-	std::cout << "std::string Note::text_content(): [" << m_text_content << "]";
+	//std::cout << "std::string Note::text_content(): [" << m_text_content << "]";
 	return m_text_content;
 }
 
   void Note::set_text_content(const std::string & text)
   {
-    std::cout << "Note::set_text_content(): [" << text << "]";
+    //std::cout << "Note::set_text_content(): [" << text << "]";
     m_data.data().text() = text;
     m_text_content = text;
     return;
