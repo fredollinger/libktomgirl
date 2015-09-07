@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2009 Hubert Figuiere
  *
- * 2012, 2013 Modified by Fred Ollinger <follinge@gmail.com> for KTomGirl
+ * 2012-2015 Modified by Fred Ollinger <follinge@gmail.com> for KTomGirl
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -184,17 +184,17 @@ bool NoteManager::create_directory(const std::string & path) const
     return boost::filesystem::create_directory(path);
 }
 
-  Note::Ptr NoteManager::find(const std::string & linked_title) const
-  {
-    for(Note::List::const_iterator iter = m_notes.begin();
-        iter != m_notes.end(); ++iter) {
-      const Note::Ptr & note(*iter);
-      if (sharp::string_to_lower(note->get_title()) == sharp::string_to_lower(linked_title))
-				std::cout << __PRETTY_FUNCTION__ << " uri: [" << note->uri() << std::endl;
-        return note;
+// BEGIN NoteManager::find()
+Note::Ptr NoteManager::find(const std::string & linked_title) const {
+    for(Note::List::const_iterator iter = m_notes.begin(); iter != m_notes.end(); ++iter) {
+        const Note::Ptr & note(*iter);
+        if (sharp::string_to_lower(note->get_title()) == sharp::string_to_lower(linked_title)){
+            std::cout << __PRETTY_FUNCTION__ << " uri: [" << note->uri() << std::endl;
+            return note;
+        }	
     }
     return Note::Ptr();
-  }
+} // END NoteManager::find()
 
 // BEGIN NoteManager::delete_note()
 void NoteManager::delete_note(const Note::Ptr & note)
@@ -261,4 +261,4 @@ std::string NoteManager::get_note_template_content(const std::string & title) {
 }
 
 } // namespace gnote
-// Wed Aug  7 15:47:36 PDT 2013
+// Mon Sep  7 16:08:34 PDT 2015
