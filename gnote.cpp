@@ -37,6 +37,8 @@
 
 namespace gnote {
 
+  const std::string LIBKTOMGIRL_TOMBOY_DATA_DIR_SUFFIX = "libktomgirl";
+
   bool Gnote::s_tray_icon_showing = false;
 
   Gnote::Gnote()
@@ -113,7 +115,7 @@ bool gnote::GnoteCommandLine::needs_execute() const{
 
 std::string Gnote::data_dir()
 {
-	return KTGlib::get_user_data_dir() + "/ktomgirl";
+    return KTGlib::get_user_data_dir() + "/" + LIBKTOMGIRL_TOMBOY_DATA_DIR_SUFFIX; 
 }
 
 std::string Gnote::gnote_data_dir(){
@@ -122,7 +124,7 @@ std::string Gnote::gnote_data_dir(){
 
 // get the data dir for tomboy
 std::string Gnote::tomboy_data_dir(){
-	return KTGlib::get_user_data_dir() + "/tomboy";
+	return KTGlib::get_user_data_dir() + "/" + LIBKTOMGIRL_TOMBOY_DATA_DIR_SUFFIX; 
 }
 
 #if 0
@@ -143,10 +145,8 @@ std::string Gnote::tomboy_data_dir(){
 }
 #endif
 
-// FIXME: Need to get rid of qt only
-//KTGlib::StringList Gnote::get_note_list2(){
-//void Gnote::get_note_list2(){
 KTGlib::StringList Gnote::get_note_list(){
+    std::cout << " BEGIN " << __PRETTY_FUNCTION__ << std::endl;
 	std::string p = tomboy_data_dir();
 	std::string fn;
 	KTGlib::StringList qsl;
@@ -155,20 +155,23 @@ KTGlib::StringList Gnote::get_note_list(){
 
 	for (boost::filesystem::directory_iterator itr(p); itr!=boost::filesystem::directory_iterator(); ++itr){
 #if BOOST_VERSION >= 104601
+        std::cout << " #if BOOST_VERSION >= 104601 " << std::endl;
 		fn = itr->path().filename().string();
 #else
+        std::cout << " #if BOOST_VERSION LESS THAN 104601 " << std::endl;
 		fn = itr->path().filename();
 #endif
-//		std::cout << fn << ' '; // display filename only
+        std::cout << fn << ' '; // display filename only
 
 		if (is_regular_file(itr->status())){
-//			std::cout << " [" << file_size(itr->path()) << ']';
+			std::cout << " [" << file_size(itr->path()) << ']';
 			qsl.push_back(fn);
 		}
 	}
 	
+    std::cout << " END " << __PRETTY_FUNCTION__ << std::endl;
 	return qsl;
-}
+} // END Gnote::get_note_list()
 
 } // namespace gnote
 // Sat Jun 23 12:09:47 PDT 2012
