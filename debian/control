@@ -1,7 +1,7 @@
 Source: libktomgirl
 Priority: optional
 Maintainer: Frederick Ollinger <follinge@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), cmake (>= 2.8.7), libpcre++-dev (>= 0.9.5), libstdc++-4.8-dev (>= 4.8.2-16), libpcre3-dev (>= 8.12), libboost-filesystem1.55-dev, libboost1.55-dev, libboost-system1.55-dev, libboost-date-time1.55-dev, libsigc++-2.0-dev
+Build-Depends: debhelper (>= 8.0.0), cmake (>= 2.8.7), libpcre++-dev (>= 0.9.5), libstdc++-4.8-dev (>= 4.8.2-16), libpcre3-dev (>= 8.12), libboost-filesystem1.55-dev, libboost1.55-dev, libboost-system1.55-dev, libboost-date-time1.55-dev, libsigc++-2.0-dev, libxml2-dev
 Standards-Version: 3.9.2
 Section: libs
 Homepage: https://github.com/fredollinger/libktomgirl
