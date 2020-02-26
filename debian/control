@@ -1,7 +1,7 @@
 Source: libktomgirl
 Priority: optional
 Maintainer: Frederick Ollinger <follinge@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), cmake (>= 2.8.7), libpcre++-dev (>= 0.9.5), libstdc++-4.8-dev (>= 4.8.2-16), libpcre3-dev (>= 8.12), libboost-filesystem1.55-dev, libboost1.55-dev, libboost-system1.55-dev, libboost-date-time1.55-dev, libsigc++-2.0-dev, libxml2-dev
+Build-Depends: debhelper, cmake, libpcre++-dev, libstdc++-dev, libpcre3-dev, libboost-filesystem-dev, libboost-dev, libboost-system-dev, libboost-date-time-dev, libsigc++-2.0-dev, libxml2-dev
 Standards-Version: 3.9.2
 Section: libs
 Homepage: https://github.com/fredollinger/libktomgirl
@@ -18,6 +18,6 @@ Description: Allows compiling of applications that use the Tomboy File Format (d
 Package: libktomgirl
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-filesystem1.55.0 (>= 1.55.0), libboost-date-time1.55.0 (>= 1.55.0), libboost-system1.55.0 (>= 1.55.0), libpcre3 (>= 8.12), libsigc++-2.0-0c2a
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-filesystem1.67.0, libboost-date-time1.67.0, libboost-system1.67.0, libpcre3, libsigc++-2.0-0v5
 Description: Implements the Tomboy File Format
  This is just a library and gives no actual end user interface to Tomboy style notes. 
